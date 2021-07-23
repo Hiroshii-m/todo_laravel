@@ -1,0 +1,123 @@
+// ======================================
+// foundation
+// ======================================
+@use 'foundation/reset';
+@use 'foundation/mixin';
+@use 'foundation/variables';
+@use 'foundation/base';
+// ======================================
+// layout
+// ======================================
+#l-header {
+    width: 100%;
+    &:before {
+        position: absolute;
+        content: '';
+        width: 470px;
+        height: 280px;
+        top: 0;
+        border-top: 0px solid transparent;
+        border-bottom: 280px solid transparent;
+        border-left: 470px solid var(--color_accent);
+    }
+}
+#l-main {
+    padding: 80px;
+}
+// ======================================
+// object
+// ======================================
+// Component
+// **************************************
+.c-header {
+    width: 90%;
+    height: 130px;
+    margin: 0 auto;
+    &__top {
+        color: var(--font-color_secondary);
+        font-weight: bold;
+        font-size: var(--font-size_xxl);
+        cursor: pointer;
+        z-index: 1;
+    }
+    &__item {
+        color: var(--font-color_secondary);
+        font-size: var(--font-size_l);
+        margin-right: var(--space_xxl);
+    }
+}
+
+// Project
+// **************************************
+.p-main {
+    width: var(--site-width_xxl);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    &__provider {
+        width: 50%;
+        text-align: center;
+    }
+    &__title {
+        font-size: var(--font-size_3l);
+        font-weight: bolder;
+        margin-top: var(--space_3l);
+    }
+    &__btn {
+        width: 200px;
+        margin: var(--space_3l) auto;
+        padding: var(--space_xl);
+        color: var(--font-color_secondary);
+        border-radius: 50px;
+    }
+    &__img {
+        width: 50%;
+    }
+}
+
+// Utility
+// **************************************
+.u-bgColor {
+    &--base {
+        background: var(--color_base);
+    }
+    &--success {
+        background: var(--color_success);
+    }
+    &--primary {
+        background: var(--color_primary);
+    }
+}
+.u-flex {
+    display: flex;
+    &_space-between {
+        justify-content: space-between;
+    }
+    &_align-items--center {
+        align-items: center;
+    }
+}
+
+
+// Vue Transition
+// ***************************************
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+.fade-enter-active {
+    animation: bounce-in .5s;
+}
+@keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+}

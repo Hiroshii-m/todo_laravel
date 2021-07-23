@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style.css">
+    <title>Todo-Pro</title>
+</head>
+<body class="u-bgColor--base">
+    <!-- header -->
+    <section id="l-header">
+        <header class="c-header u-flex u-flex_space-between u-flex_align-items--center">
+            <h2 class="c-header__top u-flex u-flex_align-items--center">
+                <a href="">TODO-PRO</a>
+            </h2>
+            <ul class="c-header__menu u-flex u-flex_align-items--center">
+                <div class="c-header__tool">
+                    <p href="" class="c-header__text">Web-Tool</p>
+                </div>
+                <ul class="c-header__list">
+                    <li class="c-header__item">
+                        <a href="" class="c-header__text">Home</a>
+                    </li>
+                    <li class="c-header__item">
+                        <a href="" class="c-header__text">Bord</a>
+                    </li>
+                    <li class="c-header__item">
+                        <a href="" class="c-header__text">Login</a>
+                    </li>
+                    <li class="c-header__item">
+                        <a href="" class="c-header__text">Signup</a>
+                    </li>
+                </ul>
+                <div class="c-header__hamburger">
+                    <span class="c-header__bar"></span>
+                    <span class="c-header__bar"></span>
+                    <span class="c-header__bar"></span>
+                </div>
+            </ul>
+        </header>
+    </section>
+
+    <!-- boardList -->
+    <section id="l-main">
+        <div class="p-boardList">
+            <div class="p-boardList__head u-flex u-flex_space-between">
+                <h2 class="p-boardList__tit">全てのボード一覧</h2>
+                <button class="p-boardList__create">新しくボード作成</button>
+            </div>
+            <ul class="p-boardList__list">
+                <li class="p-boardList__item">
+                    <span class="p-boardList__name">ボード名ボード名</span>
+                    <span class="p-boardList__date">最終更新日：2021/07/16</span>
+                    <i class="fas fa-ellipsis-v p-boardList__icon"></i>
+                    <ul class="p-boardList__modal">
+                        <li><i class="far fa-edit p-boardList__icon"></i>編集</li>
+                        <li><i class="fas fa-pencil-alt p-boardList__icon"></i>名前を変更する</li>
+                        <li><i class="fas fa-trash-alt p-boardList__icon"></i>削除</li>
+                    </ul>
+                </li>
+                <li class="p-boardList__item">
+                    <span class="p-boardList__name">ボード名ボード名</span>
+                    <span class="p-boardList__date">最終更新日：2021/07/16</span>
+                    <i class="fas fa-ellipsis-v p-boardList__icon"></i>
+                </li>
+                <li class="p-boardList__item">
+                    <span class="p-boardList__name">ボード名ボード名</span>
+                    <span class="p-boardList__date">最終更新日：2021/07/16</span>
+                    <i class="fas fa-ellipsis-v p-boardList__icon"></i>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <section id="l-footer">
+        <footer class="c-footer">
+            Todo-Pro
+        </footer>
+    </section>
+</body>
+</html>

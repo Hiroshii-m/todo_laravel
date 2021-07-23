@@ -1,0 +1,71 @@
+// ======================================
+// foundation
+// ======================================
+@use 'foundation/reset';
+@use 'foundation/variables';
+@use 'foundation/base';
+// ======================================
+// layout
+// ======================================
+#l-header {
+    width: 100%;
+}
+#l-main {
+    padding: 80px;
+}
+// ======================================
+// object
+// ======================================
+// Component
+// **************************************
+.c-header {
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    &__item {
+        color: #fff;
+    }
+}
+.c-main {
+    width: var(--site-width_xxl);
+    margin: 0 auto;
+}
+
+// Project
+// **************************************
+// Utility
+// **************************************
+.u-border {
+    &-bottom {
+        border-bottom: 3px solid var(--color_accent);
+    }
+}
+.u-bgColor {
+    &-base {
+        background: var(--color_base);
+    }
+}
+
+// Vue Transition
+// ***************************************
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+.fade-enter-active {
+    animation: bounce-in .5s;
+}
+@keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+}

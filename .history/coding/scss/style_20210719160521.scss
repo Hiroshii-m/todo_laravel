@@ -1,0 +1,409 @@
+// ======================================
+// foundation
+// ======================================
+@use 'foundation/reset';
+@use 'foundation/mixin';
+@use 'foundation/variables';
+@use 'foundation/base';
+// ======================================
+// layout
+// ======================================
+#l-header {
+    width: 100%;
+    &:before {
+        position: absolute;
+        content: '';
+        width: 470px;
+        height: 280px;
+        top: 0;
+        border-top: 0px solid transparent;
+        border-bottom: 280px solid transparent;
+        border-left: 470px solid var(--color_accent);
+        @include mixin.mq(md) {
+            width: 300px;
+            height: 200px;
+            border-left: 300px solid var(--color_accent);
+            border-bottom: 200px solid transparent;
+        }
+        @include mixin.mq(sm) {
+            width: 210px;
+            height: 180px;
+            border-left: 210px solid var(--color_accent);
+            border-bottom: 180px solid transparent;
+        }
+    }
+}
+#l-main {
+    padding: 80px;
+    @include mixin.mq(xl) {
+        padding: 40px;
+    }
+}
+#l-footer {
+    width: 100%;
+}
+#l-itemMenu {
+    position: relative;
+}
+#l-modal {
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    top: 20px;
+    left: 25%;
+}
+// ======================================
+// object
+// ======================================
+// Component
+// **************************************
+.c-header {
+    width: 90%;
+    height: 130px;
+    margin: 0 auto;
+    &__top {
+        font-weight: bold;
+        font-size: var(--font-size_xxl);
+        cursor: pointer;
+        z-index: 1;
+        @include mixin.mq(md) {
+            font-size: var(--font-size_l);
+        }
+        @include mixin.mq(sm) {
+            font-size: var(--font-size_m);
+        }
+    }
+    &__menu {
+        font-size: var(--font-size_l);
+        z-index: 1;
+        @include mixin.mq(lg) {
+            font-size: var(--font-size_m);
+        }
+    }
+    &__tool {
+        margin: 0 var(--space_3l);
+        padding: var(--space_s) var(--space_xl);
+        border: 1px solid;
+        border-radius: 5px;
+        cursor: pointer;
+        @include mixin.mq(md) {
+            font-size: var(--font-size_s);
+            padding: var(--space_s) var(--space_l);
+            margin-right: var(--space_xl);
+        }
+    }
+    &__list {
+        display: flex;
+        align-items: center;
+        @include mixin.mq(md) {
+            position: fixed;
+            top: -312px;
+            left: 0;
+            display: block;
+            width: 100%;
+            padding-bottom: var(--space_3l);
+            background: var(--color_accent);
+            opacity: .8;
+            text-align: center;
+            &.active {
+                top: 0;
+            }
+        }
+    }
+    &__item {
+        margin-right: var(--space_xxl);
+        @include mixin.mq(lg) {
+            margin-right: var(--space_xl);
+        }
+        @include mixin.mq(md) {
+            margin-right: 0;
+            margin-top: var(--space_3l);
+        }
+    }
+    &__hamburger {
+        display: none;
+        width: 30px;
+        position: relative;
+        @include mixin.mq(md) {
+            display: block;
+        }
+    }
+    &__bar {
+        display: none;
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        background: var(--font-color_secondary);
+        @include mixin.mq(md) {
+            display: block;
+        }
+        &:nth-of-type(1) {
+            top: -8px;
+            &.active {
+                top: 0px;
+                transform: rotate(45deg);
+            }
+        }
+        &:nth-of-type(2) {
+            top: 0px;
+            &.active {
+                display: none;
+            }
+        }
+        &:nth-of-type(3) {
+            top: 8px;
+            &.active {
+                top: 0;
+                transform: rotate(-45deg);
+            }
+        }
+    }
+}
+.c-component {
+    max-width: var(--site-width_xxl);
+    margin: 0 auto;
+    @include mixin.mq(lg) {
+        max-width: var(--site-width_xl);
+    }
+    &__title {
+        font-size: var(--font-size_xxl);
+        @include mixin.mq(lg) {
+            font-size: var(--font-size_xl);
+        }
+    }
+}
+.c-form {
+    max-width: 500px;
+    margin: 0 auto;
+    &__tit {
+        @extend .c-component__title;
+        margin: var(--space_xl) 0;
+        text-align: center;
+    }
+    &__label {
+        display: block;
+        margin-bottom: var(--space_m);
+    }
+    &__input {
+        @extend .u-input;
+        padding: var(--space_s) var(--space_m);
+        margin-bottom: var(--space_m);
+    }
+    &__error {
+        color: var(--color_error);
+    }
+    &__submit {
+        margin: var(--space_3l) 0;
+        width: 100%;
+        font-size: var(--font-size_xl);
+        padding: var(--space_s) 0;
+        border-radius: 50px;
+        text-align: center;
+    }
+}
+.c-footer {
+    width: 100%;
+    background: var(--color_accent);
+    text-align: center;
+    padding: var(--space_l);
+    box-sizing: border-box;
+}
+.c-itemMenu {
+    position: absolute;
+    right: 30px;
+    background: var(--color_base);
+    box-shadow: 0px 0px 6px 1px ;
+    z-index: 1;
+    display: none;
+    &.show {
+        display: block;
+    }
+    &__icon {
+        margin: 0 var(--space_m);
+    }
+    &__item {
+        cursor: pointer;
+        padding: var(--space_m) var(--space_l);
+        &:hover {
+            background: var(--color_active);
+        }
+    }
+}
+.c-modal {
+    display: none;
+    background: var(--color_active);
+    padding: var(--space_l) var(--space_xxl);
+    width: 50%;
+    font-size: var(--font-size_l);
+    &.show {
+        display: block;
+    }
+    &__head {
+        font-size: var(--font-size_xxl);
+    }
+    &__form {
+        margin: var(--space_l) 0;
+    }
+    &__input {
+        @extend .u-input;
+        margin-bottom: var(--space_xl);
+    }
+    &__submit {
+        @extend .u-btn;
+        @extend .u-bgColor--primary;
+    }
+}
+
+// Project
+// **************************************
+.p-main {
+    @extend .c-component;
+    display: flex;
+    justify-content: space-between;
+    @include mixin.mq(lg) {
+        display: grid;
+        justify-content: center;
+        margin: 100px auto 0 auto;
+    }
+    &__provider {
+        width: 40%;
+        text-align: center;
+        @include mixin.mq(lg) {
+            width: 100%;
+            order: 2;
+        }
+    }
+    &__title {
+        font-size: var(--font-size_3l);
+        font-weight: bolder;
+        margin-top: var(--space_3l);
+    }
+    &__btn {
+        width: 200px;
+        margin: var(--space_3l) auto;
+        padding: var(--space_xl);
+        border-radius: 50px;
+    }
+    &__img {
+        width: 50%;
+        max-width: 500px;
+        @include mixin.mq(lg) {
+            width: 100%;
+            max-width: 400px;
+            order: 1;
+        }
+    }
+}
+.p-boardList {
+    @extend .c-component;
+    position: relative;
+    &__head {
+        @extend .u-flex;
+        @extend .u-justify-content--space-between;
+        margin-bottom: var(--space_xxl);
+    }
+    &__tit {
+        @extend .c-component__title;
+    }
+    &__create {
+        @extend .u-bgColor--primary;   
+        @extend .u-btn;
+    }
+    &__item {
+        @extend .u-flex;
+        @extend .u-justify-content--space-between;
+        padding: var(--space_m);
+        border-top: 2px solid;
+        border-left: 2px solid;
+        border-right: 2px solid;
+        &:last-child {
+            border-bottom: 2px solid;
+        }
+    }
+    &__name {
+        width: 74%;
+        max-width: 700px;
+        display: inline-block;
+        @include mixin.mq(xl) {
+            width: 55%;
+            max-width: 300px;
+        }
+    }
+    &__date {
+        font-size: var(--font-size_m);
+    }
+    &__icon {
+        margin-left: var(--space_m);
+    }
+}
+
+// Utility
+// **************************************
+// BackGround
+// ======================================
+.u-bgColor {
+    &--base {
+        background: var(--color_base);
+    }
+    &--success {
+        background: var(--color_success);
+    }
+    &--primary {
+        background: var(--color_primary);
+    }
+}
+// Flex
+// ======================================
+.u-flex {
+    display: flex;
+}
+.u-align-items {
+    &--center {
+        align-items: center;
+    }
+}
+.u-justify-content {
+    &--space-between {
+        justify-content: space-between;
+    }
+    &--flex-end {
+        justify-content: flex-end;
+    }
+}
+// Parts
+// =======================================
+.u-input {
+    border: 2px solid;
+    border-radius: 5px;
+    &:focus {
+        border: 2px solid var(--color_success);
+    }
+}
+.u-btn {
+    padding: var(--space_s) var(--space_l);
+    border-radius: 5px;
+}
+
+
+// Vue Transition
+// ***************************************
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+.fade-enter-active {
+    animation: bounce-in .5s;
+}
+@keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+}

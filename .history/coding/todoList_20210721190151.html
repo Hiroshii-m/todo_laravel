@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style.css">
+    <title>Todo-Pro</title>
+</head>
+<body class="u-bgColor--base">
+
+    <!-- modal -->
+    <section id="l-modal">
+        <div class="c-modal">
+            <div class="c-modal__head">
+                <i class="far fa-times-circle"></i>
+            </div>
+            <form class="c-modal__form" action="" method="post">
+                <div class="">
+                    <input class="c-modal__input" type="text" placeholder="ボード名">
+                </div>
+                <div class="c-modal__bottom">
+                    <p class="c-form__error">入力必須です</p>
+                    <button class="c-modal__submit">ボードを作成</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- header -->
+    <section id="l-header">
+        <header class="c-header u-flex u-justify-content--space-between u-align-items--center">
+            <h2 class="c-header__top u-flex u-align-items--center">
+                <a href="">TODO-PRO</a>
+            </h2>
+            <ul class="c-header__menu u-flex u-align-items--center">
+                <div class="c-header__tool">
+                    <p href="" class="c-header__text">Web-Tool</p>
+                </div>
+                <ul class="c-header__list">
+                    <li class="c-header__item">
+                        <a href="" class="c-header__text">Home</a>
+                    </li>
+                    <li class="c-header__item">
+                        <a href="" class="c-header__text">Bord</a>
+                    </li>
+                    <li class="c-header__item">
+                        <a href="" class="c-header__text">Login</a>
+                    </li>
+                    <li class="c-header__item">
+                        <a href="" class="c-header__text">Signup</a>
+                    </li>
+                </ul>
+                <div class="c-header__hamburger">
+                    <span class="c-header__bar"></span>
+                    <span class="c-header__bar"></span>
+                    <span class="c-header__bar"></span>
+                </div>
+            </ul>
+        </header>
+    </section>
+
+    <!-- todoList -->
+    <section id="l-todoList">
+        <div class="p-todoList">
+            <h2 class="p-todoList__tit">サンプルボードサンプル</h2>
+            
+            <ul class="p-todoList__list">
+                <li class="p-todoList__item">
+                    <div class="p-todoList__head">
+                        <input type="text" class="p-todoList__input" placeholder="リスト名">
+                        <span class="p-todoList__name"></span>
+                    </div>
+                    <div class="p-todoList__bottom">
+                        <button class="p-todoList__btn">リスト追加</button>
+                        <i class="far fa-times-circle p-todoList__icon"></i>
+                    </div>
+                </li>
+                <li class="p-todoList__item">
+                    <div class="p-todoList__head">
+                        <!-- <input type="text" class="p-todoList__input" placeholder="リスト名"> -->
+                        <span class="p-todoList__name">リスト名</span>
+                    </div>
+                    <div class="p-todoList__bottom">
+                        <span class="p-todoList__add"><i class="fas fa-plus"></i>TODOを追加</span>
+                    </div>
+                </li>
+                <li class="p-todoList__item">
+                    <div class="p-todoList__head">
+                        <!-- <input type="text" class="p-todoList__input" placeholder="リスト名"> -->
+                        <span class="p-todoList__name">リスト名</span>
+                    </div>
+                    <div class="p-todoList__todo">
+                        <i class="far fa-square"></i>
+                        <input type="text" class="p-todoList__input u-margin--0-m" placeholder="TODO名">
+                        <!-- <span class="p-todoList__text u-margin--0-m">TODO</span> -->
+                        <i class="fas fa-chevron-down u-margin-left--auto"></i>
+                    </div>
+                    <input type="text" class="p-todoList__input" placeholder="TODO名">
+                    <div class="p-todoList__bottom">
+                        <span class="p-todoList__btn"><i class="fas fa-plus"></i>TODOを追加</span>
+                        <i class="far fa-times-circle p-todoList__icon"></i>
+                    </div>
+                </li>
+                <li class="p-todoList__item">
+                    <div class="p-todoList__head">
+                        <!-- <input type="text" class="p-todoList__input" placeholder="リスト名"> -->
+                        <span class="p-todoList__name">リスト名</span>
+                    </div>
+                    <div class="p-todoList__todo">
+                        <div class="u-flex u-align-items--center">
+                            <i class="far fa-square"></i>
+                            <input type="text" class="p-todoList__input u-margin--0-m" placeholder="TODO名">
+                            <!-- <span class="p-todoList__text u-margin--0-m">TODO</span> -->
+                        </div>
+                        <i class="fas fa-chevron-down u-margin-left--auto">
+                            <input class="" type="checkbox">
+                        </i>
+                    </div>
+                    <div class="p-todoList__bottom">
+                        <span class="p-todoList__add"><i class="fas fa-plus"></i>TODOを追加</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <section id="l-footer">
+        <footer class="c-footer">
+            Todo-Pro
+        </footer>
+    </section>
+</body>
+</html>

@@ -1,0 +1,82 @@
+// ======================================
+// foundation
+// ======================================
+@use 'foundation/reset';
+@use 'foundation/variables';
+@use 'foundation/base';
+// ======================================
+// layout
+// ======================================
+#l-header {
+    width: 100%;
+}
+#l-main {
+    padding: 80px;
+}
+// ======================================
+// object
+// ======================================
+// Component
+// **************************************
+.c-header {
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    &__top {
+        color: var(--font-color_secondary);
+        font-weight: bold;
+        font-size: var(--font-size_xxl);
+    }
+    &__item {
+        color: var(--font-color_secondary);
+        font-size: var(--font-size_l);
+        margin-right: var(--space_l);
+    }
+}
+.c-main {
+    width: var(--site-width_xxl);
+    margin: 0 auto;
+}
+
+// Project
+// **************************************
+// Utility
+// **************************************
+.u-bgColor {
+    &__base {
+        background: var(--color_base);
+    }
+}
+.u-flex {
+    display: flex;
+    &_space-between {
+        justify-content: space-between;
+    }
+    &_align-items--center {
+        align-items: center;
+    }
+}
+
+
+// Vue Transition
+// ***************************************
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+.fade-enter-active {
+    animation: bounce-in .5s;
+}
+@keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+}
