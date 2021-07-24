@@ -589,6 +589,11 @@ i {
 #l-footer {
   width: 100%;
 }
+#l-footer.active {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 
 #l-itemMenu {
   position: relative;

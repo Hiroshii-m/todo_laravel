@@ -19,8 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
-<body class="u-bgColor--base">
-    <div id="app" class="">
+<body>
+    <div id="app" class="u-bgColor--base">
 
         <!-- header -->
         <section id="l-header">
@@ -92,10 +92,6 @@
     <script>
         window.addEventListener("DOMContentLoaded", function() {
             const $ftr = document.querySelector('#l-footer');
-            // フッター要素を最下部に固定
-            if(window.innerHeight > $ftr.offsetTop + $ftr.offsetHeight ){
-                $ftr.classList.add("active");
-            }
         });
     </script>
 </body>

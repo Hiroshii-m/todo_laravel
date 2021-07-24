@@ -19,8 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
-<body class="u-bgColor--base">
-    <div id="app" class="">
+<body>
+    <div id="app" class="u-bgColor--base">
 
         <!-- header -->
         <section id="l-header">
