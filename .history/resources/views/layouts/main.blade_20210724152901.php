@@ -86,7 +86,7 @@
         <!-- footer -->
         <section id="l-footer">
             <footer class="c-footer">
-                Todo-Watcher
+                Todo-Pro
             </footer>
         </section>
     </div>

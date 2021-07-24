@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('top');
 });
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('/boards', 'BoardsController@index')->name('boards');
-});
+Route::get('/boards', 'BoardsController@index')->name('boards');
 
 Auth::routes();
 
