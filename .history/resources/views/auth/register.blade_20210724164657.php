@@ -30,7 +30,7 @@
         </label>
         <label for="password_confirmation" class="c-form__label">
             {{ __('Confirm Password') }}
-            <input id="password_confirmation" type="text" class="c-form__input" name="password_confirmation" required autocomplete="new-password" autofocus>
+            <input id="password_confirmation" type="text" class="c-form__input" name="password_confirmation" value="" required autocomplete="new-password" autofocus>
             @error('password_confirmation')
                 <p class="c-form__error">{{ $message }}</p>
             @enderror

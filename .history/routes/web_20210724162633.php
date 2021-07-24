@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/boards', 'BoardsController@index')->name('boards');
 });
-Route::get('/lists', 'ListsController@index')->name('lists');
+
 
 Auth::routes();
 
