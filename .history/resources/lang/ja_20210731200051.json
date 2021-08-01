@@ -1,0 +1,11 @@
+{
+    "Login": "ログイン",
+    "Register": "ユーザー登録",
+    "Logout": "ログアウト",
+    "Invalid operation was performed.": "不正な操作が行われました",
+    "E-Mail Address": "メールアドレス",
+    "Password": "パスワード",
+    "Remember Me": "自動でログイン",
+    "Forgot Your Password?": "パスワードをお忘れですか？",
+    "UserName": "ユーザ名"
+}

@@ -1,0 +1,20 @@
+{
+    "Drill Register": "練習登録",
+    "Drill List": "練習一覧",
+    "Title": "タイトル",
+    "Category": "カテゴリー",
+    "Problem": "問題",
+    "DrillRegister": "登録する",
+    "Login": "ログイン",
+    "Register": "ユーザー登録",
+    "Logout": "ログアウト",
+    "Invalid operation was performed.": "不正な操作が行われました",
+    "Drill Updater": "問題編集",
+    "DrillUpdater": "更新",
+    "Updated.": "更新しました",
+    "Go Practice": "挑戦する",
+    "Go Edit": "編集する",
+    "Deleted": "削除しました",
+    "Go Delete": "削除する",
+    "Practice": "練習問題"
+}
