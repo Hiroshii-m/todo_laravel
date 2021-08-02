@@ -66258,63 +66258,70 @@ var ListApp = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      boardData: {},
-      u_id: null
+      u_id: null,
+      b_id: null,
+      board_name: '',
+      clusters: {},
+      todos: {}
     };
     _this.handleChangeBoard = _this.handleChangeBoard.bind(_assertThisInitialized(_this));
+    _this.addList = _this.addList.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ListApp, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
-      // URLのパラメータからboardのidを取得
-      var arr = window.location.href.split("/");
-      var index = arr.indexOf('lists');
-      var board_id = arr[index + 1];
-      var u_id = arr[index + 2];
       this.setState({
-        u_id: Number(u_id)
-      }); // 取得したidからaxiosでボード名を取得
-
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/getboard/' + board_id + '/' + u_id).then(function (res) {
-        _this2.setState({
-          boardData: res.data.data
-        });
-      })["catch"](function (err) {
-        console.log(err);
-      }); // リストとTODOタスクを取得する
+        u_id: u_id,
+        boardData: board,
+        b_id: board['id'],
+        board_name: board['board_name']
+      });
     }
   }, {
     key: "handleChangeBoard",
     value: function handleChangeBoard(text) {
-      var _this3 = this;
+      var _this2 = this;
 
       // ボード名をDBへ送信
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/upboard', {
-        b_id: this.state.boardData['id'],
+        b_id: this.state.b_id,
         u_id: this.state.u_id,
         text: text
       }) // データ送信が成功したら、ListAppの値を更新
       .then(function (res) {
-        _this3.setState({
-          boardData: {
-            board_name: text
-          }
+        _this2.setState({
+          board_name: text
         });
       })["catch"](function (err) {
         console.log(err);
       });
     }
   }, {
+    key: "addList",
+    value: function addList(text) {
+      // テキストをクラスターテーブル（リスト）に追加
+      var newData = this.state.clusters;
+      newData.push({
+        id: 'n',
+        cluster_name: text
+      });
+      this.setState({
+        clusters: newData
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ListHead__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        text: this.state.boardData['board_name'],
+        text: this.state.board_name,
         onChangeBoard: this.handleChangeBoard
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ListTodo__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ListTodo__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        onAddList: this.addList,
+        clusters: this.state.clusters,
+        todos: this.state.todos
+      }));
     }
   }]);
 
@@ -66494,6 +66501,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ListTodo; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _TaskList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskList */ "./resources/js/components/TaskList.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66518,39 +66526,51 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ListTodo = /*#__PURE__*/function (_React$Component) {
   _inherits(ListTodo, _React$Component);
 
   var _super = _createSuper(ListTodo);
 
   function ListTodo(props) {
+    var _this;
+
     _classCallCheck(this, ListTodo);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.addList = _this.addList.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ListTodo, [{
+    key: "callBackAddList",
+    value: function callBackAddList(text) {
+      this.props.onAddList(text);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var lists = []; // もしも、データがない場合
+
+      if (lists.indexOf() === -1) {
+        lists.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: 'a',
+          id: 'a',
+          ListMode: "New",
+          onAddList: this.callBackAddList
+        }));
+      } else {
+        for (var i in this.props.clusters) {
+          lists.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: this.props.clusters[i].id,
+            id: this.props.clusters[i].id
+          }));
+        }
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "p-todoList__list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "p-todoList__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-todoList__head"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "p-todoList__input",
-        placeholder: "\u30EA\u30B9\u30C8\u540D"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "p-todoList__name"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-todoList__bottom"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "p-todoList__btn"
-      }, "\u30EA\u30B9\u30C8\u8FFD\u52A0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-times-circle p-todoList__icon"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      }, lists, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "p-todoList__item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "p-todoList__head"
@@ -66644,6 +66664,238 @@ var ListTodo = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return ListTodo;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Task.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/Task.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Task; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var Task = /*#__PURE__*/function (_React$Component) {
+  _inherits(Task, _React$Component);
+
+  var _super = _createSuper(Task);
+
+  function Task(props) {
+    var _this;
+
+    _classCallCheck(this, Task);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      TaskMode: 'New'
+    };
+    return _this;
+  }
+
+  _createClass(Task, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+    }
+  }]);
+
+  return Task;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TaskList.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/TaskList.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TaskList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Task */ "./resources/js/components/Task.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var TaskList = /*#__PURE__*/function (_React$Component) {
+  _inherits(TaskList, _React$Component);
+
+  var _super = _createSuper(TaskList);
+
+  function TaskList(props) {
+    var _this;
+
+    _classCallCheck(this, TaskList);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      text: '',
+      ListMode: _this.props.ListMode
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
+    _this.handleNew = _this.handleNew.bind(_assertThisInitialized(_this));
+    _this.addList = _this.addList.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(TaskList, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState({
+        text: e.target.value
+      });
+    }
+  }, {
+    key: "handleInput",
+    value: function handleInput() {
+      this.setState({
+        ListMode: "Input"
+      });
+    }
+  }, {
+    key: "handleNew",
+    value: function handleNew() {
+      this.setState({
+        ListMode: "New"
+      });
+    }
+  }, {
+    key: "addList",
+    value: function addList() {
+      this.props.onAddList(this.state.text);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var head = '';
+      var bottom = '';
+
+      switch (this.state.ListMode) {
+        case 'New':
+          head = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            onClick: this.handleInput,
+            className: "p-todoList__add"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-plus"
+          }), "\u30EA\u30B9\u30C8\u3092\u8FFD\u52A0");
+          bottom = '';
+          break;
+
+        case 'Input':
+          head = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__head"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            className: "p-todoList__input",
+            placeholder: "\u30EA\u30B9\u30C8\u540D",
+            onChange: this.handleChange,
+            value: this.state.text
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "p-todoList__name"
+          }));
+          bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__bottom"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: this.addList,
+            className: "p-todoList__btn"
+          }, "\u30EA\u30B9\u30C8\u8FFD\u52A0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            onClick: this.handleNew,
+            className: "far fa-times-circle p-todoList__icon"
+          }));
+          break;
+
+        case 'Show':
+          head = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__head"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "p-todoList__name"
+          }, "\u30EA\u30B9\u30C8\u540D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Expected Time\uFF1A5\u6642\u9593"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Spended Time\uFF1A10\u6642\u959310\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Time Lug\uFF1A+5\u6642\u959310\u5206"));
+          bottom = '';
+          break;
+
+        case 'Edit':
+          head = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__head"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            className: "p-todoList__input",
+            placeholder: "\u30EA\u30B9\u30C8\u540D"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "p-todoList__name"
+          }, "\u30EA\u30B9\u30C8\u540D"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Expected Time\uFF1A5\u6642\u9593"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Spended Time\uFF1A10\u6642\u959310\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Time Lug\uFF1A+5\u6642\u959310\u5206"));
+          bottom = '';
+          break;
+
+        default:
+          console.log('default');
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "p-todoList__item"
+      }, head, bottom, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Task__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+    }
+  }]);
+
+  return TaskList;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 

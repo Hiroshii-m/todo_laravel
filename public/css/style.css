@@ -1299,6 +1299,7 @@ i {
 .p-todoList__tit {
   max-width: 500px;
   margin: 0 50px var(--space_3l);
+  cursor: pointer;
 }
 
 .p-todoList__list {
