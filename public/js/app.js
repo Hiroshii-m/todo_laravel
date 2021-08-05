@@ -66272,6 +66272,11 @@ var ListApp = /*#__PURE__*/function (_Component) {
     _this.callBackAddList = _this.callBackAddList.bind(_assertThisInitialized(_this));
     _this.callBackUpList = _this.callBackUpList.bind(_assertThisInitialized(_this));
     _this.callBackRemoveList = _this.callBackRemoveList.bind(_assertThisInitialized(_this));
+    _this.callBackAddTodo = _this.callBackAddTodo.bind(_assertThisInitialized(_this));
+    _this.callBackUpTodo = _this.callBackUpTodo.bind(_assertThisInitialized(_this));
+    _this.callBackRemoveTodo = _this.callBackRemoveTodo.bind(_assertThisInitialized(_this));
+    _this.callBackToggleDone = _this.callBackToggleDone.bind(_assertThisInitialized(_this));
+    _this.callBackUpTime = _this.callBackUpTime.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -66343,7 +66348,7 @@ var ListApp = /*#__PURE__*/function (_Component) {
         user_id: this.state.u_id,
         id: updata['id'],
         cluster_name: updata['cluster_name']
-      }).then(function (res) {
+      }).then(function () {
         _this4.setState(function (prevState) {
           return {
             clusters: prevState.clusters.map(function (obj) {
@@ -66362,7 +66367,7 @@ var ListApp = /*#__PURE__*/function (_Component) {
     value: function callBackRemoveList(id) {
       var _this5 = this;
 
-      if (confirm('削除しますか')) {
+      if (confirm('本当に削除しますか')) {
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/delcluster', {
           id: id,
           user_id: this.state.u_id
@@ -66378,9 +66383,106 @@ var ListApp = /*#__PURE__*/function (_Component) {
         })["catch"](function (err) {
           console.log(err);
         });
-      } else {
-        console.log('削除しません');
       }
+    }
+  }, {
+    key: "callBackAddTodo",
+    value: function callBackAddTodo(todoData) {
+      var _this6 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/createtodo', {
+        user_id: this.state.u_id,
+        board_id: this.state.b_id,
+        cluster_id: todoData['c_id'],
+        todo_name: todoData['text']
+      }).then(function (res) {
+        var nextData = _this6.state.todos;
+        nextData.push({
+          id: res.data,
+          cluster_id: todoData['c_id'],
+          todo_name: todoData['text']
+        });
+
+        _this6.setState({
+          todos: nextData
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: "callBackUpTodo",
+    value: function callBackUpTodo(todoData) {
+      var _this7 = this;
+
+      // TODOのテキストを変更
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/uptodo', {
+        user_id: this.state.u_id,
+        id: todoData['id'],
+        todo_name: todoData['text']
+      }).then(function () {
+        _this7.setState(function (prevState) {
+          return {
+            todos: prevState.todos.map(function (obj) {
+              return obj.id === todoData['id'] ? Object.assign(obj, {
+                todo_name: todoData['text']
+              }) : obj;
+            })
+          };
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: "callBackRemoveTodo",
+    value: function callBackRemoveTodo(id) {
+      var _this8 = this;
+
+      if (confirm('本当に削除しますか')) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/deltodo', {
+          id: id,
+          user_id: this.state.u_id
+        }).then(function () {
+          var data = lodash__WEBPACK_IMPORTED_MODULE_3___default.a.reject(_this8.state.todos, {
+            'id': id
+          });
+
+          _this8.setState({
+            todos: data
+          });
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
+    }
+  }, {
+    key: "callBackToggleDone",
+    value: function callBackToggleDone(todoData) {
+      var _this9 = this;
+
+      // TODOの完了状態の変更を登録
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/updonetodo', {
+        user_id: this.state.u_id,
+        id: todoData['id'],
+        done_flg: todoData['isDone']
+      }).then(function () {
+        _this9.setState(function (prevState) {
+          return {
+            todos: prevState.todos.map(function (obj) {
+              return obj.id === todoData['id'] ? Object.assign(obj, {
+                done_flg: todoData['isDone']
+              }) : obj;
+            })
+          };
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: "callBackUpTime",
+    value: function callBackUpTime(todoData) {// 予想時間、実行時間をスキーマへ登録
     }
   }, {
     key: "render",
@@ -66394,7 +66496,12 @@ var ListApp = /*#__PURE__*/function (_Component) {
         todos: this.state.todos,
         word: this.state.word,
         onUpList: this.callBackUpList,
-        onRemoveList: this.callBackRemoveList
+        onRemoveList: this.callBackRemoveList,
+        onAddTodo: this.callBackAddTodo,
+        onUpTodo: this.callBackUpTodo,
+        onRemoveTodo: this.callBackRemoveTodo,
+        onToggleDone: this.callBackToggleDone,
+        onUpTime: this.callBackUpTime
       }));
     }
   }]);
@@ -66618,6 +66725,11 @@ var ListTodo = /*#__PURE__*/function (_React$Component) {
     _this.callBackAddList = _this.callBackAddList.bind(_assertThisInitialized(_this));
     _this.callBackUpList = _this.callBackUpList.bind(_assertThisInitialized(_this));
     _this.callBackRemoveList = _this.callBackRemoveList.bind(_assertThisInitialized(_this));
+    _this.callBackAddTodo = _this.callBackAddTodo.bind(_assertThisInitialized(_this));
+    _this.callBackUpTodo = _this.callBackUpTodo.bind(_assertThisInitialized(_this));
+    _this.callBackRemoveTodo = _this.callBackRemoveTodo.bind(_assertThisInitialized(_this));
+    _this.callBackToggleDone = _this.callBackToggleDone.bind(_assertThisInitialized(_this));
+    _this.callBackUpTime = _this.callBackUpTime.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -66637,13 +66749,38 @@ var ListTodo = /*#__PURE__*/function (_React$Component) {
       this.props.onRemoveList(id);
     }
   }, {
+    key: "callBackAddTodo",
+    value: function callBackAddTodo(todoData) {
+      this.props.onAddTodo(todoData);
+    }
+  }, {
+    key: "callBackUpTodo",
+    value: function callBackUpTodo(todoData) {
+      this.props.onUpTodo(todoData);
+    }
+  }, {
+    key: "callBackRemoveTodo",
+    value: function callBackRemoveTodo(id) {
+      this.props.onRemoveTodo(id);
+    }
+  }, {
+    key: "callBackToggleDone",
+    value: function callBackToggleDone(todoData) {
+      this.props.onToggleDone(todoData);
+    }
+  }, {
+    key: "callBackUpTime",
+    value: function callBackUpTime(todoData) {
+      this.props.onUpTime(todoData);
+    }
+  }, {
     key: "render",
     value: function render() {
       var lists = [];
-      var todos = [];
 
       for (var i in this.props.clusters) {
-        // クラスターID（リストの番号）毎にTODOを分けた変数を作る
+        var todos = []; // クラスターID（リストの番号）毎にTODOを分けた変数を作る
+
         for (var k in this.props.todos) {
           if (this.props.clusters[i].id === this.props.todos[k].cluster_id) {
             todos.push(this.props.todos[k]);
@@ -66658,7 +66795,12 @@ var ListTodo = /*#__PURE__*/function (_React$Component) {
           word: this.props.word,
           onUpList: this.callBackUpList,
           onRemoveList: this.callBackRemoveList,
-          todos: todos
+          todos: todos,
+          onAddTodo: this.callBackAddTodo,
+          onUpTodo: this.callBackUpTodo,
+          onRemoveTodo: this.callBackRemoveTodo,
+          onToggleDone: this.callBackToggleDone,
+          onUpTime: this.callBackUpTime
         }));
       }
 
@@ -66667,79 +66809,13 @@ var ListTodo = /*#__PURE__*/function (_React$Component) {
       }, lists, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskList__WEBPACK_IMPORTED_MODULE_1__["default"], {
         key: 'n',
         id: 'n',
-        listMode: "Input",
+        listMode: "New",
         text: '',
-        onAddList: this.callBackAddList
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "p-todoList__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "p-todoList__input",
-        placeholder: "TODO\u540D"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-todoList__bottom"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "p-todoList__btn u-bgColor--primary"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-plus"
-      }), "TODO\u3092\u8FFD\u52A0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-times-circle p-todoList__icon"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "p-todoList__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: ""
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-todoList__todo"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-square p-todoList__icon"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "p-todoList__text u-margin--0-m"
-      }, "TODO")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "c-acd"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "c-acd__check",
-        type: "checkbox"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "c-acd__content p-todoList__acd"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "c-acd__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-edit p-todoList__icon"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "c-acd__text"
-      }, "\u7DE8\u96C6")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "c-acd__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-trash-alt p-todoList__icon"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "c-acd__text"
-      }, "\u524A\u9664")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "c-acd__time"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u4E88\u60F3\u6642\u9593\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "time",
-        defaultValue: "00:00"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "\u4F5C\u696D\u6642\u9593\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "time",
-        defaultValue: "00:00"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "c-timer"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "c-timer__btn u-bgColor--primary"
-      }, "START"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "c-timer__btn u-bgColor--error"
-      }, "STOP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "c-timer__btn u-bgColor--success"
-      }, "RESET")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-chevron-down p-todoList__icon p-todoList__acon c-acd__icon c-acd__down"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-chevron-up p-todoList__icon p-todoList__acon c-acd__icon c-acd__up"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-todoList__bottom"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "p-todoList__add"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-plus"
-      }), "TODO\u3092\u8FFD\u52A0"))));
+        onAddList: this.callBackAddList,
+        onAddTodo: this.callBackAddTodo,
+        onUpTodo: this.callBackUpTodo,
+        onRemoveTodo: this.callBackRemoveTodo
+      }));
     }
   }]);
 
@@ -66762,6 +66838,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Task; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66786,6 +66864,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Task = /*#__PURE__*/function (_React$Component) {
   _inherits(Task, _React$Component);
 
@@ -66802,24 +66881,296 @@ var Task = /*#__PURE__*/function (_React$Component) {
       text: _this.props.text,
       isDone: _this.props.isDone,
       expTime: _this.props.expTime,
+      expMinute: _this.props.expMinute,
       speTime: _this.props.speTime,
-      taskMode: _this.props.taskMode
+      speMinute: _this.props.speMinute,
+      taskMode: _this.props.taskMode,
+      isTimer: false
     };
+    _this.handleNew = _this.handleNew.bind(_assertThisInitialized(_this));
+    _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleEdit = _this.handleEdit.bind(_assertThisInitialized(_this));
+    _this.handleCloseEdit = _this.handleCloseEdit.bind(_assertThisInitialized(_this));
+    _this.handleToggleDone = _this.handleToggleDone.bind(_assertThisInitialized(_this));
+    _this.handleChangeExpTime = _this.handleChangeExpTime.bind(_assertThisInitialized(_this));
+    _this.handleChangeExpMinute = _this.handleChangeExpMinute.bind(_assertThisInitialized(_this));
+    _this.handleChangeSpeTime = _this.handleChangeSpeTime.bind(_assertThisInitialized(_this));
+    _this.handleChangeSpeMinute = _this.handleChangeSpeMinute.bind(_assertThisInitialized(_this));
+    _this.handleUpTime = _this.handleUpTime.bind(_assertThisInitialized(_this));
+    _this.addTodo = _this.addTodo.bind(_assertThisInitialized(_this));
+    _this.removeTodo = _this.removeTodo.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Task, [{
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
+      if (this.props.isDone != nextProps.isDone) {
+        this.setState({
+          isDone: nextProps.isDone
+        });
+      }
+    }
+  }, {
+    key: "handleNew",
+    value: function handleNew() {
+      this.setState({
+        taskMode: "New"
+      });
+    }
+  }, {
+    key: "handleInput",
+    value: function handleInput() {
+      this.setState({
+        taskMode: "Input"
+      });
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState({
+        text: e.target.value
+      });
+    }
+  }, {
+    key: "handleEdit",
+    value: function handleEdit() {
+      this.setState({
+        taskMode: "Edit"
+      });
+    }
+  }, {
+    key: "handleCloseEdit",
+    value: function handleCloseEdit() {
+      var todoData = {
+        id: this.state.id,
+        text: this.state.text
+      };
+      this.props.onUpTodo(todoData);
+      this.setState({
+        taskMode: "Show"
+      });
+    }
+  }, {
+    key: "handleToggleDone",
+    value: function handleToggleDone() {
+      var todoData = {
+        id: this.state.id,
+        isDone: !this.state.isDone
+      };
+      this.props.onToggleDone(todoData);
+    }
+  }, {
+    key: "handleChangeExpTime",
+    value: function handleChangeExpTime(e) {
+      this.setState({
+        expTime: e.target.value
+      });
+    }
+  }, {
+    key: "handleChangeExpMinute",
+    value: function handleChangeExpMinute(e) {
+      this.setState({
+        expMinute: e.target.value
+      });
+    }
+  }, {
+    key: "handleChangeSpeTime",
+    value: function handleChangeSpeTime(e) {
+      this.setState({
+        speTime: e.target.value
+      });
+    }
+  }, {
+    key: "handleChangeSpeMinute",
+    value: function handleChangeSpeMinute(e) {
+      this.setState({
+        speMinute: e.target.value
+      });
+    }
+  }, {
+    key: "handleUpTime",
+    value: function handleUpTime() {
+      var todoData = {
+        id: this.state.id,
+        expTime: this.state.expTime,
+        expMinute: this.state.expMinute,
+        speTime: this.state.speTime,
+        speMinute: this.state.speMinute
+      };
+      this.props.onUpTime(todoData);
+    }
+  }, {
+    key: "addTodo",
+    value: function addTodo() {
+      if (this.state.text) {
+        var todoData = {
+          id: this.state.id,
+          c_id: this.props.c_id,
+          text: this.state.text
+        };
+        this.props.onAddTodo(todoData);
+        this.setState({
+          taskMode: "New",
+          text: ''
+        });
+      }
+    }
+  }, {
+    key: "removeTodo",
+    value: function removeTodo() {
+      this.props.onRemoveTodo(this.state.id);
+    }
+  }, {
     key: "render",
     value: function render() {
       var task = '';
+      var classNameIcon = classnames__WEBPACK_IMPORTED_MODULE_1___default()({
+        'far': true,
+        'p-todoList__icon': true,
+        'fa-check-square': this.state.isDone,
+        'fa-square': !this.state.isDone
+      });
+      var timer = this.state.isTimer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "c-timer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "c-timer__btn u-bgColor--error"
+      }, "STOP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "c-timer__btn u-bgColor--success"
+      }, "RESET")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "c-timer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "c-timer__btn u-bgColor--primary"
+      }, "START"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "c-timer__btn u-bgColor--success"
+      }, "RESET"));
 
       switch (this.state.taskMode) {
         case "New":
           task = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            onClick: this.handleInput,
             className: "p-todoList__add"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fas fa-plus"
-          }), "TODO\u3092\u8FFD\u52A0");
+          }), "\xA0TODO\u3092\u8FFD\u52A0");
+          break;
+
+        case "Input":
+          task = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            className: "p-todoList__input u-margin--m-0 c-component__item",
+            placeholder: "TODO\u540D",
+            value: this.state.text,
+            onChange: this.handleChange
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__bottom"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            onClick: this.addTodo,
+            className: "p-todoList__btn u-bgColor--primary c-component__item"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-plus"
+          }), "TODO\u3092\u8FFD\u52A0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            onClick: this.handleNew,
+            className: "far fa-times-circle p-todoList__icon u-margin-left--m"
+          })));
+          break;
+
+        case "Show":
+          task = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: ""
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__todo"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            onClick: this.handleToggleDone,
+            className: classNameIcon
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            onClick: this.handleEdit,
+            className: "p-todoList__text"
+          }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "c-acd"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            className: "c-acd__check",
+            type: "checkbox"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "c-acd__content p-todoList__acd"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            onClick: this.handleEdit,
+            className: "c-acd__item"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "far fa-edit p-todoList__icon"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "c-acd__text"
+          }, "\u7DE8\u96C6")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            onClick: this.removeTodo,
+            className: "c-acd__item"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "far fa-trash-alt p-todoList__icon"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "c-acd__text"
+          }, "\u524A\u9664")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "c-acd__time"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: ""
+          }, "\u4E88\u60F3\u6642\u9593\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__time u-flex"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            className: "p-todoList__timeInput",
+            min: "0",
+            type: "number",
+            value: this.state.expTime,
+            onChange: this.handleChangeExpTime
+          }), ":", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            className: "p-todoList__timeInput",
+            type: "number",
+            min: "0",
+            max: "59",
+            value: this.state.expMinute,
+            onChange: this.handleChangeExpMinute
+          }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "\u4F5C\u696D\u6642\u9593\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__time u-flex"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            className: "p-todoList__timeInput",
+            min: "0",
+            type: "number",
+            value: this.state.speTime,
+            onChange: this.handleChangeSpeTime
+          }), ":", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            className: "p-todoList__timeInput",
+            type: "number",
+            min: "0",
+            max: "59",
+            value: this.state.speMinute,
+            onChange: this.handleChangeSpeMinute
+          }))), timer, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: this.handleUpTime,
+            className: "p-todoList__submit u-bgColor--accent c-component__item"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-arrow-circle-up"
+          }), "\xA0\u4E88\u60F3\u30FB\u4F5C\u696D\u6642\u9593\u4FDD\u5B58"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-chevron-down p-todoList__icon p-todoList__acon c-acd__icon c-acd__down"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-chevron-up p-todoList__icon p-todoList__acon c-acd__icon c-acd__up"
+          })));
+          break;
+
+        case "Edit":
+          task = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "p-todoList__edit"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "far fa-square p-todoList__icon"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            className: "p-todoList__input",
+            placeholder: "TODO\u540D",
+            value: this.state.text,
+            onChange: this.handleChange
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: this.handleCloseEdit,
+            className: "p-todoList__btn u-bgColor--primary"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-arrow-circle-up"
+          })));
           break;
       }
 
@@ -66895,6 +67246,11 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
     _this.handleCloseEdit = _this.handleCloseEdit.bind(_assertThisInitialized(_this));
     _this.addList = _this.addList.bind(_assertThisInitialized(_this));
     _this.removeList = _this.removeList.bind(_assertThisInitialized(_this));
+    _this.callBackAddTodo = _this.callBackAddTodo.bind(_assertThisInitialized(_this));
+    _this.callBackUpTodo = _this.callBackUpTodo.bind(_assertThisInitialized(_this));
+    _this.callBackRemoveTodo = _this.callBackRemoveTodo.bind(_assertThisInitialized(_this));
+    _this.callBackToggleDone = _this.callBackToggleDone.bind(_assertThisInitialized(_this));
+    _this.callBackUpTime = _this.callBackUpTime.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -66962,11 +67318,46 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
       this.props.onRemoveList(this.state.id);
     }
   }, {
+    key: "callBackAddTodo",
+    value: function callBackAddTodo(todoData) {
+      this.props.onAddTodo(todoData);
+    }
+  }, {
+    key: "callBackUpTodo",
+    value: function callBackUpTodo(todoData) {
+      this.props.onUpTodo(todoData);
+    }
+  }, {
+    key: "callBackRemoveTodo",
+    value: function callBackRemoveTodo(id) {
+      this.props.onRemoveTodo(id);
+    }
+  }, {
+    key: "callBackToggleDone",
+    value: function callBackToggleDone(todoData) {
+      this.props.onToggleDone(todoData);
+    }
+  }, {
+    key: "callBackUpTime",
+    value: function callBackUpTime(todoData) {// 
+    }
+  }, {
     key: "render",
     value: function render() {
       var head = '';
       var bottom = '';
       var todos = [];
+      var newTask = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Task__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        id: 'n',
+        c_id: this.props.id,
+        text: '',
+        taskMode: 'New',
+        onAddTodo: this.callBackAddTodo,
+        onUpTodo: this.callBackUpTodo,
+        onRemoveTodo: this.callBackRemoveTodo,
+        onToggleDone: this.callBackToggleDone,
+        onUpTime: this.callBackUpTime
+      });
 
       switch (this.state.listMode) {
         case 'New':
@@ -67007,11 +67398,9 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
             className: "p-todoList__name "
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             onClick: this.handleEdit,
-            className: "u-margin--0-m"
+            className: "p-todoList__text"
           }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['ExpTime'], "\uFF1A5\u6642\u9593"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['SpeTime'], "\uFF1A10\u6642\u959310\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['TimeLug'], "\uFF1A+5\u6642\u959310\u5206"));
-          bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Task__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            taskMode: 'New'
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, newTask, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "u-flex"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: this.removeList,
@@ -67036,9 +67425,7 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fas fa-arrow-circle-up"
           }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['ExpTime'], "\uFF1A5\u6642\u9593"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['SpeTime'], "\uFF1A10\u6642\u959310\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['TimeLug'], "\uFF1A+5\u6642\u959310\u5206"));
-          bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Task__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            taskMode: 'New'
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, newTask, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "u-flex"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: this.removeList,
@@ -67054,17 +67441,25 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
         todos.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Task__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: this.props.todos[i].id,
           id: this.props.todos[i].id,
+          c_id: this.props.id,
           text: this.props.todos[i].todo_name,
           isDone: this.props.todos[i].done_flg,
           expTime: this.props.todos[i].expect_time,
-          speTime: this.props.spend_time,
-          taskMode: 'Show'
+          speTime: this.props.todos[i].spend_time,
+          expMinute: this.props.todos[i].expect_minute,
+          speMinute: this.props.todos[i].spend_minute,
+          taskMode: 'Show',
+          onAddTodo: this.callBackAddTodo,
+          onUpTodo: this.callBackUpTodo,
+          onRemoveTodo: this.callBackRemoveTodo,
+          onToggleDone: this.callBackToggleDone,
+          onUpTime: this.callBackUpTime
         }));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "p-todoList__item"
-      }, head, bottom, todos);
+      }, head, todos, bottom);
     }
   }]);
 

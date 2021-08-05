@@ -532,7 +532,7 @@ template {
 :root {
   --font-color_default: #fff;
   --color_base: #C6C6C6;
-  --color_accent: #000000;
+  --color_accent: #00233D;
   --color_active: #dadada;
   --color_success: #39D353;
   --color_primary: #2024ad;
@@ -891,6 +891,8 @@ i {
 
 .c-component__item,
 .p-todoList__remove,
+.p-todoList__edit,
+.p-todoList__todo,
 .p-todoList__name,
 .p-todoList__item,
 .p-todoList__tit {
@@ -1083,8 +1085,8 @@ i {
 .c-acd__check {
   position: absolute;
   z-index: 1;
-  top: -36px;
-  right: 10px;
+  top: -32px;
+  right: 15px;
   width: 22px;
   height: 20px;
   opacity: 0;
@@ -1134,7 +1136,7 @@ i {
 
 .c-timer__btn {
   color: var(--font-color_default);
-  width: 33%;
+  width: 48%;
   height: 30px;
   line-height: 30px;
   cursor: pointer;
@@ -1341,6 +1343,22 @@ i {
 }
 
 .p-todoList__input {
+  padding: var(--space_s) var(--space_m);
+}
+
+.p-todoList__input:focus {
+  border: 2px solid var(--color_primary);
+  padding: 3px var(--space_m);
+}
+
+.p-todoList__time,
+.p-todoList__timeInput {
+  margin-left: calc(-1 * var(--space_m));
+}
+
+.p-todoList__timeInput {
+  border: 2px solid var(--color_active);
+  margin: 0 var(--space_m);
   padding: 0 var(--space_m);
 }
 
@@ -1353,19 +1371,28 @@ i {
   align-items: center;
   margin: var(--space_s) 0;
   background: var(--font-color_default);
-  border-radius: 5px;
   padding: 0 var(--space_3l) 0 var(--space_l);
+}
+
+.p-todoList__edit {
+  display: flex;
+  align-items: center;
+  margin: var(--space_m) 0;
+  background: var(--font-color_default);
+  padding: 0 0 0 var(--space_l);
 }
 
 .c-acd__check:checked + .p-todoList__acd {
   opacity: 1;
-  height: 220px;
+  height: 280px;
   visibility: visible;
+  background: var(--font-color_default);
+  padding-bottom: var(--space_l);
 }
 
 .p-todoList__acon {
-  top: -35px;
-  right: 10px;
+  top: -32px;
+  right: 2px;
 }
 
 .p-todoList__bottom {
@@ -1374,19 +1401,24 @@ i {
   margin-top: var(--space_m);
 }
 
-.p-todoList__btn {
-  padding: 0 var(--space_m);
+.p-todoList__btn,
+.p-todoList__submit {
+  padding: var(--space_s) var(--space_m);
   color: var(--font-color_default);
+  cursor: pointer;
 }
 
 .p-todoList__icon {
   font-size: var(--font-size_xl);
   width: 28px;
+  cursor: pointer;
 }
 
 .p-todoList__add {
+  display: block;
   color: var(--font-color_secondary);
   cursor: pointer;
+  margin: var(--space_m) 0;
 }
 
 .p-todoList__remove {
@@ -1394,6 +1426,13 @@ i {
   font-size: var(--font-size_default);
   margin: 0 0 0 auto;
   padding: var(--space_s) var(--space_m);
+}
+
+.p-todoList__submit {
+  display: block;
+  width: 100%;
+  color: var(--font-color_default);
+  margin-top: var(--space_m);
 }
 
 .p-boardHead {
@@ -1441,6 +1480,10 @@ i {
   background: var(--color_base);
 }
 
+.u-bgColor--accent {
+  background: var(--color_accent);
+}
+
 .u-bgColor--error {
   background: var(--color_error);
 }
@@ -1453,6 +1496,10 @@ i {
   background: var(--color_primary);
 }
 
+.u-margin-left--m {
+  margin-left: var(--space_m);
+}
+
 .u-margin-left--auto {
   margin-left: auto;
 }
@@ -1463,6 +1510,10 @@ i {
 
 .u-margin--0-m {
   margin: 0 var(--space_m);
+}
+
+.u-margin--m-0 {
+  margin: var(--space_m) 0;
 }
 
 .u-padding--s-m {
