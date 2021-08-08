@@ -66482,7 +66482,35 @@ var ListApp = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "callBackUpTime",
-    value: function callBackUpTime(todoData) {// 予想時間、実行時間をスキーマへ登録
+    value: function callBackUpTime(todoData) {
+      var _this10 = this;
+
+      // 予想時間、実行時間をスキーマへ登録
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/uptimetodo', {
+        user_id: this.state.u_id,
+        id: todoData['id'],
+        expect_time: todoData['expTime'],
+        expect_minute: todoData['expMinute'],
+        spend_time: todoData['speTime'],
+        spend_minute: todoData['speMinute']
+      }).then(function () {
+        _this10.setState(function (prevState) {
+          return {
+            todos: prevState.todos.map(function (obj) {
+              return obj.id === todoData['id'] ? Object.assign(obj, {
+                expect_time: todoData['expTime'],
+                expect_minute: todoData['expMinute'],
+                spend_time: todoData['speTime'],
+                spend_minute: todoData['speMinute']
+              }) : obj;
+            })
+          };
+        });
+
+        console.log(todoData);
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }, {
     key: "render",
@@ -66900,6 +66928,8 @@ var Task = /*#__PURE__*/function (_React$Component) {
     _this.handleUpTime = _this.handleUpTime.bind(_assertThisInitialized(_this));
     _this.addTodo = _this.addTodo.bind(_assertThisInitialized(_this));
     _this.removeTodo = _this.removeTodo.bind(_assertThisInitialized(_this));
+    _this.startTimer = _this.startTimer.bind(_assertThisInitialized(_this));
+    _this.stopTimer = _this.stopTimer.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -66994,10 +67024,10 @@ var Task = /*#__PURE__*/function (_React$Component) {
     value: function handleUpTime() {
       var todoData = {
         id: this.state.id,
-        expTime: this.state.expTime,
-        expMinute: this.state.expMinute,
-        speTime: this.state.speTime,
-        speMinute: this.state.speMinute
+        expTime: parseInt(this.state.expTime),
+        expMinute: parseInt(this.state.expMinute),
+        speTime: parseInt(this.state.speTime),
+        speMinute: parseInt(this.state.speMinute)
       };
       this.props.onUpTime(todoData);
     }
@@ -67023,6 +67053,26 @@ var Task = /*#__PURE__*/function (_React$Component) {
       this.props.onRemoveTodo(this.state.id);
     }
   }, {
+    key: "countTimer",
+    value: function countTimer() {
+      setInterval(console.log('ok'), 1000);
+    }
+  }, {
+    key: "startTimer",
+    value: function startTimer() {
+      this.setState({
+        isTimer: true
+      });
+    }
+  }, {
+    key: "stopTimer",
+    value: function stopTimer() {
+      this.setState({
+        isTimer: false
+      });
+      clearInterval(this.state.timer);
+    }
+  }, {
     key: "render",
     value: function render() {
       var task = '';
@@ -67035,16 +67085,18 @@ var Task = /*#__PURE__*/function (_React$Component) {
       var timer = this.state.isTimer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "c-timer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        onClick: this.stopTimer,
         className: "c-timer__btn u-bgColor--error"
       }, "STOP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "c-timer__btn u-bgColor--success"
       }, "RESET")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "c-timer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        onClick: this.startTimer,
         className: "c-timer__btn u-bgColor--primary"
       }, "START"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "c-timer__btn u-bgColor--success"
-      }, "RESET"));
+      }, "RESET")); // Taskの状態から要素を分ける
 
       switch (this.state.taskMode) {
         case "New":
@@ -67339,7 +67391,8 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "callBackUpTime",
-    value: function callBackUpTime(todoData) {// 
+    value: function callBackUpTime(todoData) {
+      this.props.onUpTime(todoData);
     }
   }, {
     key: "render",
@@ -67357,7 +67410,37 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
         onRemoveTodo: this.callBackRemoveTodo,
         onToggleDone: this.callBackToggleDone,
         onUpTime: this.callBackUpTime
-      });
+      }); // TODOの予想時間を全て加算する
+
+      var expTimeTotal = 0;
+      var expMinuteTotal = 0;
+      var speTimeTotal = 0;
+      var speMinuteTotal = 0;
+      var timeLug = 0;
+      var minuteLug = 0;
+
+      for (var i in this.props.todos) {
+        expTimeTotal += !isNaN(this.props.todos[i].expect_time) ? this.props.todos[i].expect_time : 0;
+        expMinuteTotal += !isNaN(this.props.todos[i].expect_minute) ? this.props.todos[i].expect_minute : 0;
+        speTimeTotal += !isNaN(this.props.todos[i].spend_time) ? this.props.todos[i].spend_time : 0;
+        expMinuteTotal += !isNaN(this.props.todos[i].spend_minute) ? this.props.todos[i].spend_minute : 0;
+      }
+
+      minuteLug = expMinuteTotal - speMinuteTotal;
+      var intLug = minuteLug / 60;
+
+      if (0 < minuteLug) {
+        intLug = Math.floor(minuteLug);
+      } else {
+        intLug = Math.ceil(minuteLug);
+      }
+
+      minuteLug = parseFloat("0." + String(minuteLug).split(".")[1]) * 60;
+      timeLug = expTimeTotal - speTimeTotal + intLug;
+
+      if (0 < timeLug) {
+        timeLug = '+' + timeLug;
+      }
 
       switch (this.state.listMode) {
         case 'New':
@@ -67399,7 +67482,7 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             onClick: this.handleEdit,
             className: "p-todoList__text"
-          }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['ExpTime'], "\uFF1A5\u6642\u9593"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['SpeTime'], "\uFF1A10\u6642\u959310\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['TimeLug'], "\uFF1A+5\u6642\u959310\u5206"));
+          }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['ExpTime'], "\uFF1A", expTimeTotal, "\u6642\u9593", expMinuteTotal, "\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['SpeTime'], "\uFF1A", speTimeTotal, "\u6642\u9593", speMinuteTotal, "\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['TimeLug'], "\uFF1A", timeLug, "\u6642\u9593", minuteLug, "\u5206"));
           bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, newTask, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "u-flex"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -67424,7 +67507,7 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
             className: "p-todoList__btn u-bgColor--primary"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fas fa-arrow-circle-up"
-          }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['ExpTime'], "\uFF1A5\u6642\u9593"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['SpeTime'], "\uFF1A10\u6642\u959310\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['TimeLug'], "\uFF1A+5\u6642\u959310\u5206"));
+          }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['ExpTime'], "\uFF1A", expTimeTotal, "\u6642\u9593", expMinuteTotal, "\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['SpeTime'], "\uFF1A", speTimeTotal, "\u6642\u9593", speMinuteTotal, "\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['TimeLug'], "\uFF1A", timeLug, "\u6642\u9593", minuteLug, "\u5206"));
           bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, newTask, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "u-flex"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -67437,17 +67520,22 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
           console.log('listMode:default');
       }
 
-      for (var i in this.props.todos) {
+      for (var _i in this.props.todos) {
+        // 予想時間、実行時間を数値か判定し、inputのvalueにnullが入らないようにする
+        var expTime = Number.isInteger(this.props.todos[_i].expect_time) ? this.props.todos[_i].expect_time : 0;
+        var expMinute = Number.isInteger(this.props.todos[_i].expect_minute) ? this.props.todos[_i].expect_minute : 0;
+        var speTime = Number.isInteger(this.props.todos[_i].spend_time) ? this.props.todos[_i].spend_time : 0;
+        var speMinute = Number.isInteger(this.props.todos[_i].spend_minute) ? this.props.todos[_i].spend_minute : 0;
         todos.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Task__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: this.props.todos[i].id,
-          id: this.props.todos[i].id,
+          key: this.props.todos[_i].id,
+          id: this.props.todos[_i].id,
           c_id: this.props.id,
-          text: this.props.todos[i].todo_name,
-          isDone: this.props.todos[i].done_flg,
-          expTime: this.props.todos[i].expect_time,
-          speTime: this.props.todos[i].spend_time,
-          expMinute: this.props.todos[i].expect_minute,
-          speMinute: this.props.todos[i].spend_minute,
+          text: this.props.todos[_i].todo_name,
+          isDone: this.props.todos[_i].done_flg,
+          expTime: expTime,
+          expMinute: expMinute,
+          speTime: speTime,
+          speMinute: speMinute,
           taskMode: 'Show',
           onAddTodo: this.callBackAddTodo,
           onUpTodo: this.callBackUpTodo,
