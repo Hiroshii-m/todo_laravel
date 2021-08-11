@@ -98,24 +98,21 @@ export default class TaskList extends React.Component {
             expTimeTotal += (!isNaN(this.props.todos[i].expect_time)) ? this.props.todos[i].expect_time : 0;
             expMinuteTotal += (!isNaN(this.props.todos[i].expect_minute)) ? this.props.todos[i].expect_minute: 0;
             speTimeTotal += (!isNaN(this.props.todos[i].spend_time)) ? this.props.todos[i].spend_time : 0;
-            speMinuteTotal += (!isNaN(this.props.todos[i].spend_minute)) ? this.props.todos[i].spend_minute: 0;
+            expMinuteTotal += (!isNaN(this.props.todos[i].spend_minute)) ? this.props.todos[i].spend_minute: 0;
         }
-
-        // 予想時間の合計を時間と分に直す。
-        // 時間に60をかけ、分に加算する
-        const expTotal = (expTimeTotal * 60) + expMinuteTotal;
-        // 整数部分を時間、余りを分として整理する
-        expTimeTotal = Math.floor(expTotal/60);
-        expMinuteTotal = expTotal % 60;
-        // 実行時間の合計を時間と分に直す。
-        const speTotal = (speTimeTotal * 60) + speMinuteTotal;
-        speTimeTotal = Math.floor(speTotal/60);
-        speMinuteTotal = speTotal % 60;
-        // タイムラグの計算
-        const totalLug = expTotal - speTotal;
-        timeLug = Math.floor(totalLug/60);
-        // 分にマイナスはつけなくないので、絶対値を取得
-        minuteLug = Math.abs(totalLug % 60);
+        minuteLug = expMinuteTotal - speMinuteTotal;
+        let intLug = minuteLug/60;
+        // タイムラグが正だった場合、小数点以下を切り捨てる
+        if(0 < minuteLug){
+            intLug = Math.floor(minuteLug);
+        }else{
+            intLug = Math.ceil(minuteLug);
+        }
+        minuteLug = parseFloat("0." + (String(minuteLug).split(".")[1])) * 60;
+        timeLug = expTimeTotal - speTimeTotal + intLug;
+        if(0 < timeLug) {
+            timeLug = '+' + timeLug;
+        }
 
         switch(this.state.listMode) {
             case 'New':
@@ -177,9 +174,9 @@ export default class TaskList extends React.Component {
         }
         for(let i in this.props.todos) {
             // 予想時間、実行時間を数値か判定し、inputのvalueにnullが入らないようにする
-            let expTime   = (Number.isInteger(this.props.todos[i].expect_time)) ? this.props.todos[i].expect_time : 0;
+            let expTime = (Number.isInteger(this.props.todos[i].expect_time)) ? this.props.todos[i].expect_time : 0;
             let expMinute = (Number.isInteger(this.props.todos[i].expect_minute)) ? this.props.todos[i].expect_minute : 0;
-            let speTime   = (Number.isInteger(this.props.todos[i].spend_time)) ? this.props.todos[i].spend_time : 0;
+            let speTime = (Number.isInteger(this.props.todos[i].spend_time)) ? this.props.todos[i].spend_time : 0;
             let speMinute = (Number.isInteger(this.props.todos[i].spend_minute)) ? this.props.todos[i].spend_minute : 0;
 
             todos.push(<Task    key={this.props.todos[i].id}

@@ -102,20 +102,23 @@ export default class TaskList extends React.Component {
         }
 
         // 予想時間の合計を時間と分に直す。
-        // 時間に60をかけ、分に加算する
-        const expTotal = (expTimeTotal * 60) + expMinuteTotal;
-        // 整数部分を時間、余りを分として整理する
-        expTimeTotal = Math.floor(expTotal/60);
-        expMinuteTotal = expTotal % 60;
-        // 実行時間の合計を時間と分に直す。
-        const speTotal = (speTimeTotal * 60) + speMinuteTotal;
-        speTimeTotal = Math.floor(speTotal/60);
-        speMinuteTotal = speTotal % 60;
-        // タイムラグの計算
-        const totalLug = expTotal - speTotal;
-        timeLug = Math.floor(totalLug/60);
-        // 分にマイナスはつけなくないので、絶対値を取得
-        minuteLug = Math.abs(totalLug % 60);
+        expMinuteTotal = (expTimeTotal * 60) + expMinuteTotal;
+
+        // 全ての予想時間、実行時間を分にして計算。
+        minuteLug = ((expTimeTotal * 60) + expMinuteTotal) - ((speTimeTotal * 60) + speMinuteTotal);
+        // minuteLugを60で割った値の整数部分が時間、少数部分が分。
+        if(0 < minuteLug) {
+            // 正の値の場合、小数点以下を切り捨てる
+            timeLug = Math.floor(minuteLug/60);
+        }else{
+            // 負の値の場合、小数点以下を切り上げる
+            timeLug = Math.ceil(minuteLug/60);
+        }
+        if((minuteLug/60) <= 1) {
+            minuteLug = Math.floor(parseFloat("0." + (String(minuteLug/60).split(".")[1])) * 60);
+        }else{
+            minuteLug = Math.ceil(parseFloat("0." + (String(minuteLug/60).split(".")[1])) * 60);
+        }
 
         switch(this.state.listMode) {
             case 'New':

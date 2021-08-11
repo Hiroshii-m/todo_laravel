@@ -100,22 +100,34 @@ export default class TaskList extends React.Component {
             speTimeTotal += (!isNaN(this.props.todos[i].spend_time)) ? this.props.todos[i].spend_time : 0;
             speMinuteTotal += (!isNaN(this.props.todos[i].spend_minute)) ? this.props.todos[i].spend_minute: 0;
         }
+        // minuteLug = expMinuteTotal - speMinuteTotal;
+        // let intLug = minuteLug/60;
+        // // タイムラグが正だった場合、小数点以下を切り捨てる
+        // if(0 < minuteLug){
+        //     intLug = Math.floor(minuteLug);
+        // // タイムラグが負だった場合、小数点以下を切り上げる
+        // }else{
+        //     intLug = Math.ceil(minuteLug);
+        // }
+        // minuteLug += parseFloat("0." + (String(intLug).split(".")[1])) * 60;
+        // timeLug = expTimeTotal - speTimeTotal;
+        // if(0 < timeLug) {
+        //     timeLug = '+' + timeLug;
+        // }
 
-        // 予想時間の合計を時間と分に直す。
-        // 時間に60をかけ、分に加算する
-        const expTotal = (expTimeTotal * 60) + expMinuteTotal;
-        // 整数部分を時間、余りを分として整理する
-        expTimeTotal = Math.floor(expTotal/60);
-        expMinuteTotal = expTotal % 60;
-        // 実行時間の合計を時間と分に直す。
-        const speTotal = (speTimeTotal * 60) + speMinuteTotal;
-        speTimeTotal = Math.floor(speTotal/60);
-        speMinuteTotal = speTotal % 60;
-        // タイムラグの計算
-        const totalLug = expTotal - speTotal;
-        timeLug = Math.floor(totalLug/60);
-        // 分にマイナスはつけなくないので、絶対値を取得
-        minuteLug = Math.abs(totalLug % 60);
+        // 全ての予想時間、実行時間を分にして計算。
+        minuteLug = ((expTimeTotal * 60) + expMinuteTotal) - ((speTimeTotal * 60) + speMinuteTotal);
+        // minuteLugを60で割った値の整数部分が時間、少数部分が分。
+        if(0 < minuteLug) {
+            // 正の値の場合、小数点以下を切り捨てる
+            timeLug = Math.floor(minuteLug/60);
+        }else{
+            // 負の値の場合、小数点以下を切り上げる
+            timeLug = Math.ceil(minuteLug/60);
+        }
+        console.log(minuteLug);
+        minuteLug = parseFloat("0." + (String(minuteLug/60).split(".")[1])) * 60;
+        console.log(minuteLug);
 
         switch(this.state.listMode) {
             case 'New':

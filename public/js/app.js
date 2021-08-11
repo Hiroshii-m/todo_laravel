@@ -66506,8 +66506,6 @@ var ListApp = /*#__PURE__*/function (_Component) {
             })
           };
         });
-
-        console.log(todoData);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -66912,6 +66910,7 @@ var Task = /*#__PURE__*/function (_React$Component) {
       expMinute: _this.props.expMinute,
       speTime: _this.props.speTime,
       speMinute: _this.props.speMinute,
+      speSecond: 0,
       taskMode: _this.props.taskMode,
       isTimer: false
     };
@@ -67053,11 +67052,6 @@ var Task = /*#__PURE__*/function (_React$Component) {
       this.props.onRemoveTodo(this.state.id);
     }
   }, {
-    key: "countTimer",
-    value: function countTimer() {
-      setInterval(console.log('ok'), 1000);
-    }
-  }, {
     key: "startTimer",
     value: function startTimer() {
       this.setState({
@@ -67070,7 +67064,6 @@ var Task = /*#__PURE__*/function (_React$Component) {
       this.setState({
         isTimer: false
       });
-      clearInterval(this.state.timer);
     }
   }, {
     key: "render",
@@ -67423,24 +67416,38 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
         expTimeTotal += !isNaN(this.props.todos[i].expect_time) ? this.props.todos[i].expect_time : 0;
         expMinuteTotal += !isNaN(this.props.todos[i].expect_minute) ? this.props.todos[i].expect_minute : 0;
         speTimeTotal += !isNaN(this.props.todos[i].spend_time) ? this.props.todos[i].spend_time : 0;
-        expMinuteTotal += !isNaN(this.props.todos[i].spend_minute) ? this.props.todos[i].spend_minute : 0;
-      }
+        speMinuteTotal += !isNaN(this.props.todos[i].spend_minute) ? this.props.todos[i].spend_minute : 0;
+      } // 予想時間の合計を時間と分に直す。
+      // 時間に60をかけ、分に加算する
 
-      minuteLug = expMinuteTotal - speMinuteTotal;
-      var intLug = minuteLug / 60;
 
-      if (0 < minuteLug) {
-        intLug = Math.floor(minuteLug);
-      } else {
-        intLug = Math.ceil(minuteLug);
-      }
+      var expTotal = expTimeTotal * 60 + expMinuteTotal; // 整数部分を時間、余りを分として整理する
 
-      minuteLug = parseFloat("0." + String(minuteLug).split(".")[1]) * 60;
-      timeLug = expTimeTotal - speTimeTotal + intLug;
+      expTimeTotal = Math.floor(expTotal / 60);
+      expMinuteTotal = expTotal % 60; // 実行時間の合計を時間と分に直す。
 
-      if (0 < timeLug) {
-        timeLug = '+' + timeLug;
-      }
+      var speTotal = speTimeTotal * 60 + speMinuteTotal;
+      speTimeTotal = Math.floor(speTotal / 60);
+      speMinuteTotal = speTotal % 60; // タイムラグの計算
+
+      var totalLug = expTotal - speTotal;
+      timeLug = Math.floor(totalLug / 60); // 分にマイナスはつけなくないので、絶対値を取得
+
+      minuteLug = Math.abs(totalLug % 60); // // 全ての予想時間、実行時間を分にして計算。
+      // minuteLug = ((expTimeTotal * 60) + expMinuteTotal) - ((speTimeTotal * 60) + speMinuteTotal);
+      // // minuteLugを60で割った値の整数部分が時間、少数部分が分。
+      // if(0 < minuteLug) {
+      //     // 正の値の場合、小数点以下を切り捨てる
+      //     timeLug = Math.floor(minuteLug/60);
+      // }else{
+      //     // 負の値の場合、小数点以下を切り上げる
+      //     timeLug = Math.ceil(minuteLug/60);
+      // }
+      // if((minuteLug/60) <= 1) {
+      //     minuteLug = Math.floor(parseFloat("0." + (String(minuteLug/60).split(".")[1])) * 60);
+      // }else{
+      //     minuteLug = Math.ceil(parseFloat("0." + (String(minuteLug/60).split(".")[1])) * 60);
+      // }
 
       switch (this.state.listMode) {
         case 'New':
