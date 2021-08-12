@@ -15,7 +15,7 @@ export default class Task extends React.Component {
             speSecond: 0,
             taskMode: this.props.taskMode,
             upTimer: false,
-            timeMsg: this.props.timeMsg
+            timeMsg: ''
         }
         this.handleNew = this.handleNew.bind(this);
         this.handleInput = this.handleInput.bind(this);
@@ -34,17 +34,11 @@ export default class Task extends React.Component {
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
         this.updateTimer = this.updateTimer.bind(this);
-        this.closeMsg = this.closeMsg.bind(this);
     }
     UNSAFE_componentWillReceiveProps(nextProps) {
         if(this.props.isDone != nextProps.isDone) {
             this.setState({
                 isDone: nextProps.isDone
-            });
-        }
-        if(this.props.timeMsg != nextProps.timeMsg) {
-            this.setState({
-                timeMsg: nextProps.timeMsg
             });
         }
     }
@@ -102,11 +96,6 @@ export default class Task extends React.Component {
     handleUpTime() {
         const todoData = {id: this.state.id, expTime: parseInt(this.state.expTime), expMinute: parseInt(this.state.expMinute), speTime: parseInt(this.state.speTime), speMinute: parseInt(this.state.speMinute)};
         this.props.onUpTime(todoData);
-        this.setState({
-            upTimer: true
-        });
-        // メッセージを表示して10秒ごに非表示にする
-        setTimeout(() => this.closeMsg(), 10000);
     }
     handleResetTimer() {
         // 実行時間をリセットする
@@ -154,11 +143,6 @@ export default class Task extends React.Component {
             speSecond: seconds
         });
     }
-    closeMsg() {
-        this.setState({
-            upTimer: false
-        });
-    }
     render() {
         let task = '';
         const classNameIcon = classNames({
@@ -177,7 +161,7 @@ export default class Task extends React.Component {
             <p onClick={this.handleResetTimer} className="c-timer__btn u-bgColor--success">RESET</p>
         </div>;
         // 予想時間、実行時間が保存されたかどうか通知する
-        const timeMsg = (this.state.upTimer === true) ? <p className="u-margin--m-0">{this.state.timeMsg}</p> : '';
+        const timeMsg = <p className="u-margin--m-0">保存に成功しました!!</p>;
         // Taskの状態から要素を分ける
         switch(this.state.taskMode){
             case "New":

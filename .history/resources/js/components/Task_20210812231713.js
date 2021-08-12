@@ -42,11 +42,6 @@ export default class Task extends React.Component {
                 isDone: nextProps.isDone
             });
         }
-        if(this.props.timeMsg != nextProps.timeMsg) {
-            this.setState({
-                timeMsg: nextProps.timeMsg
-            });
-        }
     }
     handleNew() {
         this.setState({

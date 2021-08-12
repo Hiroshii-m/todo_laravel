@@ -1384,7 +1384,7 @@ i {
 
 .c-acd__check:checked + .p-todoList__acd {
   opacity: 1;
-  height: 280px;
+  height: 300px;
   visibility: visible;
   background: var(--font-color_default);
   padding-bottom: var(--space_l);
@@ -1476,6 +1476,10 @@ i {
   color: var(--color_error);
 }
 
+.u-color--success {
+  color: var(--color_success);
+}
+
 .u-bgColor--base {
   background: var(--color_base);
 }
@@ -1554,48 +1558,5 @@ i {
 
 .js-target-display.show {
   display: block;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-active {
-  -webkit-animation: bounce-in 0.5s;
-          animation: bounce-in 0.5s;
-}
-
-@-webkit-keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1);
-  }
 }
 

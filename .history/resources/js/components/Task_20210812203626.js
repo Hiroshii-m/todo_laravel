@@ -14,8 +14,7 @@ export default class Task extends React.Component {
             speMinute: this.props.speMinute,
             speSecond: 0,
             taskMode: this.props.taskMode,
-            upTimer: false,
-            timeMsg: this.props.timeMsg
+            isTimer: false
         }
         this.handleNew = this.handleNew.bind(this);
         this.handleInput = this.handleInput.bind(this);
@@ -27,24 +26,17 @@ export default class Task extends React.Component {
         this.handleChangeExpMinute = this.handleChangeExpMinute.bind(this);
         this.handleChangeSpeTime = this.handleChangeSpeTime.bind(this);
         this.handleChangeSpeMinute = this.handleChangeSpeMinute.bind(this);
-        this.handleResetTimer = this.handleResetTimer.bind(this);
         this.handleUpTime = this.handleUpTime.bind(this);
         this.addTodo = this.addTodo.bind(this);
         this.removeTodo = this.removeTodo.bind(this);
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
         this.updateTimer = this.updateTimer.bind(this);
-        this.closeMsg = this.closeMsg.bind(this);
     }
     UNSAFE_componentWillReceiveProps(nextProps) {
         if(this.props.isDone != nextProps.isDone) {
             this.setState({
                 isDone: nextProps.isDone
-            });
-        }
-        if(this.props.timeMsg != nextProps.timeMsg) {
-            this.setState({
-                timeMsg: nextProps.timeMsg
             });
         }
     }
@@ -102,20 +94,6 @@ export default class Task extends React.Component {
     handleUpTime() {
         const todoData = {id: this.state.id, expTime: parseInt(this.state.expTime), expMinute: parseInt(this.state.expMinute), speTime: parseInt(this.state.speTime), speMinute: parseInt(this.state.speMinute)};
         this.props.onUpTime(todoData);
-        this.setState({
-            upTimer: true
-        });
-        // メッセージを表示して10秒ごに非表示にする
-        setTimeout(() => this.closeMsg(), 10000);
-    }
-    handleResetTimer() {
-        // 実行時間をリセットする
-        this.setState({
-            speTime: 0,
-            speMinute: 0,
-            speSecond: 0
-        });
-        clearInterval(this.timer);
     }
     addTodo() {
         if(this.state.text) {
@@ -134,30 +112,17 @@ export default class Task extends React.Component {
         this.setState({
             isTimer: true
         });
-        this.timer = setInterval(() => this.updateTimer(), 1000);
     }
     stopTimer() {
         this.setState({
             isTimer: false
         });
-        clearInterval(this.timer);
     }
     updateTimer() {
-        // 元々、登録されている時間と1秒を time 定数に加算する
-        const time = (this.state.speTime * 60 * 60) + (this.state.speMinute * 60) + this.state.speSecond + 1;
+        // 更新が呼び出されば、1秒追加する
+        const time = this.state.speSecond + 1;
         const hours = parseInt(time / 60 / 60, 10);
-        const minutes = parseInt(time / 60 % 60, 10);
-        const seconds = parseInt(time % 60, 10);
-        this.setState({
-            speTime: hours,
-            speMinute: minutes,
-            speSecond: seconds
-        });
-    }
-    closeMsg() {
-        this.setState({
-            upTimer: false
-        });
+        const minutes = parseInt(time / 60 % 60, 10)
     }
     render() {
         let task = '';
@@ -170,14 +135,12 @@ export default class Task extends React.Component {
         const timer = (this.state.isTimer) ? 
         <div className="c-timer">
             <p onClick={this.stopTimer} className="c-timer__btn u-bgColor--error">STOP</p>
-            <p onClick={this.handleResetTimer} className="c-timer__btn u-bgColor--success">RESET</p>
+            <p className="c-timer__btn u-bgColor--success">RESET</p>
         </div>: 
         <div className="c-timer">
             <p onClick={this.startTimer} className="c-timer__btn u-bgColor--primary">START</p>
-            <p onClick={this.handleResetTimer} className="c-timer__btn u-bgColor--success">RESET</p>
+            <p className="c-timer__btn u-bgColor--success">RESET</p>
         </div>;
-        // 予想時間、実行時間が保存されたかどうか通知する
-        const timeMsg = (this.state.upTimer === true) ? <p className="u-margin--m-0">{this.state.timeMsg}</p> : '';
         // Taskの状態から要素を分ける
         switch(this.state.taskMode){
             case "New":
@@ -224,7 +187,6 @@ export default class Task extends React.Component {
                                 </div>
                                 {timer}
                                 <button onClick={this.handleUpTime} className="p-todoList__submit u-bgColor--accent c-component__item"><i className="fas fa-arrow-circle-up"></i>&nbsp;予想・作業時間保存</button>
-                                {timeMsg}
                             </div>
                         </div>
                         <i className="fas fa-chevron-down p-todoList__icon p-todoList__acon c-acd__icon c-acd__down"></i>

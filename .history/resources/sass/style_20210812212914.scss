@@ -590,7 +590,7 @@
     &__acd {
         .c-acd__check:checked + & {
             opacity: 1;
-            height: 300px;
+            height: 280px;
             visibility: visible;
             background: var(--font-color_default);
             padding-bottom: var(--space_l);
@@ -674,9 +674,6 @@
     }
     &--error {
         color: var(--color_error);
-    }
-    &--success {
-        color: var(--color_success);
     }
 }
 // BackGround

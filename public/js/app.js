@@ -66501,13 +66501,24 @@ var ListApp = /*#__PURE__*/function (_Component) {
                 expect_time: todoData['expTime'],
                 expect_minute: todoData['expMinute'],
                 spend_time: todoData['speTime'],
-                spend_minute: todoData['speMinute']
+                spend_minute: todoData['speMinute'],
+                timeMsg: '保存に成功しました！！'
               }) : obj;
             })
           };
         });
       })["catch"](function (err) {
         console.log(err);
+
+        _this10.setState(function (prevState) {
+          return {
+            todos: prevState.todos.map(function (obj) {
+              return obj.id === todoData['id'] ? Object.assign(obj, {
+                timeMsg: '保存に失敗しました。しばらくお待ちください。'
+              }) : obj;
+            })
+          };
+        });
       });
     }
   }, {
@@ -66912,7 +66923,8 @@ var Task = /*#__PURE__*/function (_React$Component) {
       speMinute: _this.props.speMinute,
       speSecond: 0,
       taskMode: _this.props.taskMode,
-      isTimer: false
+      upTimer: false,
+      timeMsg: _this.props.timeMsg
     };
     _this.handleNew = _this.handleNew.bind(_assertThisInitialized(_this));
     _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
@@ -66924,11 +66936,14 @@ var Task = /*#__PURE__*/function (_React$Component) {
     _this.handleChangeExpMinute = _this.handleChangeExpMinute.bind(_assertThisInitialized(_this));
     _this.handleChangeSpeTime = _this.handleChangeSpeTime.bind(_assertThisInitialized(_this));
     _this.handleChangeSpeMinute = _this.handleChangeSpeMinute.bind(_assertThisInitialized(_this));
+    _this.handleResetTimer = _this.handleResetTimer.bind(_assertThisInitialized(_this));
     _this.handleUpTime = _this.handleUpTime.bind(_assertThisInitialized(_this));
     _this.addTodo = _this.addTodo.bind(_assertThisInitialized(_this));
     _this.removeTodo = _this.removeTodo.bind(_assertThisInitialized(_this));
     _this.startTimer = _this.startTimer.bind(_assertThisInitialized(_this));
     _this.stopTimer = _this.stopTimer.bind(_assertThisInitialized(_this));
+    _this.updateTimer = _this.updateTimer.bind(_assertThisInitialized(_this));
+    _this.closeMsg = _this.closeMsg.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -66938,6 +66953,12 @@ var Task = /*#__PURE__*/function (_React$Component) {
       if (this.props.isDone != nextProps.isDone) {
         this.setState({
           isDone: nextProps.isDone
+        });
+      }
+
+      if (this.props.timeMsg != nextProps.timeMsg) {
+        this.setState({
+          timeMsg: nextProps.timeMsg
         });
       }
     }
@@ -67021,6 +67042,8 @@ var Task = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleUpTime",
     value: function handleUpTime() {
+      var _this2 = this;
+
       var todoData = {
         id: this.state.id,
         expTime: parseInt(this.state.expTime),
@@ -67029,6 +67052,24 @@ var Task = /*#__PURE__*/function (_React$Component) {
         speMinute: parseInt(this.state.speMinute)
       };
       this.props.onUpTime(todoData);
+      this.setState({
+        upTimer: true
+      }); // メッセージを表示して10秒ごに非表示にする
+
+      setTimeout(function () {
+        return _this2.closeMsg();
+      }, 10000);
+    }
+  }, {
+    key: "handleResetTimer",
+    value: function handleResetTimer() {
+      // 実行時間をリセットする
+      this.setState({
+        speTime: 0,
+        speMinute: 0,
+        speSecond: 0
+      });
+      clearInterval(this.timer);
     }
   }, {
     key: "addTodo",
@@ -67054,15 +67095,42 @@ var Task = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "startTimer",
     value: function startTimer() {
+      var _this3 = this;
+
       this.setState({
         isTimer: true
       });
+      this.timer = setInterval(function () {
+        return _this3.updateTimer();
+      }, 1000);
     }
   }, {
     key: "stopTimer",
     value: function stopTimer() {
       this.setState({
         isTimer: false
+      });
+      clearInterval(this.timer);
+    }
+  }, {
+    key: "updateTimer",
+    value: function updateTimer() {
+      // 元々、登録されている時間と1秒を time 定数に加算する
+      var time = this.state.speTime * 60 * 60 + this.state.speMinute * 60 + this.state.speSecond + 1;
+      var hours = parseInt(time / 60 / 60, 10);
+      var minutes = parseInt(time / 60 % 60, 10);
+      var seconds = parseInt(time % 60, 10);
+      this.setState({
+        speTime: hours,
+        speMinute: minutes,
+        speSecond: seconds
+      });
+    }
+  }, {
+    key: "closeMsg",
+    value: function closeMsg() {
+      this.setState({
+        upTimer: false
       });
     }
   }, {
@@ -67081,6 +67149,7 @@ var Task = /*#__PURE__*/function (_React$Component) {
         onClick: this.stopTimer,
         className: "c-timer__btn u-bgColor--error"
       }, "STOP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        onClick: this.handleResetTimer,
         className: "c-timer__btn u-bgColor--success"
       }, "RESET")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "c-timer"
@@ -67088,8 +67157,13 @@ var Task = /*#__PURE__*/function (_React$Component) {
         onClick: this.startTimer,
         className: "c-timer__btn u-bgColor--primary"
       }, "START"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        onClick: this.handleResetTimer,
         className: "c-timer__btn u-bgColor--success"
-      }, "RESET")); // Taskの状態から要素を分ける
+      }, "RESET")); // 予想時間、実行時間が保存されたかどうか通知する
+
+      var timeMsg = this.state.upTimer === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "u-margin--m-0"
+      }, this.state.timeMsg) : ''; // Taskの状態から要素を分ける
 
       switch (this.state.taskMode) {
         case "New":
@@ -67192,7 +67266,7 @@ var Task = /*#__PURE__*/function (_React$Component) {
             className: "p-todoList__submit u-bgColor--accent c-component__item"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fas fa-arrow-circle-up"
-          }), "\xA0\u4E88\u60F3\u30FB\u4F5C\u696D\u6642\u9593\u4FDD\u5B58"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          }), "\xA0\u4E88\u60F3\u30FB\u4F5C\u696D\u6642\u9593\u4FDD\u5B58"), timeMsg)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fas fa-chevron-down p-todoList__icon p-todoList__acon c-acd__icon c-acd__down"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fas fa-chevron-up p-todoList__icon p-todoList__acon c-acd__icon c-acd__up"
@@ -67433,21 +67507,7 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
       var totalLug = expTotal - speTotal;
       timeLug = Math.floor(totalLug / 60); // 分にマイナスはつけなくないので、絶対値を取得
 
-      minuteLug = Math.abs(totalLug % 60); // // 全ての予想時間、実行時間を分にして計算。
-      // minuteLug = ((expTimeTotal * 60) + expMinuteTotal) - ((speTimeTotal * 60) + speMinuteTotal);
-      // // minuteLugを60で割った値の整数部分が時間、少数部分が分。
-      // if(0 < minuteLug) {
-      //     // 正の値の場合、小数点以下を切り捨てる
-      //     timeLug = Math.floor(minuteLug/60);
-      // }else{
-      //     // 負の値の場合、小数点以下を切り上げる
-      //     timeLug = Math.ceil(minuteLug/60);
-      // }
-      // if((minuteLug/60) <= 1) {
-      //     minuteLug = Math.floor(parseFloat("0." + (String(minuteLug/60).split(".")[1])) * 60);
-      // }else{
-      //     minuteLug = Math.ceil(parseFloat("0." + (String(minuteLug/60).split(".")[1])) * 60);
-      // }
+      minuteLug = Math.abs(totalLug % 60);
 
       switch (this.state.listMode) {
         case 'New':
@@ -67533,6 +67593,7 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
         var expMinute = Number.isInteger(this.props.todos[_i].expect_minute) ? this.props.todos[_i].expect_minute : 0;
         var speTime = Number.isInteger(this.props.todos[_i].spend_time) ? this.props.todos[_i].spend_time : 0;
         var speMinute = Number.isInteger(this.props.todos[_i].spend_minute) ? this.props.todos[_i].spend_minute : 0;
+        var timeMsg = typeof this.props.todos[_i].timeMsg !== 'undefined' ? this.props.todos[_i].timeMsg : '';
         todos.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Task__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: this.props.todos[_i].id,
           id: this.props.todos[_i].id,
@@ -67544,6 +67605,7 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
           speTime: speTime,
           speMinute: speMinute,
           taskMode: 'Show',
+          timeMsg: timeMsg,
           onAddTodo: this.callBackAddTodo,
           onUpTodo: this.callBackUpTodo,
           onRemoveTodo: this.callBackRemoveTodo,

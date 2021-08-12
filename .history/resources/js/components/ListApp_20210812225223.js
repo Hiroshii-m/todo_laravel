@@ -208,11 +208,6 @@ export default class ListApp extends Component {
             })
             .catch( err => {
                 console.log(err);
-                this.setState(prevState => ({
-                    todos: prevState.todos.map(
-                        obj => (obj.id === todoData['id'] ? Object.assign(obj, {timeMsg: '保存に失敗しました。しばらくお待ちください。'}): obj)
-                    )
-                }));
             })
     }
     render() {

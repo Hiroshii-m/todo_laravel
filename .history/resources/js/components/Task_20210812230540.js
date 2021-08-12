@@ -42,11 +42,6 @@ export default class Task extends React.Component {
                 isDone: nextProps.isDone
             });
         }
-        if(this.props.timeMsg != nextProps.timeMsg) {
-            this.setState({
-                timeMsg: nextProps.timeMsg
-            });
-        }
     }
     handleNew() {
         this.setState({
@@ -105,7 +100,6 @@ export default class Task extends React.Component {
         this.setState({
             upTimer: true
         });
-        // メッセージを表示して10秒ごに非表示にする
         setTimeout(() => this.closeMsg(), 10000);
     }
     handleResetTimer() {
@@ -177,7 +171,7 @@ export default class Task extends React.Component {
             <p onClick={this.handleResetTimer} className="c-timer__btn u-bgColor--success">RESET</p>
         </div>;
         // 予想時間、実行時間が保存されたかどうか通知する
-        const timeMsg = (this.state.upTimer === true) ? <p className="u-margin--m-0">{this.state.timeMsg}</p> : '';
+        const timeMsg = <p className="u-margin--m-0"></p>;
         // Taskの状態から要素を分ける
         switch(this.state.taskMode){
             case "New":

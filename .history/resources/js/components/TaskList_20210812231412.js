@@ -177,10 +177,10 @@ export default class TaskList extends React.Component {
         }
         for(let i in this.props.todos) {
             // 予想時間、実行時間を数値か判定し、inputのvalueにnullが入らないようにする
-            const expTime   = (Number.isInteger(this.props.todos[i].expect_time)) ? this.props.todos[i].expect_time : 0;
-            const expMinute = (Number.isInteger(this.props.todos[i].expect_minute)) ? this.props.todos[i].expect_minute : 0;
-            const speTime   = (Number.isInteger(this.props.todos[i].spend_time)) ? this.props.todos[i].spend_time : 0;
-            const speMinute = (Number.isInteger(this.props.todos[i].spend_minute)) ? this.props.todos[i].spend_minute : 0;
+            let expTime   = (Number.isInteger(this.props.todos[i].expect_time)) ? this.props.todos[i].expect_time : 0;
+            let expMinute = (Number.isInteger(this.props.todos[i].expect_minute)) ? this.props.todos[i].expect_minute : 0;
+            let speTime   = (Number.isInteger(this.props.todos[i].spend_time)) ? this.props.todos[i].spend_time : 0;
+            let speMinute = (Number.isInteger(this.props.todos[i].spend_minute)) ? this.props.todos[i].spend_minute : 0;
             const timeMsg = (typeof this.props.todos[i].timeMsg !== 'undefined') ? this.props.todos[i].timeMsg : '';
 
             todos.push(<Task    key={this.props.todos[i].id}
