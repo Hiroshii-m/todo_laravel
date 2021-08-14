@@ -66966,7 +66966,8 @@ var Task = /*#__PURE__*/function (_React$Component) {
     key: "handleNew",
     value: function handleNew() {
       this.setState({
-        taskMode: "New"
+        taskMode: "New",
+        text: ''
       });
     }
   }, {
@@ -67400,7 +67401,8 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
     key: "handleNew",
     value: function handleNew() {
       this.setState({
-        listMode: "New"
+        listMode: "New",
+        text: ''
       });
     }
   }, {

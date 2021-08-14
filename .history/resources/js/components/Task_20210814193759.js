@@ -50,8 +50,7 @@ export default class Task extends React.Component {
     }
     handleNew() {
         this.setState({
-            taskMode: "New",
-            text: ''
+            taskMode: "New"
         });
     }
     handleInput() {

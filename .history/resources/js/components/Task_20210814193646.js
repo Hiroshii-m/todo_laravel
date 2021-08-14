@@ -50,8 +50,7 @@ export default class Task extends React.Component {
     }
     handleNew() {
         this.setState({
-            taskMode: "New",
-            text: ''
+            taskMode: "New"
         });
     }
     handleInput() {
@@ -73,7 +72,8 @@ export default class Task extends React.Component {
         const todoData = {id: this.state.id, text: this.state.text};
         this.props.onUpTodo(todoData);
         this.setState({
-            taskMode: "Show"
+            taskMode: "Show",
+            text: ''
         });
     }
     handleToggleDone() {
