@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Todo;
 use App\Cluster;
 use App\TodoList;
 use Illuminate\Http\Request;

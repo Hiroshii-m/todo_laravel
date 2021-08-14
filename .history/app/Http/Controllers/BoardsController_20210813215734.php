@@ -47,22 +47,4 @@ class BoardsController extends Controller
 
         return redirect('/boards')->with('flash_message', __('Deleted'));
     }
-    // 退会ページ
-    public function withdraw()
-    {
-        return view('member.withdraw');
-    }
-    // 退会する
-    public function retire()
-    {
-        // ユーザーのTODO,クラスター(リスト),ボードを削除
-        $u_id = Auth::user()->id;
-        Auth::user()->todos()->where('user_id', $u_id)->delete();
-        Auth::user()->clusters()->where('user_id', $u_id)->delete();
-        Auth::user()->boards()->where('user_id', $u_id)->delete();
-        // ユーザーを削除
-        Auth::user()->delete();
-
-        return redirect('/login')->with('flash_message', __('Deleted an membership'));
-    }
 }

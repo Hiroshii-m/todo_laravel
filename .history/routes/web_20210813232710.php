@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/boards', 'BoardsController@create');
     Route::delete('/boards/{id}/delete', 'BoardsController@delete')->name('boards.delete');
     Route::get('/boards/withdraw', 'BoardsController@withdraw')->name('boards.withdraw');
-    Route::delete('/boards/withdraw', 'BoardsController@retire')->name('boards.retire');
+    Route::delete('/boards/retire', 'BoardsController@retire')->name('boards.retire');
     Route::get('/clusters/{id}', 'ClustersController@index')->name('clusters');
 });
 

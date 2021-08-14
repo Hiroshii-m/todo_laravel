@@ -93,11 +93,9 @@
                     <a href="" class="c-footer__item">利用規約</a>
                     <a href="" class="c-footer__item">お問い合わせ</a>
                     <a href="" class="c-footer__item">個人情報保護方針</a>
-                    <a href="" class="c-footer__item">ヘルプ</a>
-                    <a href="{{ route('boards.withdraw') }}" class="c-footer__item">退会</a>
+                    <a href="" class="c-footer__item">退会</a>
                 </div>
-                <p class="c-footer__tit">Todo-Pro</p>
-                <p class="c-footer__tit">Copyright&copy;piroshiki</p>
+                <p class="c-footer__tit">Copyright&copy;Todo-Pro</p>
             </footer>
         </section>
     </div>

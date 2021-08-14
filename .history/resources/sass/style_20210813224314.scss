@@ -56,7 +56,6 @@
 }
 #l-footer {
     width: 100%;
-    margin: var(--space_3l) 0 0 0;
     &.active {
         position: absolute;
         bottom: 0;
@@ -256,7 +255,7 @@
     &__tit {
         text-align: right;
         margin: 0 var(--space_m);
-        @include mixin.mq(sm) {
+        @include mq(sm) {
             text-align: center;
         }
     }
@@ -692,9 +691,6 @@
     }
     &--success {
         color: var(--color_success);
-    }
-    &--default {
-        color: var(--font-color_default);
     }
 }
 // BackGround

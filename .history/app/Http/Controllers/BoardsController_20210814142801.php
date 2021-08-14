@@ -63,6 +63,6 @@ class BoardsController extends Controller
         // ユーザーを削除
         Auth::user()->delete();
 
-        return redirect('/login')->with('flash_message', __('Deleted an membership'));
+        return redirect('/login')->with('flash_message', __('Deleted').__('an membership'));
     }
 }
