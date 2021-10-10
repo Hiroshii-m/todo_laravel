@@ -18,8 +18,8 @@ require('./components/BoardApp');
 require('./components/ListApp');
 
 /**
-* Native JavaScript
-*/
+ * Native JavaScript
+ */
 window.addEventListener("DOMContentLoaded", function() {
     const clickShow = document.querySelectorAll('.js-click-toggle-display') || null,
         targetShow = document.querySelectorAll('.js-target-display') || null,

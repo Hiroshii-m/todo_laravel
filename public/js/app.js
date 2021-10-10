@@ -65756,8 +65756,8 @@ __webpack_require__(/*! ./components/BoardApp */ "./resources/js/components/Boar
 
 __webpack_require__(/*! ./components/ListApp */ "./resources/js/components/ListApp.js");
 /**
- * Native JavaScript
- */
+* Native JavaScript
+*/
 
 
 window.addEventListener("DOMContentLoaded", function () {
