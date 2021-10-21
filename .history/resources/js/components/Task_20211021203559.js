@@ -199,7 +199,7 @@ export default class Task extends React.Component {
                 task = 
                 <div className="">
                     <div className="p-todoList__todo">
-                        {icon}
+                        <i onClick={this.handleToggleDone} className={classNameIcon}></i>
                         <span onClick={this.handleEdit} className="p-todoList__text">{this.state.text}</span>
                     </div>
                     <div className="c-acd">
@@ -237,8 +237,8 @@ export default class Task extends React.Component {
             case "Edit":
                 task = 
                 <div className="p-todoList__edit">
-                    {icon}
-                    <input type="text" className="p-todoList__input" placeholder="TODO名" value={this.state.text} onChange={this.handleChange} autoFocus />
+                    <i className="far fa-square p-todoList__icon"></i>
+                    <input type="text" className="p-todoList__input" placeholder="TODO名" value={this.state.text} onChange={this.handleChange}  />
                     <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary"><i className="fas fa-arrow-circle-up"></i></button>
                 </div>
                 break;

@@ -67144,6 +67144,10 @@ var Task = /*#__PURE__*/function (_React$Component) {
         'fa-check-square': this.state.isDone,
         'fa-square': !this.state.isDone
       });
+      var icon = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        onClick: this.handleToggleDone,
+        className: classNameIcon
+      });
       var timer = this.state.isTimer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "c-timer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -67201,10 +67205,7 @@ var Task = /*#__PURE__*/function (_React$Component) {
             className: ""
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "p-todoList__todo"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            onClick: this.handleToggleDone,
-            className: classNameIcon
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          }, icon, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             onClick: this.handleEdit,
             className: "p-todoList__text"
           }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -67277,14 +67278,13 @@ var Task = /*#__PURE__*/function (_React$Component) {
         case "Edit":
           task = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "p-todoList__edit"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "far fa-square p-todoList__icon"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          }, icon, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
             className: "p-todoList__input",
             placeholder: "TODO\u540D",
             value: this.state.text,
-            onChange: this.handleChange
+            onChange: this.handleChange,
+            autoFocus: true
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: this.handleCloseEdit,
             className: "p-todoList__btn u-bgColor--primary"
