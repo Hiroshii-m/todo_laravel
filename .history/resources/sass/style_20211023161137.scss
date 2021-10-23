@@ -19,13 +19,11 @@
         border-top: 0px solid transparent;
         border-bottom: 280px solid transparent;
         border-left: 470px solid var(--color_accent);
-        @include mixin.mq(lg) {
-            height: 180px;
-            border-bottom: 180px solid transparent;
-        }
         @include mixin.mq(md) {
             width: 300px;
+            height: 200px;
             border-left: 300px solid var(--color_accent);
+            border-bottom: 200px solid transparent;
         }
         @include mixin.mq(sm) {
             width: 210px;
@@ -105,7 +103,7 @@
     }
     &__menu {
         font-size: var(--font-size_l);
-        z-index: 2;
+        z-index: 1;
         @include mixin.mq(lg) {
             font-size: var(--font-size_m);
         }
@@ -127,18 +125,16 @@
         align-items: center;
         @include mixin.mq(md) {
             position: fixed;
-            top: -100%;
+            top: -312px;
             left: 0;
             display: block;
             width: 100%;
-            padding: var(--space_3l) 0;
+            padding-bottom: var(--space_3l);
             background: var(--color_accent);
             opacity: .8;
             text-align: center;
-            transition: all .4s;
             &.active {
                 top: 0;
-                transition: all .4s;
             }
         }
     }
@@ -170,21 +166,19 @@
         @include mixin.mq(md) {
             display: block;
         }
-        &.active {
-            background: var(--font-color_default);
-            transition: all .4s;
-        }
         &:nth-of-type(1) {
             top: -8px;
             &.active {
                 top: 0px;
                 transform: rotate(45deg);
+                transition: all .4s;
             }
         }
         &:nth-of-type(2) {
             top: 0px;
             &.active {
                 display: none;
+                transition: all .4s;
             }
         }
         &:nth-of-type(3) {
@@ -192,6 +186,7 @@
             &.active {
                 top: 0;
                 transform: rotate(-45deg);
+                transition: all .4s;
             }
         }
     }
@@ -304,7 +299,6 @@
     }
     @include mixin.mq(sm) {
         width: 80%;
-        font-size: var(--font-size_m);
     }
     &.show {
         display: block;
@@ -313,9 +307,6 @@
         font-size: var(--font-size_xxl);
         display: flex;
         justify-content: space-between;
-        @include mixin.mq(md) {
-            font-size: var(--font-size_l);
-        }
     }
     &__form {
         margin: var(--space_l) 0;

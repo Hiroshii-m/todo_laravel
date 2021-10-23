@@ -624,12 +624,17 @@ i {
   border-left: 470px solid var(--color_accent);
 }
 
+@media screen and (max-width: 1000px) {
+  #l-header:before {
+    height: 180px;
+    border-bottom: 180px solid transparent;
+  }
+}
+
 @media screen and (max-width: 768px) {
   #l-header:before {
     width: 300px;
-    height: 200px;
     border-left: 300px solid var(--color_accent);
-    border-bottom: 200px solid transparent;
   }
 }
 
@@ -736,7 +741,7 @@ i {
 
 .c-header__menu {
   font-size: var(--font-size_l);
-  z-index: 1;
+  z-index: 2;
 }
 
 @media screen and (max-width: 1000px) {
@@ -769,18 +774,20 @@ i {
 @media screen and (max-width: 768px) {
   .c-header__list {
     position: fixed;
-    top: -312px;
+    top: -100%;
     left: 0;
     display: block;
     width: 100%;
-    padding-bottom: var(--space_3l);
+    padding: var(--space_3l) 0;
     background: var(--color_accent);
     opacity: 0.8;
     text-align: center;
+    transition: all 0.4s;
   }
 
   .c-header__list.active {
     top: 0;
+    transition: all 0.4s;
   }
 }
 
@@ -819,12 +826,18 @@ i {
   height: 2px;
   position: absolute;
   background: var(--font-color_secondary);
+  transition: all 0.4s;
 }
 
 @media screen and (max-width: 768px) {
   .c-header__bar {
     display: block;
   }
+}
+
+.c-header__bar.active {
+  background: var(--font-color_default);
+  transition: all 0.4s;
 }
 
 .c-header__bar:nth-of-type(1) {
@@ -1012,6 +1025,7 @@ i {
 @media screen and (max-width: 414px) {
   .c-modal {
     width: 80%;
+    font-size: var(--font-size_m);
   }
 }
 
@@ -1023,6 +1037,12 @@ i {
   font-size: var(--font-size_xxl);
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .c-modal__head {
+    font-size: var(--font-size_l);
+  }
 }
 
 .c-modal__form {

@@ -40,7 +40,7 @@ export default class AddBoard extends React.Component {
         });
     }
     handleClose() {
-        // 入力エラー削除
+        // 入力エラーも削除
         this.setState({
             errFlg: false,
             errMsg: ''

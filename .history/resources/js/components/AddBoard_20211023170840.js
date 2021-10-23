@@ -40,11 +40,6 @@ export default class AddBoard extends React.Component {
         });
     }
     handleClose() {
-        // 入力エラー削除
-        this.setState({
-            errFlg: false,
-            errMsg: ''
-        });
         return this.props.onAddBoardClose();
     }
     handleSubmit(e) {
@@ -73,7 +68,7 @@ export default class AddBoard extends React.Component {
                         </div>
                         <div className="c-modal__bottom">
                             <p className="c-form__error">{errMsg}</p>
-                            <button className="c-modal__submit">作成</button>
+                            <button className="c-modal__submit">追加</button>
                         </div>
                     </form>
                 </div>

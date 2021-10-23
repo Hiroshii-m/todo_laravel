@@ -21,17 +21,12 @@ require('./components/ListApp');
 * Native JavaScript
 */
 window.addEventListener("DOMContentLoaded", function() {
-    // ハンバーガーメニューの要素
-    const $headerToggle = document.querySelector('.js-header-toggle') || null,
-        $headerBar = document.querySelectorAll('.js-header-bar') || null,
-        $headerTarget = document.querySelector('.js-header-target') || null;
-    // ボード一覧のボード操作用の要素
-    const clickShow = document.querySelectorAll('.js-click-toggle-display') || null,
-        targetShow = document.querySelectorAll('.js-target-display') || null;
-    // フラッシュメッセージの要素
-    const $showMsg = document.querySelector(".js-show-msg") || null;
-    // フッターの要素
-    const $ftr = document.querySelector('#l-footer') || null;
+    const headerToggle = document.querySelector('.js-header-toggle') || null,
+        headerBar = document.querySelectorAll('js-header-bar') || null,
+        clickShow = document.querySelectorAll('.js-click-toggle-display') || null,
+        targetShow = document.querySelectorAll('.js-target-display') || null,
+        $showMsg = document.querySelector(".js-show-msg") || null,
+        $ftr = document.querySelector('#l-footer') || null;
 
     // ボード一覧のボード操作ボタンをイベント
     if(clickShow !== null && targetShow !== null){
@@ -44,18 +39,6 @@ window.addEventListener("DOMContentLoaded", function() {
                 e.target.nextElementSibling.classList.add('show');
             }
         })
-    }
-
-    // ハンバーガーメニュー
-    if($headerToggle !== null && $headerBar !== null && $headerTarget !== null) {
-        $headerToggle.addEventListener('click', function() {
-            // ハンバーガーを変形させる
-            $headerBar.forEach(($bar) => {
-                $bar.classList.toggle('active');
-            });
-            // メニューを表示・非表示する
-            $headerTarget.classList.toggle('active');
-        });
     }
     
     // フラッシュメッセージの動き

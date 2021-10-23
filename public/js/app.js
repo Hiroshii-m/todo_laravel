@@ -65761,10 +65761,17 @@ __webpack_require__(/*! ./components/ListApp */ "./resources/js/components/ListA
 
 
 window.addEventListener("DOMContentLoaded", function () {
+  // ハンバーガーメニューの要素
+  var $headerToggle = document.querySelector('.js-header-toggle') || null,
+      $headerBar = document.querySelectorAll('.js-header-bar') || null,
+      $headerTarget = document.querySelector('.js-header-target') || null; // ボード一覧のボード操作用の要素
+
   var clickShow = document.querySelectorAll('.js-click-toggle-display') || null,
-      targetShow = document.querySelectorAll('.js-target-display') || null,
-      $showMsg = document.querySelector(".js-show-msg") || null,
-      $ftr = document.querySelector('#l-footer') || null; // ボード一覧のボード操作ボタンをイベント
+      targetShow = document.querySelectorAll('.js-target-display') || null; // フラッシュメッセージの要素
+
+  var $showMsg = document.querySelector(".js-show-msg") || null; // フッターの要素
+
+  var $ftr = document.querySelector('#l-footer') || null; // ボード一覧のボード操作ボタンをイベント
 
   if (clickShow !== null && targetShow !== null) {
     document.addEventListener('click', function (e) {
@@ -65775,6 +65782,18 @@ window.addEventListener("DOMContentLoaded", function () {
       if (!e.target.closest('.js-click-toggle-display')) {} else {
         e.target.nextElementSibling.classList.add('show');
       }
+    });
+  } // ハンバーガーメニュー
+
+
+  if ($headerToggle !== null && $headerBar !== null && $headerTarget !== null) {
+    $headerToggle.addEventListener('click', function () {
+      // ハンバーガーを変形させる
+      $headerBar.forEach(function ($bar) {
+        $bar.classList.toggle('active');
+      }); // メニューを表示・非表示する
+
+      $headerTarget.classList.toggle('active');
     });
   } // フラッシュメッセージの動き
 
@@ -65953,6 +65972,11 @@ var AddBoard = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleClose",
     value: function handleClose() {
+      // 入力エラー削除
+      this.setState({
+        errFlg: false,
+        errMsg: ''
+      });
       return this.props.onAddBoardClose();
     }
   }, {
@@ -66007,7 +66031,7 @@ var AddBoard = /*#__PURE__*/function (_React$Component) {
         className: "c-form__error"
       }, errMsg), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         className: "c-modal__submit"
-      }, "\u9001\u4FE1")))));
+      }, "\u4F5C\u6210")))));
     }
   }]);
 
@@ -66186,7 +66210,8 @@ var BoardHead = /*#__PURE__*/function (_React$Component) {
         className: "p-boardHead__btn--pc",
         onClick: this.handleAddBoardShow
       }, "\u65B0\u305F\u306B\u30DC\u30FC\u30C9\u3092\u4F5C\u6210"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "p-boardHead__btn--sp"
+        className: "p-boardHead__btn--sp",
+        onClick: this.handleAddBoardShow
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
       })));

@@ -40,11 +40,6 @@ export default class AddBoard extends React.Component {
         });
     }
     handleClose() {
-        // 入力エラー削除
-        this.setState({
-            errFlg: false,
-            errMsg: ''
-        });
         return this.props.onAddBoardClose();
     }
     handleSubmit(e) {

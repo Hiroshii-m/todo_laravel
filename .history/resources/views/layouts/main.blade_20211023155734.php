@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -38,9 +38,12 @@
                     {{-- <div class="c-header__tool">
                         <p href="" class="c-header__text">{{ __('Web-Tool') }}</p>
                     </div> --}}
-                    <ul class="c-header__list js-header-target">
+                    <ul class="c-header__list">
                         <li class="c-header__item">
                             <a href="{{ url('/') }}" class="c-header__text">{{ __('Home') }}</a>
+                        </li>
+                        <li class="c-header__item">
+                            <a href="{{ route('boards') }}" class="c-header__text">{{ __('Board') }}</a>
                         </li>
                         @guest
                             <li class="c-header__item">
@@ -53,9 +56,6 @@
                             @endif
                         @else
                             <li class="c-header__item">
-                                <a href="{{ route('boards') }}" class="c-header__text">{{ __('Board') }}</a>
-                            </li>
-                            <li class="c-header__item">
                                 <a class="c-header__text" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
@@ -67,7 +67,7 @@
                             </form>
                         @endguest
                     </ul>
-                    <div class="c-header__hamburger js-header-toggle">
+                    <div class="c-header__hamburger js-header-hamburger">
                         <span class="c-header__bar js-header-bar"></span>
                         <span class="c-header__bar js-header-bar"></span>
                         <span class="c-header__bar js-header-bar"></span>
