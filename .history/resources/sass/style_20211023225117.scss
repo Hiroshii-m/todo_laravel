@@ -154,9 +154,10 @@
     }
     &__hamburger {
         display: none;
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
         position: relative;
+        padding: var(--space_s);
         @include mixin.mq(md) {
             display: block;
         }
@@ -178,20 +179,20 @@
         &:nth-of-type(1) {
             top: 0px;
             &.active {
-                top: 10px;
+                top: 8px;
                 transform: rotate(45deg);
             }
         }
         &:nth-of-type(2) {
-            top: 10px;
+            top: 8px;
             &.active {
                 display: none;
             }
         }
         &:nth-of-type(3) {
-            top: 20px;
+            top: 16px;
             &.active {
-                top: 10px;
+                top: 8px;
                 transform: rotate(-45deg);
             }
         }

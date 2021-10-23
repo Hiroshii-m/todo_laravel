@@ -810,7 +810,8 @@ i {
 
 .c-header__hamburger {
   display: none;
-  width: 30px;
+  width: 35px;
+  height: 35px;
   position: relative;
 }
 
@@ -841,16 +842,16 @@ i {
 }
 
 .c-header__bar:nth-of-type(1) {
-  top: -8px;
+  top: 0px;
 }
 
 .c-header__bar:nth-of-type(1).active {
-  top: 0px;
+  top: 10px;
   transform: rotate(45deg);
 }
 
 .c-header__bar:nth-of-type(2) {
-  top: 0px;
+  top: 10px;
 }
 
 .c-header__bar:nth-of-type(2).active {
@@ -858,11 +859,11 @@ i {
 }
 
 .c-header__bar:nth-of-type(3) {
-  top: 8px;
+  top: 20px;
 }
 
 .c-header__bar:nth-of-type(3).active {
-  top: 0;
+  top: 10px;
   transform: rotate(-45deg);
 }
 
