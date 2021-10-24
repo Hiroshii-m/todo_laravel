@@ -15,9 +15,12 @@ Route::get('/', function () {
     return view('top');
 });
 
+Route::get('/home', function () {
+    return view('boards');
+});
+
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/boards', 'BoardsController@index')->name('boards');
-    Route::get('/home', 'BoardsController@index');
     Route::post('/boards', 'BoardsController@create');
     Route::delete('/boards/{id}/delete', 'BoardsController@delete')->name('boards.delete');
     Route::get('/boards/withdraw', 'BoardsController@withdraw')->name('boards.withdraw');
