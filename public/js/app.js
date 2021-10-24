@@ -65812,6 +65812,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
   if (window.innerHeight > $ftr.offsetTop + $ftr.offsetHeight) {
     $ftr.classList.add("active");
+  } else {
+    $ftr.classList.remove("active");
   }
 });
 
