@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-    <form action="{{ route('boards.retire') }}" method="post" class="c-form u-color--accent u-margin--0-auto u-padding--0-3l">
+    <form action="{{ route('boards.retire') }}" method="post" class="c-form u-color--accent">
         @method('DELETE')
         @csrf
         <h2 class="c-form__tit">退会ページ</h2>

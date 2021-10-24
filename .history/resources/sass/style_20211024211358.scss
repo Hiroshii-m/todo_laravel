@@ -609,7 +609,7 @@
     &__text {
         padding: var(--space_l) var(--space_m);
         font-size: var(--font-size_l);
-        max-height: 60px;
+        max-height: 60px
     }
     &__todo {
         @extend .c-component__item;
@@ -639,7 +639,7 @@
         }
     }
     &__acon {
-        top: -43px;
+        top: -42px;
         right: 2px;
     }
     &__bottom {
