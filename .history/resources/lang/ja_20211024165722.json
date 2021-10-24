@@ -10,6 +10,8 @@
     "UserName": "ユーザ名",
     "Confirm Password": "パスワード（再入力）",
     "Regist": "登録",
+    "email": "メールアドレス",
+    "password": "パスワード",
     "Verify Your Email Address": "メールアドレスを確認する",
     "A fresh verification link has been sent to your email address.": "あなた宛に新しく確認メールを送信しました。",
     "Before proceeding, please check your email for a verification link.": "実行する前にあなたのメールアドレスを確認してください。",
