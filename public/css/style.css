@@ -774,7 +774,7 @@ i {
 @media screen and (max-width: 768px) {
   .c-header__list {
     position: fixed;
-    top: 0;
+    top: -100%;
     left: 0;
     display: block;
     width: 100%;
