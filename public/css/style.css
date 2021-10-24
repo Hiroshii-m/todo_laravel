@@ -783,6 +783,7 @@ i {
     opacity: 0.8;
     text-align: center;
     transition: all 0.4s;
+    box-sizing: border-box;
   }
 
   .c-header__list.active {
