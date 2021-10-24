@@ -61,6 +61,7 @@
     margin: var(--space_3l) 0 0 0;
     &.active {
         position: absolute;
+        // bottom: 0;
         width: 100%;
     }
 }
