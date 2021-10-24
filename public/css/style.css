@@ -687,6 +687,7 @@ i {
 
 #l-footer.active {
   position: absolute;
+  bottom: 0;
   width: 100%;
 }
 
