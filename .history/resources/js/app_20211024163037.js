@@ -67,10 +67,6 @@ window.addEventListener("DOMContentLoaded", function() {
     }
     
     // フッター要素を最下部に固定
-    console.log('window.innerHeight');
-    console.log(window.innerHeight);
-    console.log('ftr');
-    console.log($ftr.offsetTop + $ftr.offsetHeight);
     if(window.innerHeight > ($ftr.offsetTop + $ftr.offsetHeight)){
         $ftr.classList.add("active");
     }else{
