@@ -1,0 +1,57 @@
+.p-boardList {
+    @extend .c-container;
+    position: relative;
+    color: var(--color_accent);
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space_m);
+        border-top: 2px solid;
+        border-left: 2px solid;
+        border-right: 2px solid;
+        &:last-child {
+            border-bottom: 2px solid;
+        }
+    }
+    &__name {
+        width: 74%;
+        max-width: 700px;
+        display: inline-block;
+        @include mixin.mq(xl) {
+            width: 55%;
+            max-width: 300px;
+        }
+        @include mixin.mq(md) {
+            width: 80%;
+        }
+        @include mixin.mq(sm) {
+            font-size: var(--font-size_m);
+        }
+    }
+    &__date {
+        font-size: var(--font-size_m);
+        @include mixin.mq(md) {
+            display: none;
+        }
+    }
+    &__icon {
+        width: 20px;
+        margin: 0 var(--space_s);
+        cursor: pointer;
+        text-align: center;
+    }
+    &__opMenu {
+        min-width: 230px;
+        position: absolute;
+        right: 40px;
+        background: var(--color_base);
+        box-shadow: 0px 0px 6px 1px ;
+        z-index: 1;
+    }
+    &__opItem {
+        cursor: pointer;
+        &:hover {
+            background: var(--color_active);
+        }
+    }
+}

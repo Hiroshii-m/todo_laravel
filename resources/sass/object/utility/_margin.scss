@@ -1,0 +1,40 @@
+// Margin
+// ======================================
+.u-margin {
+    &-left {
+        &--m {
+            margin-left: var(--space_m);
+        }
+        &--auto {
+            margin-left: auto;
+        }
+    }
+    &-right {
+        &--xl {
+            margin-right: var(--space_xl);
+        }
+    }
+    &-bottom {
+        &--m {
+            margin-bottom: var(--space_m);
+        }
+    }
+    &--0 {
+        &-m {
+            margin: 0 var(--space_m);
+        }
+        &-auto {
+            margin: 0 auto;
+        }
+    }
+    &--m {
+        &-0 {
+            margin: var(--space_m) 0;
+        }
+    }
+    &--xl {
+        &-0 {
+            margin: var(--space_xl) 0;
+        }
+    }
+}

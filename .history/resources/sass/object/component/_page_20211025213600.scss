@@ -1,0 +1,13 @@
+
+.c-page {
+    display: flex;
+    justify-content: center;
+    &__item {
+        display: block;
+        text-align: center;
+        cursor: pointer;
+        &.disabled {
+            display: none;
+        }
+    }
+}

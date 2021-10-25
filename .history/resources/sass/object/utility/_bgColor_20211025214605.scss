@@ -1,0 +1,19 @@
+// BackGround
+// ======================================
+.u-bgColor {
+    &--base {
+        background: var(--color_base);
+    }
+    &--accent {
+        background: var(--color_accent);
+    }
+    &--error {
+        background: var(--color_error);
+    }
+    &--success {
+        background: var(--color_success);
+    }
+    &--primary {
+        background: var(--color_primary);
+    }
+}

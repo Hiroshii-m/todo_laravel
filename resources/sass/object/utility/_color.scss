@@ -1,0 +1,16 @@
+// Color
+// ======================================
+.u-color {
+    &--accent {
+        color: var(--color_accent);
+    }
+    &--error {
+        color: var(--color_error);
+    }
+    &--success {
+        color: var(--color_success);
+    }
+    &--default {
+        color: var(--font-color_default);
+    }
+}

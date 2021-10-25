@@ -1,0 +1,50 @@
+.p-modal {
+    display: none;
+    background: var(--color_active);
+    padding: var(--space_l) var(--space_xxl);
+    width: 60%;
+    font-size: var(--font-size_l);
+    border-radius: 5px;
+    @include mixin.mq(md) {
+        padding: var(--space_m) var(--space_xl);
+    }
+    @include mixin.mq(sm) {
+        width: 80%;
+        font-size: var(--font-size_m);
+    }
+    &.show {
+        display: block;
+    }
+    &__head {
+        font-size: var(--font-size_xxl);
+        display: flex;
+        justify-content: space-between;
+        @include mixin.mq(md) {
+            font-size: var(--font-size_l);
+        }
+    }
+    &__form {
+        margin: var(--space_l) 0;
+    }
+    &__input {
+        @extend .c-input;
+        margin-bottom: var(--space_xl);
+        @include mixin.mq(md) {
+            margin-bottom: var(--space_s);
+        }
+    }
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    &__submit {
+        @extend .c-btn;
+        background: var(--color_primary);
+        @include mixin.mq(md) {
+            width: 100%;
+            text-align: center;
+            margin-top: var(--space_m);
+        }
+    }
+}

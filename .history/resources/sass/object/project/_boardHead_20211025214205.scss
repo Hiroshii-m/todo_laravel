@@ -1,0 +1,27 @@
+.p-boardHead {
+    color: var(--color_accent);
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--space_xxl);
+    }
+    &__btn {
+        &--pc {
+            color: var(--font-color_default);
+            background: var(--color_primary);
+            @extend .c-btn;
+            @include mixin.mq(sm) {
+                display: none;
+            }
+        }
+        &--sp {
+            color: var(--font-color_default);
+            background: var(--color_primary);
+            @extend .c-btn;
+            display: none;
+            @include mixin.mq(sm) {
+                display: block;
+            }
+        }
+    }
+}

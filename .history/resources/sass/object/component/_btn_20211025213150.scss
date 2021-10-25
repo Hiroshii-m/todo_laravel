@@ -1,0 +1,22 @@
+.c-btn {
+    padding: 0 var(--space_l);
+    border-radius: 5px;
+    cursor: pointer;
+    @include mixin.mq(md) {
+        padding: 0 var(--space_m);
+        font-size: var(--font-size_m);
+    }
+}
+
+.c-page {
+    display: flex;
+    justify-content: center;
+    &__item {
+        display: block;
+        text-align: center;
+        cursor: pointer;
+        &.disabled {
+            display: none;
+        }
+    }
+}

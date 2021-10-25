@@ -66002,16 +66002,16 @@ var AddBoard = /*#__PURE__*/function (_React$Component) {
         id: "l-modal",
         className: classNameShow
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "c-modal show"
+        className: "p-modal show"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "c-modal__head"
+        className: "p-modal__head"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
         className: "u-color--accent"
       }, "\u65B0\u305F\u306B\u30DC\u30FC\u30C9\u3092\u4F5C\u6210"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
         onClick: this.handleClose,
         className: "far fa-times-circle"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        className: "c-modal__form",
+        className: "p-modal__form",
         method: "post",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
@@ -66022,17 +66022,17 @@ var AddBoard = /*#__PURE__*/function (_React$Component) {
         className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         name: "board_name",
-        className: "c-modal__input",
+        className: "p-modal__input",
         type: "text",
         value: this.state.val,
         onChange: this.handleChange,
         placeholder: "\u30DC\u30FC\u30C9\u540D"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "c-modal__bottom"
+        className: "p-modal__bottom"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "c-form__error"
       }, errMsg), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        className: "c-modal__submit"
+        className: "p-modal__submit"
       }, "\u4F5C\u6210")))));
     }
   }]);
@@ -66127,7 +66127,7 @@ var BoardApp = /*#__PURE__*/function (_Component) {
         isShow: this.state.addBoardShow,
         onAddBoardClose: this.handleAddBoardClose
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "p-boardHead c-component"
+        className: "p-boardHead c-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BoardHead__WEBPACK_IMPORTED_MODULE_3__["default"], {
         onAddBoardShow: this.handleAddBoardShow
       })));
@@ -66207,7 +66207,7 @@ var BoardHead = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "p-boardHead__head"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "c-component__tit"
+        className: "c-container__tit"
       }, "\u30DC\u30FC\u30C9\u30EA\u30B9\u30C8"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "p-boardHead__btn--pc",
         onClick: this.handleAddBoardShow

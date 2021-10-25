@@ -1,0 +1,179 @@
+// ======================================
+// foundation
+// ======================================
+@use 'foundation/reset';
+@use 'foundation/mixin';
+@use 'foundation/variables';
+@use 'foundation/base';
+// ======================================
+// layout
+// ======================================
+@use 'layout/main';
+@use 'layout/footer';
+@use 'layout/modal';
+// ======================================
+// object
+// ======================================
+// Component
+// **************************************
+@use 'object/component/menuTrigger';
+@use 'object/component/container';
+@use 'object/component/form';
+@use 'object/component/btn';
+@use 'object/component/page';
+@use 'object/component/flashMsg';
+.c-acd {
+    width: 100%;
+    position: relative;
+    &__icon {
+        position: absolute;
+    }
+    &__up {
+        display: none;
+    }
+    &__check {
+        position: absolute;
+        z-index: 1;
+        top: -32px;
+        right: 15px;
+        width: 22px;
+        height: 20px;
+        opacity: 0;
+        cursor: pointer;
+        &:checked ~ .c-acd__up {
+            display: block;
+        }
+        &:checked ~ .c-acd__down {
+            display: none;
+        }
+    }
+    &__content {
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: .4s;
+    }
+    &__item {
+        display: flex;
+        background: var(--font-color_default);
+        padding: var(--space_s) var(--space_l);
+        cursor: pointer;
+        &:hover {
+            opacity: .5;
+        }
+    }
+    &__time {
+        background: var(--font-color_default);
+        padding: var(--space_s) var(--space_l);
+    }
+    &__text {
+        margin: 0 var(--space_m);
+    }
+}
+.c-timer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space_l);
+    &__btn {
+        color: var(--font-color_default);
+        width: 48%;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 5px;
+    }
+}
+
+
+// Project
+// **************************************
+@use 'object/project/mainHeader';
+@use 'object/project/main';
+@use 'object/project/boardList';
+@use 'object/project/todoList';
+@use 'object/project/boardHead';
+@use 'object/project/mainFooter';
+@use 'object/project/form';
+@use 'object/project/modal';
+@use 'object/project/boardPage';
+
+// Utility
+// **************************************
+@use 'object/utility/color';
+@use 'object/utility/bgColor';
+@use 'object/utility/margin';
+// Padding
+// ======================================
+.u-padding {
+    &--0 {
+        &-m {
+            padding: 0 var(--space_m);
+        }
+        &-3l {
+            padding: 0 var(--space_3l);
+        }
+    }
+    &--s {
+        &-m {
+            padding: var(--space_s) var(--space_m);
+        }
+    }
+    &--m {
+        &-l {
+            padding: var(--space_m) var(--space_l);
+        }
+    }
+}
+// Display
+// ======================================
+.u-block {
+    display: block;
+}
+.u-inline {
+    display: inline;
+}
+.u-flex {
+    display: flex;
+    &-wrap {
+        &--wrap {
+            flex-wrap: wrap;
+        }
+    }
+}
+.u-align-items {
+    &--center {
+        align-items: center;
+    }
+    &--flex-start {
+        align-items: flex-start;
+    }
+}
+.u-justify-content {
+    &--center {
+        justify-content: center;
+    }
+    &--space-between {
+        justify-content: space-between;
+    }
+    &--flex-end {
+        justify-content: flex-end;
+    }
+}
+// Text
+// ======================================
+.u-text {
+    &--center {
+        text-align: center;
+    }
+}
+
+// js Active
+// ***************************************
+.js-target-display {
+    display: none;
+    &.show {
+        display: block;
+    }
+}
+

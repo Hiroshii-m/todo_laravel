@@ -1,0 +1,39 @@
+.p-main {
+    @extend .c-container;
+    display: flex;
+    justify-content: space-between;
+    @include mixin.mq(lg) {
+        display: grid;
+        justify-content: center;
+        margin: 100px auto 0 auto;
+    }
+    &__provider {
+        width: 40%;
+        text-align: center;
+        @include mixin.mq(lg) {
+            width: 100%;
+            order: 2;
+        }
+    }
+    &__tit {
+        font-size: var(--font-size_3l);
+        font-weight: bolder;
+        margin-top: var(--space_3l);
+    }
+    &__btn {
+        display: block;
+        width: 200px;
+        margin: var(--space_3l) auto;
+        padding: var(--space_xl);
+        border-radius: 50px;
+    }
+    &__img {
+        width: 50%;
+        max-width: 500px;
+        @include mixin.mq(lg) {
+            width: 100%;
+            max-width: 400px;
+            order: 1;
+        }
+    }
+}
