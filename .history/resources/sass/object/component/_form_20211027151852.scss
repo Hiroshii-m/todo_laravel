@@ -1,3 +1,5 @@
+@use '../../global' as global;
+
 .p-form {
     max-width: 500px;
     &__submit {
@@ -10,5 +12,14 @@
     }
     &__check {
         width: 20px;
+    }
+}
+
+.c-input {
+    border: 2px solid var(--font-color_default);
+    border-radius: 5px;
+    color: var(--font-color_secondary);
+    &:focus {
+        border: 2px solid var(--color_success);
     }
 }

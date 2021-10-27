@@ -1,0 +1,16 @@
+@use '../../global' as global;
+
+.p-form {
+    max-width: 500px;
+    &__submit {
+        margin: var(--space_3l) 0;
+        width: 100%;
+        font-size: var(--font-size_xl);
+        padding: var(--space_s) 0;
+        border-radius: 50px;
+        text-align: center;
+    }
+    &__check {
+        width: 20px;
+    }
+}

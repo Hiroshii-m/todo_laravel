@@ -1,0 +1,10 @@
+@use '../../global' as global;
+
+.c-input {
+    border: 2px solid global.$font-color_secondary;
+    border-radius: 5px;
+    color: global.$font-color_default;
+    &:focus {
+        border: 2px solid global.$color_success;
+    }
+}

@@ -1,0 +1,41 @@
+@use '../../global' as global;
+
+.p-top {
+    @extend .c-container;
+    display: flex;
+    justify-content: space-between;
+    @include global.mq(lg) {
+        display: grid;
+        justify-content: center;
+        margin: 100px auto 0 auto;
+    }
+    &__provider {
+        width: 40%;
+        text-align: center;
+        @include global.mq(lg) {
+            width: 100%;
+            order: 2;
+        }
+    }
+    &__tit {
+        font-size: global.$font-size_3l;
+        font-weight: bolder;
+        margin-top: global.$space_3l;
+    }
+    &__btn {
+        display: block;
+        width: 200px;
+        margin: global.$space_3l auto;
+        padding: global.$space_xl;
+        border-radius: 50px;
+    }
+    &__img {
+        width: 50%;
+        max-width: 500px;
+        @include global.mq(lg) {
+            width: 100%;
+            max-width: 400px;
+            order: 1;
+        }
+    }
+}

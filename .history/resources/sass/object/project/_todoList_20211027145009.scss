@@ -1,0 +1,135 @@
+@use '../../global' as global;
+@use '../component/container';
+
+.p-todoList {
+    font-size: global.$font-size_m;
+    color: global.$color_accent;
+    &__tit {
+        @extend .c-container__tit;
+        @extend .c-container__item;
+        max-width: 500px;
+        margin: 0 global.$space_3l global.$space_xxl;
+        cursor: pointer;
+        font-size: global.$font-size_xl;
+        @include global.mq(md) {
+            margin: 0 global.$space_m global.$space_xxl;
+        }
+    }
+    &__list {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    &__item {
+        @extend .c-container__item;
+        background: global.$color_active;
+        width: 300px;
+        margin: global.$space_s;
+        padding: global.$space_xxl global.$space_l;
+        box-sizing: border-box;
+        @include global.mq(md) {
+            width: 100%;
+            margin: global.$space_s global.$space_l;
+        }
+    }
+    &__head {
+        margin-bottom: global.$space_l;
+    }
+    &__name {
+        @extend .c-container__item;
+        display: flex;
+        align-items: center;
+        font-size: global.$font-size_l;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+    &__input {
+        height: 100%;
+        padding: global.$space_s global.$space_m;
+        &:focus {
+            border: 2px solid global.$color_primary;
+            padding: 3px global.$space_m;
+        }
+    }
+    &__time {
+        margin-left: calc(-1 * global.$space_m);
+    }
+    &__timeInput {
+        @extend .p-todoList__time;
+        border: 2px solid global.$color_active;
+        margin: 0 global.$space_m;
+        padding: 0 global.$space_m;
+    }
+    &__text {
+        padding: global.$space_l global.$space_m;
+        font-size: global.$font-size_l;
+        max-height: 60px;
+    }
+    &__todo {
+        @extend .c-container__item;
+        display: flex;
+        align-items: center;
+        margin: global.$space_s 0;
+        background: global.$font-color_secondary;
+        padding: 0 global.$space_3l global.$space_l;
+    }
+    &__edit {
+        @extend .c-container__item;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: var(--space_m) 0;
+        background: var(--font-color_default);
+        padding: 0 0 0 var(--space_l);
+        font-size: var(--font-size_l);
+    }
+    &__acd {
+        .c-acd__check:checked + & {
+            opacity: 1;
+            height: 300px;
+            visibility: visible;
+            background: var(--font-color_default);
+            padding-bottom: var(--space_l);
+        }
+    }
+    &__acon {
+        top: -43px;
+        right: 2px;
+    }
+    &__bottom {
+        display: flex;
+        align-items: center;
+        margin-top: var(--space_m);
+    }
+    &__btn {
+        height: 100%;
+        padding: var(--space_s) var(--space_m);
+        color: var(--font-color_default);
+        cursor: pointer;
+    }
+    &__icon {
+        font-size: var(--font-size_xl);
+        width: 28px;
+        cursor: pointer;
+    }
+    &__add {
+        display: block;
+        color: var(--font-color_secondary);
+        cursor: pointer;
+        margin: var(--space_m) 0;
+    }
+    &__remove {
+        @extend .c-container__item;
+        color: var(--font-color_default);
+        font-size: var(--font-size_default);
+        margin: 0 0 0 auto;
+        padding: var(--space_s) var(--space_m);
+    }
+    &__submit {
+        @extend .p-todoList__btn;
+        display: block;
+        width: 100%;
+        color: var(--font-color_default);
+        margin-top: var(--space_m);
+    }
+}

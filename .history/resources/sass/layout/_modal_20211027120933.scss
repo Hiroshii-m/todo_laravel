@@ -1,0 +1,16 @@
+@use '../global/index' as global;
+
+#l-modal {
+    display: none;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    top: 20px;
+    left: 20%;
+    @include global.mq(sm) {
+        left: 10%;
+    }
+    &.active {
+        display: block;
+    }
+}

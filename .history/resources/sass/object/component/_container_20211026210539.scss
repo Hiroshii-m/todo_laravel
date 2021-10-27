@@ -1,0 +1,22 @@
+@use '../../foundation/mixin';
+
+.c-container {
+    max-width: var(--site-width_xxl);
+    margin: 0 auto;
+    @include mixin.mq(lg) {
+        max-width: var(--site-width_xl);
+    }
+    &__tit {
+        font-size: var(--font-size_xxl);
+        @include mixin.mq(lg) {
+            font-size: var(--font-size_xl);
+        }
+        @include mixin.mq(md) {
+            font-size: var(--font-size_l);
+        }
+    }
+    &__item {
+        border-radius: 5px;
+        overflow: hidden;
+    }
+}

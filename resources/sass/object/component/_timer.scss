@@ -1,0 +1,16 @@
+@use '../../global' as global;
+
+.c-timer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: global.$space_l;
+    &__btn {
+        color: global.$font-color_secondary;
+        width: 48%;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 5px;
+    }
+}

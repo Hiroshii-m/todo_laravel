@@ -1,0 +1,16 @@
+@use '../../global' as global;
+
+.p-withdraw {
+    max-width: 500px;
+    &__submit {
+        margin: global.$space_3l 0;
+        width: 100%;
+        font-size: global.$font-size_xl;
+        padding: global.$space_s 0;
+        border-radius: 50px;
+        text-align: center;
+    }
+    &__check {
+        width: 20px;
+    }
+}

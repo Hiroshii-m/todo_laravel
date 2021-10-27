@@ -1,0 +1,46 @@
+@use '../../global' as global;
+
+.c-menuTrigger {
+    display: none;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    @include global.mq(md) {
+        display: block;
+    }
+    &__bar {
+        display: none;
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        background: global.$font-color_default;
+        transition: all .4s;
+        @include global.mq(md) {
+            display: block;
+        }
+        &.active {
+            background: var(--font-color_default);
+            transition: all .4s;
+        }
+        &:nth-of-type(1) {
+            top: 0px;
+            &.active {
+                top: 10px;
+                transform: rotate(45deg);
+            }
+        }
+        &:nth-of-type(2) {
+            top: 10px;
+            &.active {
+                display: none;
+            }
+        }
+        &:nth-of-type(3) {
+            top: 20px;
+            &.active {
+                top: 10px;
+                transform: rotate(-45deg);
+            }
+        }
+    }
+}

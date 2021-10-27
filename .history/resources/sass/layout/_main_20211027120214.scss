@@ -1,0 +1,11 @@
+@use '../global' as global;
+
+#l-main {
+    padding: 80px;
+    @include mixin.mq(xl) {
+        padding: 40px;
+    }
+    @include mixin.mq(md) {
+        padding: 50px 20px;
+    }
+}

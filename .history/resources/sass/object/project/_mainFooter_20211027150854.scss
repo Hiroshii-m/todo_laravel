@@ -1,0 +1,23 @@
+@use '../../global' as global;
+
+.p-mainFooter {
+    width: 100%;
+    background: global.$color_accent;
+    padding: global.$space_l;
+    box-sizing: border-box;
+    &__menu {
+        margin: global.$space_3l 0 global.$space_l 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &__item {
+        margin: var(--space_s) var(--space_m);
+    }
+    &__tit {
+        text-align: right;
+        margin: 0 var(--space_m);
+        @include global.mq(sm) {
+            text-align: center;
+        }
+    }
+}

@@ -67176,7 +67176,7 @@ var Task = /*#__PURE__*/function (_React$Component) {
         className: classNameIcon
       });
       var timer = this.state.isTimer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "c-timer"
+        className: "c-timer u-margin-top--l"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         onClick: this.stopTimer,
         className: "c-timer__btn u-bgColor--error"
@@ -67184,7 +67184,7 @@ var Task = /*#__PURE__*/function (_React$Component) {
         onClick: this.handleResetTimer,
         className: "c-timer__btn u-bgColor--success"
       }, "RESET")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "c-timer"
+        className: "c-timer u-margin-top--l"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         onClick: this.startTimer,
         className: "c-timer__btn u-bgColor--primary"
@@ -67236,28 +67236,28 @@ var Task = /*#__PURE__*/function (_React$Component) {
             onClick: this.handleEdit,
             className: "p-todoList__text"
           }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "c-acd"
+            className: "p-acd"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            className: "c-acd__check",
+            className: "p-acd__check",
             type: "checkbox"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "c-acd__content p-todoList__acd"
+            className: "p-acd__content p-todoList__acd"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             onClick: this.handleEdit,
-            className: "c-acd__item"
+            className: "p-acd__item"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "far fa-edit p-todoList__icon"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-            className: "c-acd__text"
+            className: "p-acd__text"
           }, "\u7DE8\u96C6")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             onClick: this.removeTodo,
-            className: "c-acd__item"
+            className: "p-acd__item"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "far fa-trash-alt p-todoList__icon"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-            className: "c-acd__text"
+            className: "p-acd__text"
           }, "\u524A\u9664")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "c-acd__time"
+            className: "p-acd__time"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: ""
           }, "\u4E88\u60F3\u6642\u9593\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -67296,9 +67296,9 @@ var Task = /*#__PURE__*/function (_React$Component) {
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fas fa-arrow-circle-up"
           }), "\xA0\u4E88\u60F3\u30FB\u4F5C\u696D\u6642\u9593\u4FDD\u5B58"), timeMsg)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "fas fa-chevron-down p-todoList__icon p-todoList__acon c-acd__icon c-acd__down"
+            className: "fas fa-chevron-down p-todoList__icon p-todoList__acon p-acd__icon p-acd__down"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "fas fa-chevron-up p-todoList__icon p-todoList__acon c-acd__icon c-acd__up"
+            className: "fas fa-chevron-up p-todoList__icon p-todoList__acon p-acd__icon p-acd__up"
           })));
           break;
 

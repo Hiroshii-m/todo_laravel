@@ -1,0 +1,53 @@
+@use '../../global' as global;
+@use '../component/form'
+
+.p-boardModal {
+    display: none;
+    background: global.$color_active;
+    padding: global.$space_l global.$space_xxl;
+    width: 60%;
+    font-size: global.$font-size_l;
+    border-radius: 5px;
+    @include global.mq(md) {
+        padding: global.$space_m global.$space_xl;
+    }
+    @include global.mq(sm) {
+        width: 80%;
+        font-size: global.$font-size_m;
+    }
+    &.show {
+        display: block;
+    }
+    &__head {
+        font-size: global.$font-size_xxl;
+        display: flex;
+        justify-content: space-between;
+        @include global.mq(md) {
+            font-size: global.$font-size_l;
+        }
+    }
+    &__form {
+        margin: global.$space_l 0;
+    }
+    &__input {
+        @extend .c-input;
+        margin-bottom: global.$space_xl;
+        @include global.mq(md) {
+            margin-bottom: global.$space_s;
+        }
+    }
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    &__submit {
+        @extend .c-btn;
+        background: global.$color_primary;
+        @include global.mq(md) {
+            width: 100%;
+            text-align: center;
+            margin-top: global.$space_m;
+        }
+    }
+}

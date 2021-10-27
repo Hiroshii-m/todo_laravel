@@ -1,0 +1,22 @@
+@use '../../global' as global;
+
+.c-container {
+    max-width: global.$site-width_xxl;
+    margin: 0 auto;
+    @include global.mq(lg) {
+        max-width: var(--site-width_xl);
+    }
+    &__tit {
+        font-size: var(--font-size_xxl);
+        @include global.mq(lg) {
+            font-size: var(--font-size_xl);
+        }
+        @include global.mq(md) {
+            font-size: var(--font-size_l);
+        }
+    }
+    &__item {
+        border-radius: 5px;
+        overflow: hidden;
+    }
+}

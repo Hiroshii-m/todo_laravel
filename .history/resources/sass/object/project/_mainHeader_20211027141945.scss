@@ -1,0 +1,87 @@
+@use '../../global' as global;
+
+.p-mainHeader {
+    height: 130px;
+    &:before {
+        position: absolute;
+        content: '';
+        width: 470px;
+        height: 280px;
+        top: 0;
+        border-top: 0px solid transparent;
+        border-bottom: 280px solid transparent;
+        border-left: 470px solid global.$color_accent;
+        @include mixin.mq(lg) {
+            height: 180px;
+            border-bottom: 180px solid transparent;
+        }
+        @include mixin.mq(md) {
+            width: 300px;
+            border-left: 300px solid global.$color_accent;
+        }
+        @include mixin.mq(sm) {
+            width: 210px;
+            height: 180px;
+            border-left: 210px solid global.$color_accent;
+            border-bottom: 180px solid transparent;
+        }
+    }
+    &__inner {
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__top {
+        font-weight: bold;
+        font-size: global.$font-size_xxl;
+        cursor: pointer;
+        z-index: 1;
+        @include global.mq(md) {
+            font-size: global.$font-size_l;
+        }
+        @include global.mq(sm) {
+            font-size: global.$font-size_m;
+        }
+    }
+    &__nav {
+        font-size: global.$font-size_l;
+        z-index: 2;
+        @include global.mq(lg) {
+            font-size: global.$font-size_m;
+        }
+    }
+    &__list {
+        display: flex;
+        align-items: center;
+        @include global.mq(md) {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            display: block;
+            width: 100%;
+            padding: global.$space_3l 0;
+            background: var(--color_accent) global.$color_accent;
+            opacity: .8;
+            text-align: center;
+            transition: all .4s;
+            box-sizing: border-box;
+            &.active {
+                top: 0;
+                transition: all .4s;
+            }
+        }
+    }
+    &__item {
+        margin-right: var(--space_xxl);
+        @include mixin.mq(lg) {
+            margin-right: var(--space_xl);
+        }
+        @include mixin.mq(md) {
+            margin-right: 0;
+            margin-top: var(--space_3l);
+        }
+    }
+}

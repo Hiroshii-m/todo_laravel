@@ -1,0 +1,9 @@
+#l-main {
+    padding: 80px;
+    @include mq(xl) {
+        padding: 40px;
+    }
+    @include mq(md) {
+        padding: 50px 20px;
+    }
+}

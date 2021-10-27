@@ -1,0 +1,551 @@
+// ======================================
+// foundation
+// ======================================
+@use 'foundation/reset';
+@use 'foundation/variables';
+@use 'foundation/base';
+// ======================================
+// Global
+// ======================================
+
+// ======================================
+// layout
+// ======================================
+@import 'layout/main';
+// @import 'layout/footer';
+// @import 'layout/modal';
+// ======================================
+// object
+// ======================================
+// Component
+// **************************************
+// @import 'object/component/menuTrigger';
+// @import 'object/component/container';
+// @import 'object/component/form';
+// @import 'object/component/btn';
+// @import 'object/component/page';
+// @import 'object/component/flashMsg';
+.c-acd {
+    width: 100%;
+    position: relative;
+    &__icon {
+        position: absolute;
+    }
+    &__up {
+        display: none;
+    }
+    &__check {
+        position: absolute;
+        z-index: 1;
+        top: -32px;
+        right: 15px;
+        width: 22px;
+        height: 20px;
+        opacity: 0;
+        cursor: pointer;
+        &:checked ~ .c-acd__up {
+            display: block;
+        }
+        &:checked ~ .c-acd__down {
+            display: none;
+        }
+    }
+    &__content {
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: .4s;
+    }
+    &__item {
+        display: flex;
+        background: var(--font-color_default);
+        padding: var(--space_s) var(--space_l);
+        cursor: pointer;
+        &:hover {
+            opacity: .5;
+        }
+    }
+    &__time {
+        background: var(--font-color_default);
+        padding: var(--space_s) var(--space_l);
+    }
+    &__text {
+        margin: 0 var(--space_m);
+    }
+}
+.c-timer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space_l);
+    &__btn {
+        color: var(--font-color_default);
+        width: 48%;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 5px;
+    }
+}
+
+
+// Project
+// **************************************
+.p-mainHeader {
+    height: 130px;
+    &:before {
+        position: absolute;
+        content: '';
+        width: 470px;
+        height: 280px;
+        top: 0;
+        border-top: 0px solid transparent;
+        border-bottom: 280px solid transparent;
+        border-left: 470px solid var(--color_accent);
+        @include mixin.mq(lg) {
+            height: 180px;
+            border-bottom: 180px solid transparent;
+        }
+        @include mixin.mq(md) {
+            width: 300px;
+            border-left: 300px solid var(--color_accent);
+        }
+        @include mixin.mq(sm) {
+            width: 210px;
+            height: 180px;
+            border-left: 210px solid var(--color_accent);
+            border-bottom: 180px solid transparent;
+        }
+    }
+    &__inner {
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__top {
+        font-weight: bold;
+        font-size: var(--font-size_xxl);
+        cursor: pointer;
+        z-index: 1;
+        @include mixin.mq(md) {
+            font-size: var(--font-size_l);
+        }
+        @include mixin.mq(sm) {
+            font-size: var(--font-size_m);
+        }
+    }
+    &__nav {
+        font-size: var(--font-size_l);
+        z-index: 2;
+        @include mixin.mq(lg) {
+            font-size: var(--font-size_m);
+        }
+    }
+    &__list {
+        display: flex;
+        align-items: center;
+        @include mixin.mq(md) {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            display: block;
+            width: 100%;
+            padding: var(--space_3l) 0;
+            background: var(--color_accent);
+            opacity: .8;
+            text-align: center;
+            transition: all .4s;
+            box-sizing: border-box;
+            &.active {
+                top: 0;
+                transition: all .4s;
+            }
+        }
+    }
+    &__item {
+        margin-right: var(--space_xxl);
+        @include mixin.mq(lg) {
+            margin-right: var(--space_xl);
+        }
+        @include mixin.mq(md) {
+            margin-right: 0;
+            margin-top: var(--space_3l);
+        }
+    }
+}
+.p-main {
+    @extend .c-container;
+    display: flex;
+    justify-content: space-between;
+    @include mixin.mq(lg) {
+        display: grid;
+        justify-content: center;
+        margin: 100px auto 0 auto;
+    }
+    &__provider {
+        width: 40%;
+        text-align: center;
+        @include mixin.mq(lg) {
+            width: 100%;
+            order: 2;
+        }
+    }
+    &__tit {
+        font-size: var(--font-size_3l);
+        font-weight: bolder;
+        margin-top: var(--space_3l);
+    }
+    &__btn {
+        display: block;
+        width: 200px;
+        margin: var(--space_3l) auto;
+        padding: var(--space_xl);
+        border-radius: 50px;
+    }
+    &__img {
+        width: 50%;
+        max-width: 500px;
+        @include mixin.mq(lg) {
+            width: 100%;
+            max-width: 400px;
+            order: 1;
+        }
+    }
+}
+.p-boardList {
+    @extend .c-container;
+    position: relative;
+    color: var(--color_accent);
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space_m);
+        border-top: 2px solid;
+        border-left: 2px solid;
+        border-right: 2px solid;
+        &:last-child {
+            border-bottom: 2px solid;
+        }
+    }
+    &__name {
+        width: 74%;
+        max-width: 700px;
+        display: inline-block;
+        @include mixin.mq(xl) {
+            width: 55%;
+            max-width: 300px;
+        }
+        @include mixin.mq(md) {
+            width: 80%;
+        }
+        @include mixin.mq(sm) {
+            font-size: var(--font-size_m);
+        }
+    }
+    &__date {
+        font-size: var(--font-size_m);
+        @include mixin.mq(md) {
+            display: none;
+        }
+    }
+    &__icon {
+        width: 20px;
+        margin: 0 var(--space_s);
+        cursor: pointer;
+        text-align: center;
+    }
+    &__opMenu {
+        min-width: 230px;
+        position: absolute;
+        right: 40px;
+        background: var(--color_base);
+        box-shadow: 0px 0px 6px 1px ;
+        z-index: 1;
+    }
+    &__opItem {
+        cursor: pointer;
+        &:hover {
+            background: var(--color_active);
+        }
+    }
+}
+.p-todoList {
+    font-size: var(--font-size_m);
+    color: var(--color_accent);
+    &__tit {
+        @extend .c-container__tit;
+        @extend .c-container__item;
+        max-width: 500px;
+        margin: 0 var(--space_3l) var(--space_xxl);
+        cursor: pointer;
+        font-size: var(--font-size_xl);
+        @include mixin.mq(md) {
+            margin: 0 var(--space_m) var(--space_xxl);
+        }
+    }
+    &__list {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    &__item {
+        @extend .c-container__item;
+        background: var(--color_active);
+        width: 300px;
+        margin: var(--space_s);
+        padding: var(--space_xl) var(--space_l);
+        box-sizing: border-box;
+        @include mixin.mq(md) {
+            width: 100%;
+            margin: var(--space_s) var(--space_l);
+        }
+    }
+    &__head {
+        margin-bottom: var(--space_l);
+    }
+    &__name {
+        @extend .c-container__item;
+        display: flex;
+        align-items: center;
+        font-size: var(--font-size_l);
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+    &__input {
+        height: 100%;
+        padding: var(--space_s) var(--space_m);
+        &:focus {
+            border: 2px solid var(--color_primary);
+            padding: 3px var(--space_m);
+        }
+    }
+    &__time {
+        margin-left: calc(-1 * var(--space_m));
+    }
+    &__timeInput {
+        @extend .p-todoList__time;
+        border: 2px solid var(--color_active);
+        margin: 0 var(--space_m);
+        padding: 0 var(--space_m);
+    }
+    &__text {
+        padding: var(--space_l) var(--space_m);
+        font-size: var(--font-size_l);
+        max-height: 60px;
+    }
+    &__todo {
+        @extend .c-container__item;
+        display: flex;
+        align-items: center;
+        margin: var(--space_s) 0;
+        background: var(--font-color_default);
+        padding: 0 var(--space_3l) 0 var(--space_l);
+    }
+    &__edit {
+        @extend .c-container__item;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: var(--space_m) 0;
+        background: var(--font-color_default);
+        padding: 0 0 0 var(--space_l);
+        font-size: var(--font-size_l);
+    }
+    &__acd {
+        .c-acd__check:checked + & {
+            opacity: 1;
+            height: 300px;
+            visibility: visible;
+            background: var(--font-color_default);
+            padding-bottom: var(--space_l);
+        }
+    }
+    &__acon {
+        top: -43px;
+        right: 2px;
+    }
+    &__bottom {
+        display: flex;
+        align-items: center;
+        margin-top: var(--space_m);
+    }
+    &__btn {
+        height: 100%;
+        padding: var(--space_s) var(--space_m);
+        color: var(--font-color_default);
+        cursor: pointer;
+    }
+    &__icon {
+        font-size: var(--font-size_xl);
+        width: 28px;
+        cursor: pointer;
+    }
+    &__add {
+        display: block;
+        color: var(--font-color_secondary);
+        cursor: pointer;
+        margin: var(--space_m) 0;
+    }
+    &__remove {
+        @extend .c-container__item;
+        color: var(--font-color_default);
+        font-size: var(--font-size_default);
+        margin: 0 0 0 auto;
+        padding: var(--space_s) var(--space_m);
+    }
+    &__submit {
+        @extend .p-todoList__btn;
+        display: block;
+        width: 100%;
+        color: var(--font-color_default);
+        margin-top: var(--space_m);
+    }
+}
+.p-boardHead {
+    color: var(--color_accent);
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--space_xxl);
+    }
+    &__btn {
+        &--pc {
+            color: var(--font-color_default);
+            background: var(--color_primary);
+            @extend .c-btn;
+            @include mixin.mq(sm) {
+                display: none;
+            }
+        }
+        &--sp {
+            color: var(--font-color_default);
+            background: var(--color_primary);
+            @extend .c-btn;
+            display: none;
+            @include mixin.mq(sm) {
+                display: block;
+            }
+        }
+    }
+}
+.p-mainFooter {
+    width: 100%;
+    background: var(--color_accent);
+    padding: var(--space_l);
+    box-sizing: border-box;
+    &__menu {
+        margin: var(--space_3l) 0 var(--space_l) 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &__item {
+        margin: var(--space_s) var(--space_m);
+    }
+    &__tit {
+        text-align: right;
+        margin: 0 var(--space_m);
+        @include mixin.mq(sm) {
+            text-align: center;
+        }
+    }
+}
+.p-form {
+    max-width: 500px;
+    &__submit {
+        margin: var(--space_3l) 0;
+        width: 100%;
+        font-size: var(--font-size_xl);
+        padding: var(--space_s) 0;
+        border-radius: 50px;
+        text-align: center;
+    }
+    &__check {
+        width: 20px;
+    }
+}
+.p-modal {
+    display: none;
+    background: var(--color_active);
+    padding: var(--space_l) var(--space_xxl);
+    width: 60%;
+    font-size: var(--font-size_l);
+    border-radius: 5px;
+    @include mixin.mq(md) {
+        padding: var(--space_m) var(--space_xl);
+    }
+    @include mixin.mq(sm) {
+        width: 80%;
+        font-size: var(--font-size_m);
+    }
+    &.show {
+        display: block;
+    }
+    &__head {
+        font-size: var(--font-size_xxl);
+        display: flex;
+        justify-content: space-between;
+        @include mixin.mq(md) {
+            font-size: var(--font-size_l);
+        }
+    }
+    &__form {
+        margin: var(--space_l) 0;
+    }
+    &__input {
+        @extend .c-input;
+        margin-bottom: var(--space_xl);
+        @include mixin.mq(md) {
+            margin-bottom: var(--space_s);
+        }
+    }
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    &__submit {
+        @extend .c-btn;
+        background: var(--color_primary);
+        @include mixin.mq(md) {
+            width: 100%;
+            text-align: center;
+            margin-top: var(--space_m);
+        }
+    }
+}
+.p-boardPage {
+    margin: 60px 0 30px 0;
+    &__item {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        &.active {
+            color: var(--font-color_default);
+            background: var(--color_accent);
+            border-radius: 50%;
+            margin: 0 var(--space_l);
+        }
+    }
+}
+
+// Utility
+// **************************************
+@import 'object/utility/color';
+@import 'object/utility/bgColor';
+@import 'object/utility/margin';
+@import 'object/utility/padding';
+@import 'object/utility/display';
+@import 'object/utility/text';
+
+// js Active
+// ***************************************
+.js-target-display {
+    display: none;
+    &.show {
+        display: block;
+    }
+}
+

@@ -1,0 +1,14 @@
+.c-timer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space_l);
+    &__btn {
+        color: var(--font-color_default);
+        width: 48%;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 5px;
+    }
+}

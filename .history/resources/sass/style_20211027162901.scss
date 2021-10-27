@@ -1,0 +1,58 @@
+// ======================================
+// foundation
+// ======================================
+@use 'foundation/reset';
+@use 'foundation/base';
+// 一時的に使う あとで削除する
+@use 'global' as mixin;
+@use 'global/variables';
+// ======================================
+// layout
+// ======================================
+@use 'layout/main';
+@use 'layout/footer';
+@use 'layout/modal';
+// ======================================
+// object
+// ======================================
+// Component
+// **************************************
+@use 'object/component/menuTrigger';
+@use 'object/component/container';
+@use 'object/component/form';
+@use 'object/component/btn';
+@use 'object/component/page';
+@use 'object/component/flashMsg';
+@use 'object/component/timer';
+
+// Project
+// **************************************
+@use 'object/project/mainHeader';
+@use 'object/project/top';
+@use 'object/project/boardHead';
+@use 'object/project/boardList';
+@use 'object/project/todoList';
+@use 'object/project/mainFooter';
+@use 'object/project/withdraw';
+@use 'object/project/boardModal';
+@use 'object/project/boardPage';
+@use 'object/project/acd';
+
+// Utility
+// **************************************
+@use 'object/utility/color';
+@use 'object/utility/bgColor';
+@use 'object/utility/margin';
+@import 'object/utility/padding';
+@import 'object/utility/display';
+@import 'object/utility/text';
+
+// js Active
+// ***************************************
+.js-target-display {
+    display: none;
+    &.show {
+        display: block;
+    }
+}
+
