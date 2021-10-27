@@ -66002,16 +66002,16 @@ var AddBoard = /*#__PURE__*/function (_React$Component) {
         id: "l-modal",
         className: classNameShow
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "p-modal show"
+        className: "p-boardModal show"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "p-modal__head"
+        className: "p-boardModal__head"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
         className: "u-color--accent"
       }, "\u65B0\u305F\u306B\u30DC\u30FC\u30C9\u3092\u4F5C\u6210"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
         onClick: this.handleClose,
         className: "far fa-times-circle"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        className: "p-modal__form",
+        className: "p-boardModal__form",
         method: "post",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
@@ -66022,17 +66022,17 @@ var AddBoard = /*#__PURE__*/function (_React$Component) {
         className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         name: "board_name",
-        className: "p-modal__input",
+        className: "p-boardModal__input",
         type: "text",
         value: this.state.val,
         onChange: this.handleChange,
         placeholder: "\u30DC\u30FC\u30C9\u540D"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "p-modal__bottom"
+        className: "p-boardModal__bottom"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: "c-form__error"
       }, errMsg), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        className: "p-modal__submit"
+        className: "p-boardModal__submit"
       }, "\u4F5C\u6210")))));
     }
   }]);
