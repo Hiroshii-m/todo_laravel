@@ -66030,7 +66030,7 @@ var AddBoard = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "p-boardModal__bottom"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        className: "c-form__error"
+        className: "p-form__error"
       }, errMsg), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         className: "p-boardModal__submit"
       }, "\u4F5C\u6210")))));
