@@ -14,7 +14,7 @@ class BoardsController extends Controller
         return view('boards.index', compact('boards'));
     }
     // ボード作成
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
             'board_name' => 'required|max:255',

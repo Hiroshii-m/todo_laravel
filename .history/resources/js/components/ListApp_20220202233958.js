@@ -158,7 +158,7 @@ export default class ListApp extends Component {
     callBackRemoveTodo(id) {
         if(confirm('本当に削除しますか')) {
             axios
-                .delete('/api/todos', {
+                .post('/api/deltodo', {
                     id: id,
                     user_id: this.state.u_id
                 })
@@ -195,7 +195,7 @@ export default class ListApp extends Component {
     // 予想時間、実行時間をスキーマへ登録
     callBackUpTime(todoData) {
         axios
-            .patch('/api/todos/time', {
+            .post('/api/uptimetodo', {
                 user_id: this.state.u_id,
                 id: todoData['id'],
                 expect_time: todoData['expTime'],

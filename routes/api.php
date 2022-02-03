@@ -16,15 +16,3 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::group(['middleware' => 'api'], function(){
-    Route::post('/upboard', 'BoardsController@upBoard');
-    Route::post('/newcluster', 'ClustersController@create');
-    Route::post('/upcluster', 'ClustersController@update');
-    Route::post('/delcluster', 'ClustersController@delete');
-    Route::post('/createtodo', 'TodosController@create');
-    Route::post('/uptodo', 'TodosController@update');
-    Route::post('/deltodo', 'TodosController@delete');
-    Route::post('/updonetodo', 'TodosController@updone');
-    Route::post('/uptimetodo', 'TodosController@uptime');
-});

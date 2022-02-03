@@ -23,6 +23,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/home', 'BoardsController@index');
     Route::get('/boards', 'BoardsController@index')->name('boards');
     Route::post('/boards', 'BoardsController@store');
+    // Route::resource('boards', 'BoardsController')->only([
+    //     'index', 'store'
+    // ]);
+    // Route::resource('boards', 'BoardsController')->names([
+    //     'index' => 'boards'
+    // ]);
     Route::delete('/boards/{id}/delete', 'BoardsController@delete')->name('boards.delete');
     Route::get('/boards/withdraw', 'BoardsController@withdraw')->name('boards.withdraw');
     Route::delete('/boards/withdraw', 'BoardsController@retire')->name('boards.retire');
@@ -33,11 +39,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/api/clusters', 'ClustersController@update');
     Route::delete('/api/clusters', 'ClustersController@delete');
     // TODOクラス
-    Route::post('/api/todos', 'TodosController@create');
-    Route::patch('/api/todos/name', 'TodosController@update');
-    Route::patch('/api/todos/done_flg', 'TodosController@updone');
-    Route::patch('/api/todos/time', 'TodosController@uptime');
-    Route::delete('/api/todos', 'TodosController@delete');
+    Route::patch('/api/todos', 'TodosController@create');
+    Route::post('/api/uptodo', 'TodosController@update');
+    Route::post('/api/deltodo', 'TodosController@delete');
+    Route::post('/api/updonetodo', 'TodosController@updone');
+    Route::post('/api/uptimetodo', 'TodosController@uptime');
 });
 
 

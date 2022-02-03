@@ -66021,11 +66021,11 @@ var AddBoard = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        value: this.state.val,
+        onChange: this.handleChange,
         name: "board_name",
         className: "p-boardModal__input",
         type: "text",
-        value: this.state.val,
-        onChange: this.handleChange,
         placeholder: "\u30DC\u30FC\u30C9\u540D"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "p-boardModal__bottom"
@@ -66319,33 +66319,34 @@ var ListApp = /*#__PURE__*/function (_Component) {
         todos: todos,
         word: word
       });
-    }
+    } // ボード名を変更する
+
   }, {
     key: "handleChangeBoard",
     value: function handleChangeBoard(text) {
       var _this2 = this;
 
       // ボード名をDBへ送信
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/upboard', {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.put('/api/boards', {
         b_id: this.state.b_id,
         u_id: this.state.u_id,
         text: text
       }) // データ送信が成功したら、ListAppの値を更新
-      .then(function (res) {
+      .then(function () {
         _this2.setState({
           board_name: text
         });
       })["catch"](function (err) {
         console.log(err);
       });
-    }
+    } // 新たにクラスター（リスト）を追加
+
   }, {
     key: "callBackAddList",
     value: function callBackAddList(text) {
       var _this3 = this;
 
-      // テキストをクラスターテーブル（リスト）に追加
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/newcluster', {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/clusters', {
         board_id: this.state.b_id,
         user_id: this.state.u_id,
         cluster_name: text
@@ -66364,14 +66365,14 @@ var ListApp = /*#__PURE__*/function (_Component) {
       })["catch"](function (err) {
         console.log(err);
       });
-    }
+    } // クラスター（TODOリスト）のテキストを変更
+
   }, {
     key: "callBackUpList",
     value: function callBackUpList(updata) {
       var _this4 = this;
 
-      // クラスターテーブル（リスト）のテキストを変更
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/upcluster', {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.put('/api/clusters', {
         user_id: this.state.u_id,
         id: updata['id'],
         cluster_name: updata['cluster_name']
@@ -66388,14 +66389,15 @@ var ListApp = /*#__PURE__*/function (_Component) {
       })["catch"](function (err) {
         console.log(err);
       });
-    }
+    } // クラスター（TODOリスト）を削除
+
   }, {
     key: "callBackRemoveList",
     value: function callBackRemoveList(id) {
       var _this5 = this;
 
       if (confirm('本当に削除しますか')) {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/delcluster', {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]('/api/clusters', {
           id: id,
           user_id: this.state.u_id
         }).then(function () {
@@ -66411,13 +66413,14 @@ var ListApp = /*#__PURE__*/function (_Component) {
           console.log(err);
         });
       }
-    }
+    } // TODOを新たに追加
+
   }, {
     key: "callBackAddTodo",
     value: function callBackAddTodo(todoData) {
       var _this6 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/createtodo', {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/todos', {
         user_id: this.state.u_id,
         board_id: this.state.b_id,
         cluster_id: todoData['c_id'],
@@ -66436,14 +66439,14 @@ var ListApp = /*#__PURE__*/function (_Component) {
       })["catch"](function (err) {
         console.log(err);
       });
-    }
+    } // TODOのテキストを変更
+
   }, {
     key: "callBackUpTodo",
     value: function callBackUpTodo(todoData) {
       var _this7 = this;
 
-      // TODOのテキストを変更
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/uptodo', {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.patch('/api/todos/name', {
         user_id: this.state.u_id,
         id: todoData['id'],
         todo_name: todoData['text']
@@ -66460,14 +66463,15 @@ var ListApp = /*#__PURE__*/function (_Component) {
       })["catch"](function (err) {
         console.log(err);
       });
-    }
+    } // TODOを削除
+
   }, {
     key: "callBackRemoveTodo",
     value: function callBackRemoveTodo(id) {
       var _this8 = this;
 
       if (confirm('本当に削除しますか')) {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/deltodo', {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]('/api/todos', {
           id: id,
           user_id: this.state.u_id
         }).then(function () {
@@ -66482,14 +66486,14 @@ var ListApp = /*#__PURE__*/function (_Component) {
           console.log(err);
         });
       }
-    }
+    } // TODOの完了状態の変更を登録
+
   }, {
     key: "callBackToggleDone",
     value: function callBackToggleDone(todoData) {
       var _this9 = this;
 
-      // TODOの完了状態の変更を登録
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/updonetodo', {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.patch('/api/todos/done_flg', {
         user_id: this.state.u_id,
         id: todoData['id'],
         done_flg: todoData['isDone']
@@ -66506,14 +66510,14 @@ var ListApp = /*#__PURE__*/function (_Component) {
       })["catch"](function (err) {
         console.log(err);
       });
-    }
+    } // 予想時間、実行時間をスキーマへ登録
+
   }, {
     key: "callBackUpTime",
     value: function callBackUpTime(todoData) {
       var _this10 = this;
 
-      // 予想時間、実行時間をスキーマへ登録
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/uptimetodo', {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.patch('/api/todos/time', {
         user_id: this.state.u_id,
         id: todoData['id'],
         expect_time: todoData['expTime'],
@@ -66795,43 +66799,51 @@ var ListTodo = /*#__PURE__*/function (_React$Component) {
     _this.callBackToggleDone = _this.callBackToggleDone.bind(_assertThisInitialized(_this));
     _this.callBackUpTime = _this.callBackUpTime.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // クラスター（TODOリスト）を新たに追加
+
 
   _createClass(ListTodo, [{
     key: "callBackAddList",
     value: function callBackAddList(text) {
       this.props.onAddList(text);
-    }
+    } // クラスター（TODOリスト）を変更
+
   }, {
     key: "callBackUpList",
     value: function callBackUpList(updata) {
       this.props.onUpList(updata);
-    }
+    } // クラスター（TODOリスト）を削除
+
   }, {
     key: "callBackRemoveList",
     value: function callBackRemoveList(id) {
       this.props.onRemoveList(id);
-    }
+    } // TODOを新たに追加
+
   }, {
     key: "callBackAddTodo",
     value: function callBackAddTodo(todoData) {
       this.props.onAddTodo(todoData);
-    }
+    } // TODO名を変更する
+
   }, {
     key: "callBackUpTodo",
     value: function callBackUpTodo(todoData) {
       this.props.onUpTodo(todoData);
-    }
+    } // TODOを削除する
+
   }, {
     key: "callBackRemoveTodo",
     value: function callBackRemoveTodo(id) {
       this.props.onRemoveTodo(id);
-    }
+    } // TODOを完了・未完成に変更する
+
   }, {
     key: "callBackToggleDone",
     value: function callBackToggleDone(todoData) {
       this.props.onToggleDone(todoData);
-    }
+    } // TODOの予想時間・実行時間を更新する
+
   }, {
     key: "callBackUpTime",
     value: function callBackUpTime(todoData) {

@@ -158,7 +158,7 @@ export default class ListApp extends Component {
     callBackRemoveTodo(id) {
         if(confirm('本当に削除しますか')) {
             axios
-                .delete('/api/todos', {
+                .post('/api/deltodo', {
                     id: id,
                     user_id: this.state.u_id
                 })

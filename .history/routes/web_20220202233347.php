@@ -34,10 +34,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/api/clusters', 'ClustersController@delete');
     // TODOクラス
     Route::post('/api/todos', 'TodosController@create');
-    Route::patch('/api/todos/name', 'TodosController@update');
-    Route::patch('/api/todos/done_flg', 'TodosController@updone');
-    Route::patch('/api/todos/time', 'TodosController@uptime');
-    Route::delete('/api/todos', 'TodosController@delete');
+    Route::put('/api/todos', 'TodosController@update');
+    Route::post('/api/updonetodo', 'TodosController@updone');
+    Route::post('/api/uptimetodo', 'TodosController@uptime');
+    Route::post('/api/deltodo', 'TodosController@delete');
 });
 
 

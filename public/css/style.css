@@ -611,6 +611,7 @@ i {
 
 #l-main {
   padding: 80px;
+  position: relative;
 }
 
 @media screen and (max-width: 1200px) {

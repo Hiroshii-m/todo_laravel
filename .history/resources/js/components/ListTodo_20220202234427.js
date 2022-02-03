@@ -26,23 +26,18 @@ export default class ListTodo extends React.Component {
     callBackRemoveList(id) {
         this.props.onRemoveList(id);
     }
-    // TODOを新たに追加
     callBackAddTodo(todoData) {
         this.props.onAddTodo(todoData);
     }
-    // TODO名を変更する
     callBackUpTodo(todoData) {
         this.props.onUpTodo(todoData);
     }
-    // TODOを削除する
     callBackRemoveTodo(id) {
         this.props.onRemoveTodo(id);
     }
-    // TODOを完了・未完成に変更する
     callBackToggleDone(todoData) {
         this.props.onToggleDone(todoData);
     }
-    // TODOの予想時間・実行時間を更新する
     callBackUpTime(todoData) {
         this.props.onUpTime(todoData);
     }

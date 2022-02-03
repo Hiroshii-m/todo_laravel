@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::patch('/api/todos/name', 'TodosController@update');
     Route::patch('/api/todos/done_flg', 'TodosController@updone');
     Route::patch('/api/todos/time', 'TodosController@uptime');
-    Route::delete('/api/todos', 'TodosController@delete');
+    Route::post('/api/deltodo', 'TodosController@delete');
 });
 
 

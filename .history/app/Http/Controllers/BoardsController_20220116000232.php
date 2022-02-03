@@ -11,10 +11,11 @@ class BoardsController extends Controller
     public function index()
     {
         $boards = Auth::user()->boards()->paginate(10);
-        return view('boards.index', compact('boards'));
+        // return view('boards.index', compact('boards'));
+        return view('boards.index');
     }
     // ボード作成
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
             'board_name' => 'required|max:255',

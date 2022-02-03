@@ -4,7 +4,7 @@
 <!-- boardList -->
 <section id="">
     <div id="board-app"></div>
-    <div class="p-boardList">
+    {{-- <div class="p-boardList">
         <ul class="p-boardList__list">
             @foreach($boards as $board)
                 <li class="p-boardList__item">
@@ -25,12 +25,12 @@
                     </div>
                 </li>
             @endforeach
-        </ul>
+        </ul> --}}
 
         {{-- ページネーション --}}
-        <div class="">
+        {{-- <div class="">
             {{ $boards->links('vendor.pagination.board') }}
-        </div>
+        </div> --}}
     </div>
     </div>
 </section>

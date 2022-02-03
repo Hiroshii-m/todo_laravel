@@ -8,13 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class BoardsController extends Controller
 {
+    public function update(Request $request)
+    {
+        $board = Board::where('user_id', '=', $request->u_id)->where('id', '=', $request->b_id)->first();
+        $board->board_name = $request->text;
+        $board->save();
+    }
     public function index()
     {
         $boards = Auth::user()->boards()->paginate(10);
         return view('boards.index', compact('boards'));
     }
     // ボード作成
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
             'board_name' => 'required|max:255',
@@ -23,12 +29,6 @@ class BoardsController extends Controller
         Auth::user()->boards()->save($board->fill($request->all()));
         $last_id = $board->id;
         return redirect()->route('clusters', ['id' => $last_id]);
-    }
-    public function update(Request $request)
-    {
-        $board = Board::where('user_id', '=', $request->u_id)->where('id', '=', $request->b_id)->first();
-        $board->board_name = $request->text;
-        $board->save();
     }
     // ボード削除
     public function delete($id)

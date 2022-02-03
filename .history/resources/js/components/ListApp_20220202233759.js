@@ -138,7 +138,7 @@ export default class ListApp extends Component {
     // TODOのテキストを変更
     callBackUpTodo(todoData) {
         axios
-            .patch('/api/todos/name', {
+            .patch('/api/todos', {
                 user_id: this.state.u_id,
                 id: todoData['id'],
                 todo_name: todoData['text']
@@ -154,11 +154,10 @@ export default class ListApp extends Component {
                 console.log(err);
             })
     }
-    // TODOを削除
     callBackRemoveTodo(id) {
         if(confirm('本当に削除しますか')) {
             axios
-                .delete('/api/todos', {
+                .post('/api/deltodo', {
                     id: id,
                     user_id: this.state.u_id
                 })
@@ -173,10 +172,10 @@ export default class ListApp extends Component {
                 })
         }
     }
-    // TODOの完了状態の変更を登録
     callBackToggleDone(todoData) {
+        // TODOの完了状態の変更を登録
         axios
-            .patch('/api/todos/done_flg', {
+            .post('/api/updonetodo', {
                 user_id: this.state.u_id,
                 id: todoData['id'],
                 done_flg: todoData['isDone']
@@ -192,10 +191,10 @@ export default class ListApp extends Component {
                 console.log(err);
             })
     }
-    // 予想時間、実行時間をスキーマへ登録
     callBackUpTime(todoData) {
+        // 予想時間、実行時間をスキーマへ登録
         axios
-            .patch('/api/todos/time', {
+            .post('/api/uptimetodo', {
                 user_id: this.state.u_id,
                 id: todoData['id'],
                 expect_time: todoData['expTime'],
