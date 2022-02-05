@@ -612,6 +612,7 @@ i {
 #l-main {
   padding: 80px;
   position: relative;
+  min-height: 500px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -629,12 +630,6 @@ i {
 #l-footer {
   width: 100%;
   margin: 40px 0 0 0;
-}
-
-#l-footer.active {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
 
 #l-modal {

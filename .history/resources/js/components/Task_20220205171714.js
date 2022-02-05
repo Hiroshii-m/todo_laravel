@@ -234,14 +234,11 @@ export default class Task extends React.Component {
                                         <input className="p-todoList__timeInput" min="0" type="number" value={this.state.speTime} 
                                         onChange={this.handleChangeSpeTime} />:<input className="p-todoList__timeInput" 
                                         type="number" min="0" max="59" value={this.state.speMinute} 
-                                        onChange={this.handleChangeSpeMinute}/>
+                                        onChange={this.handleChangeSpeMinute} />
                                     </div>
                                 </div>
                                 {timer}
-                                <button  className="p-todoList__submit u-bgColor--accent c-component__item" 
-                                onClick={this.handleUpTime}>
-                                    <i className="fas fa-arrow-circle-up"></i>&nbsp;予想・作業時間保存
-                                </button>
+                                <button onClick={this.handleUpTime} className="p-todoList__submit u-bgColor--accent c-component__item"><i className="fas fa-arrow-circle-up"></i>&nbsp;予想・作業時間保存</button>
                                 {timeMsg}
                             </div>
                         </div>
@@ -254,11 +251,8 @@ export default class Task extends React.Component {
                 task = 
                 <div className="p-todoList__edit">
                     {icon}
-                    <input type="text" className="p-todoList__input" placeholder="TODO名" value={this.state.text} 
-                    onChange={this.handleChange} autoFocus />
-                    <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary">
-                        <i className="fas fa-arrow-circle-up"></i>
-                    </button>
+                    <input type="text" className="p-todoList__input" placeholder="TODO名" value={this.state.text} onChange={this.handleChange} autoFocus />
+                    <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary"><i className="fas fa-arrow-circle-up"></i></button>
                 </div>
                 break;
         }

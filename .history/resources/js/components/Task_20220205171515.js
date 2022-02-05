@@ -186,18 +186,14 @@ export default class Task extends React.Component {
         // Taskの状態から要素を分ける
         switch(this.state.taskMode){
             case "New":
-                task = <span onClick={this.handleInput} className="p-todoList__add">
-                    <i className="fas fa-plus"></i>&nbsp;TODOを追加</span>;
+                task = <span onClick={this.handleInput} className="p-todoList__add"><i className="fas fa-plus"></i>&nbsp;TODOを追加</span>;
                 break;
             case "Input":
                 task = 
                 <div>
-                    <input type="text" className="p-todoList__input u-margin--m-0 c-component__item" placeholder="TODO名" 
-                    value={this.state.text} onChange={this.handleChange} />
+                    <input type="text" className="p-todoList__input u-margin--m-0 c-component__item" placeholder="TODO名" value={this.state.text} onChange={this.handleChange} />
                     <div className="p-todoList__bottom">
-                        <span onClick={this.addTodo} className="p-todoList__btn u-bgColor--primary c-component__item">
-                            <i className="fas fa-plus"></i>TODOを追加
-                        </span>
+                        <span onClick={this.addTodo} className="p-todoList__btn u-bgColor--primary c-component__item"><i className="fas fa-plus"></i>TODOを追加</span>
                         <i onClick={this.handleNew} className="far fa-times-circle p-todoList__icon u-margin-left--m"></i>
                     </div>
                 </div>;
@@ -223,25 +219,16 @@ export default class Task extends React.Component {
                             <div className="p-acd__time">
                                 <div className="">予想時間：
                                     <div className="p-todoList__time u-flex">
-                                        <input className="p-todoList__timeInput" min="0" type="number" value={this.state.expTime} 
-                                        onChange={this.handleChangeExpTime} />:<input className="p-todoList__timeInput" 
-                                        type="number" min="0" max="59" value={this.state.expMinute} 
-                                        onChange={this.handleChangeExpMinute}/>
+                                        <input className="p-todoList__timeInput" min="0" type="number" value={this.state.expTime} onChange={this.handleChangeExpTime} />:<input className="p-todoList__timeInput" type="number" min="0" max="59" value={this.state.expMinute} onChange={this.handleChangeExpMinute} />
                                     </div>
                                 </div>
                                 <div>作業時間：
                                     <div className="p-todoList__time u-flex">
-                                        <input className="p-todoList__timeInput" min="0" type="number" value={this.state.speTime} 
-                                        onChange={this.handleChangeSpeTime} />:<input className="p-todoList__timeInput" 
-                                        type="number" min="0" max="59" value={this.state.speMinute} 
-                                        onChange={this.handleChangeSpeMinute}/>
+                                        <input className="p-todoList__timeInput" min="0" type="number" value={this.state.speTime} onChange={this.handleChangeSpeTime} />:<input className="p-todoList__timeInput" type="number" min="0" max="59" value={this.state.speMinute} onChange={this.handleChangeSpeMinute} />
                                     </div>
                                 </div>
                                 {timer}
-                                <button  className="p-todoList__submit u-bgColor--accent c-component__item" 
-                                onClick={this.handleUpTime}>
-                                    <i className="fas fa-arrow-circle-up"></i>&nbsp;予想・作業時間保存
-                                </button>
+                                <button onClick={this.handleUpTime} className="p-todoList__submit u-bgColor--accent c-component__item"><i className="fas fa-arrow-circle-up"></i>&nbsp;予想・作業時間保存</button>
                                 {timeMsg}
                             </div>
                         </div>
@@ -254,11 +241,8 @@ export default class Task extends React.Component {
                 task = 
                 <div className="p-todoList__edit">
                     {icon}
-                    <input type="text" className="p-todoList__input" placeholder="TODO名" value={this.state.text} 
-                    onChange={this.handleChange} autoFocus />
-                    <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary">
-                        <i className="fas fa-arrow-circle-up"></i>
-                    </button>
+                    <input type="text" className="p-todoList__input" placeholder="TODO名" value={this.state.text} onChange={this.handleChange} autoFocus />
+                    <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary"><i className="fas fa-arrow-circle-up"></i></button>
                 </div>
                 break;
         }

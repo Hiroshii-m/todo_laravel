@@ -212,9 +212,7 @@ export default class ListApp extends Component {
                                     expect_time: todoData['expTime'], expect_minute: todoData['expMinute'], 
                                     spend_time: todoData['speTime'], spend_minute: todoData['speMinute'], 
                                     timeMsg: '保存に成功しました！！'
-                                }
-                            ): obj
-                        )
+                                }): obj)
                     )
                 }));
             })
@@ -222,11 +220,7 @@ export default class ListApp extends Component {
                 console.log(err);
                 this.setState(prevState => ({
                     todos: prevState.todos.map(
-                        obj => (
-                            obj.id === todoData['id'] ? Object.assign(
-                                obj, {timeMsg: '保存に失敗しました。しばらくお待ちください。'}
-                            ): obj
-                        )
+                        obj => (obj.id === todoData['id'] ? Object.assign(obj, {timeMsg: '保存に失敗しました。しばらくお待ちください。'}): obj)
                     )
                 }));
             })

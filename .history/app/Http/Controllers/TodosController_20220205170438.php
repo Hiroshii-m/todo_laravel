@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Todo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TodosController extends Controller
 {
@@ -26,6 +25,7 @@ class TodosController extends Controller
     public function delete(Request $request)
     {
         Auth::user()->todos()->where('id', $request->id)->delete();
+        // Todo::where('user_id', $request->user_id)->where('id', $request->id)->delete();
     }
     // TODOの完了状態の変更を登録
     public function updone(Request $request)

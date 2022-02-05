@@ -20,9 +20,6 @@ require('./components/ListApp');
 /**
 * JavaScript File
 */
-// SP時のハンバーガーメニュー
 require('./common-js/SpMenu');
-// フラッシュメッセージ
 require('./common-js/FlashMsg');
-// ボード一覧画面でボードの操作
 require('./common-js/HandleBoard');

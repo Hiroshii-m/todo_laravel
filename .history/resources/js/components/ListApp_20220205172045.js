@@ -213,8 +213,7 @@ export default class ListApp extends Component {
                                     spend_time: todoData['speTime'], spend_minute: todoData['speMinute'], 
                                     timeMsg: '保存に成功しました！！'
                                 }
-                            ): obj
-                        )
+                            ): obj)
                     )
                 }));
             })
@@ -225,8 +224,7 @@ export default class ListApp extends Component {
                         obj => (
                             obj.id === todoData['id'] ? Object.assign(
                                 obj, {timeMsg: '保存に失敗しました。しばらくお待ちください。'}
-                            ): obj
-                        )
+                            ): obj)
                     )
                 }));
             })

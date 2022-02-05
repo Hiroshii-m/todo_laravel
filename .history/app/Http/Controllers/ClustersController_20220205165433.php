@@ -28,6 +28,7 @@ class ClustersController extends Controller
     // クラスター（リスト）を更新
     public function update(Request $request)
     {
+        // $cluster = Cluster::find($request->id);
         $cluster = Cluster::where('user_id', $request->user_id)->where('id', $request->id)->first();
         $cluster->cluster_name = $request->cluster_name;
         $cluster->save();

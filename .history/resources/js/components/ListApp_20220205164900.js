@@ -100,9 +100,10 @@ export default class ListApp extends Component {
         if(confirm('本当に削除しますか')) {
             let formData = new FormData();
             formData.set('_method', 'DELETE');
+            formData.set('user_id', this.state.u_id);
             formData.set('id', id);
             axios
-                .post('/api/clusters', formData)
+                .delete('/api/clusters', formData)
                 .then( () => {
                     // コンポーネントから削除
                     const data = _.reject(this.state.clusters, {'id': id});
@@ -157,11 +158,11 @@ export default class ListApp extends Component {
     // TODOを削除
     callBackRemoveTodo(id) {
         if(confirm('本当に削除しますか')) {
-            let formData = new FormData();
-            formData.set('_method', 'DELETE');
-            formData.set('id', id);
             axios
-                .post('/api/todos', formData)
+                .delete('/api/todos', {
+                    id: id,
+                    user_id: this.state.u_id
+                })
                 .then( () => {
                     const data = _.reject(this.state.todos, {'id': id});
                     this.setState({
@@ -206,15 +207,7 @@ export default class ListApp extends Component {
             .then( () => {
                 this.setState(prevState => ({
                     todos: prevState.todos.map(
-                        obj => (
-                            obj.id === todoData['id'] ? Object.assign(
-                                obj, {
-                                    expect_time: todoData['expTime'], expect_minute: todoData['expMinute'], 
-                                    spend_time: todoData['speTime'], spend_minute: todoData['speMinute'], 
-                                    timeMsg: '保存に成功しました！！'
-                                }
-                            ): obj
-                        )
+                        obj => (obj.id === todoData['id'] ? Object.assign(obj, {expect_time: todoData['expTime'], expect_minute: todoData['expMinute'], spend_time: todoData['speTime'], spend_minute: todoData['speMinute'], timeMsg: '保存に成功しました！！'}): obj)
                     )
                 }));
             })
@@ -222,11 +215,7 @@ export default class ListApp extends Component {
                 console.log(err);
                 this.setState(prevState => ({
                     todos: prevState.todos.map(
-                        obj => (
-                            obj.id === todoData['id'] ? Object.assign(
-                                obj, {timeMsg: '保存に失敗しました。しばらくお待ちください。'}
-                            ): obj
-                        )
+                        obj => (obj.id === todoData['id'] ? Object.assign(obj, {timeMsg: '保存に失敗しました。しばらくお待ちください。'}): obj)
                     )
                 }));
             })

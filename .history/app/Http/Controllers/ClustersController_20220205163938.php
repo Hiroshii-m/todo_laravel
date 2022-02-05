@@ -6,6 +6,7 @@ use App\Todo;
 use App\Cluster;
 use App\TodoList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class ClustersController extends Controller
@@ -28,6 +29,7 @@ class ClustersController extends Controller
     // クラスター（リスト）を更新
     public function update(Request $request)
     {
+        // $cluster = Cluster::find($request->id);
         $cluster = Cluster::where('user_id', $request->user_id)->where('id', $request->id)->first();
         $cluster->cluster_name = $request->cluster_name;
         $cluster->save();
@@ -35,7 +37,9 @@ class ClustersController extends Controller
     // クラスター（リスト）を削除
     public function delete(Request $request)
     {
-        Auth::user()->todos()->where('cluster_id', $request->id)->delete();
-        Auth::user()->clusters()->where('id', $request->id)->delete();
+        Log::debug(print_r($request->user_id, true));
+        Log::debug(print_r($request->id, true));
+        Todo::where('user_id', $request->user_id)->where('cluster_id', $request->id)->delete();
+        Cluster::where('user_id', $request->user_id)->where('id', $request->id)->delete();
     }
 }

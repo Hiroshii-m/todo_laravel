@@ -26,6 +26,7 @@ class TodosController extends Controller
     public function delete(Request $request)
     {
         Auth::user()->todos()->where('id', $request->id)->delete();
+        // Todo::where('user_id', $request->user_id)->where('id', $request->id)->delete();
     }
     // TODOの完了状態の変更を登録
     public function updone(Request $request)

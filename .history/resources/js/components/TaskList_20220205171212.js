@@ -122,20 +122,17 @@ export default class TaskList extends React.Component {
 
         switch(this.state.listMode) {
             case 'New':
-                head = <span onClick={this.handleInput} className="p-todoList__add">
-                    <i className="fas fa-plus"></i>リストを追加</span>;
+                head = <span onClick={this.handleInput} className="p-todoList__add"><i className="fas fa-plus"></i>リストを追加</span>;
                 bottom = '';
                 break;
             case 'Input':
                 head = 
                 <div className="p-todoList__head">
-                    <input type="text" className="p-todoList__input p-todoList__name" placeholder="リスト名" 
-                    onChange={this.handleChange} value={this.state.text} />
+                    <input type="text" className="p-todoList__input p-todoList__name" placeholder="リスト名" onChange={this.handleChange} value={this.state.text} />
                 </div>;
                 bottom = 
                 <div className="p-todoList__bottom">
-                    <button className="p-todoList__btn c-component__item u-margin-right--xl u-padding--s-m u-bgColor--primary" 
-                    onClick={this.addList}>リストを追加</button>
+                    <button onClick={this.addList} className="p-todoList__btn c-component__item u-margin-right--xl u-padding--s-m u-bgColor--primary">リストを追加</button>
                     <i onClick={this.handleNew} className="far fa-times-circle p-todoList__icon"></i>
                 </div>;
                 break;
@@ -143,7 +140,7 @@ export default class TaskList extends React.Component {
                 head = 
                 <div className="p-todoList__head">
                     <div className="p-todoList__name ">
-                        <span className="p-todoList__text" onClick={this.handleEdit}>{this.state.text}</span>
+                        <span onClick={this.handleEdit}  className="p-todoList__text">{this.state.text}</span>
                     </div>
                     <p>{this.props.word['ExpTime']}：{expTimeTotal}時間{expMinuteTotal}分</p>
                     <p>{this.props.word['SpeTime']}：{speTimeTotal}時間{speMinuteTotal}分</p>
@@ -162,11 +159,8 @@ export default class TaskList extends React.Component {
                 head = 
                 <div className="p-todoList__head">
                     <div className="p-todoList__name">
-                        <input type="text" className="p-todoList__input" placeholder="リスト名" value={this.state.text} 
-                        onChange={this.handleChange}/>
-                        <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary">
-                            <i className="fas fa-arrow-circle-up"></i>
-                        </button>
+                        <input type="text" className="p-todoList__input" placeholder="リスト名" value={this.state.text} onChange={this.handleChange} />
+                        <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary"><i className="fas fa-arrow-circle-up"></i></button>
                     </div>
                     <p>{this.props.word['ExpTime']}：{expTimeTotal}時間{expMinuteTotal}分</p>
                     <p>{this.props.word['SpeTime']}：{speTimeTotal}時間{speMinuteTotal}分</p>

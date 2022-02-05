@@ -122,8 +122,7 @@ export default class TaskList extends React.Component {
 
         switch(this.state.listMode) {
             case 'New':
-                head = <span onClick={this.handleInput} className="p-todoList__add">
-                    <i className="fas fa-plus"></i>リストを追加</span>;
+                head = <span onClick={this.handleInput} className="p-todoList__add"><i className="fas fa-plus"></i>リストを追加</span>;
                 bottom = '';
                 break;
             case 'Input':

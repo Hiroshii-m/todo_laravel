@@ -254,11 +254,8 @@ export default class Task extends React.Component {
                 task = 
                 <div className="p-todoList__edit">
                     {icon}
-                    <input type="text" className="p-todoList__input" placeholder="TODO名" value={this.state.text} 
-                    onChange={this.handleChange} autoFocus />
-                    <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary">
-                        <i className="fas fa-arrow-circle-up"></i>
-                    </button>
+                    <input type="text" className="p-todoList__input" placeholder="TODO名" value={this.state.text} onChange={this.handleChange} autoFocus />
+                    <button onClick={this.handleCloseEdit} className="p-todoList__btn u-bgColor--primary"><i className="fas fa-arrow-circle-up"></i></button>
                 </div>
                 break;
         }

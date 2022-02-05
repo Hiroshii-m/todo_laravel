@@ -65756,66 +65756,18 @@ __webpack_require__(/*! ./components/BoardApp */ "./resources/js/components/Boar
 
 __webpack_require__(/*! ./components/ListApp */ "./resources/js/components/ListApp.js");
 /**
-* Native JavaScript
+* JavaScript File
 */
+// SP時のハンバーガーメニュー
 
 
-window.addEventListener("DOMContentLoaded", function () {
-  // ハンバーガーメニューの要素
-  var $headerToggle = document.querySelector('.js-header-toggle') || null,
-      $headerBar = document.querySelectorAll('.js-header-bar') || null,
-      $headerTarget = document.querySelector('.js-header-target') || null; // ボード一覧のボード操作用の要素
-
-  var clickShow = document.querySelectorAll('.js-click-toggle-display') || null,
-      targetShow = document.querySelectorAll('.js-target-display') || null; // フラッシュメッセージの要素
-
-  var $showMsg = document.querySelector(".js-show-msg") || null; // フッターの要素
-
-  var $ftr = document.querySelector('#l-footer') || null; // ボード一覧のボード操作ボタンをイベント
-
-  if (clickShow !== null && targetShow !== null) {
-    document.addEventListener('click', function (e) {
-      targetShow.forEach(function (el) {
-        el.classList.remove('show');
-      });
-
-      if (!e.target.closest('.js-click-toggle-display')) {} else {
-        e.target.nextElementSibling.classList.add('show');
-      }
-    });
-  } // ハンバーガーメニュー
+__webpack_require__(/*! ./common-js/SpMenu */ "./resources/js/common-js/SpMenu.js"); // フラッシュメッセージ
 
 
-  if ($headerToggle !== null && $headerBar !== null && $headerTarget !== null) {
-    $headerToggle.addEventListener('click', function () {
-      // ハンバーガーを変形させる
-      $headerBar.forEach(function ($bar) {
-        $bar.classList.toggle('active');
-      }); // メニューを表示・非表示する
-
-      $headerTarget.classList.toggle('active');
-    });
-  } // フラッシュメッセージの動き
+__webpack_require__(/*! ./common-js/FlashMsg */ "./resources/js/common-js/FlashMsg.js"); // ボード一覧画面でボードの操作
 
 
-  if ($showMsg !== null) {
-    if ($showMsg.textContent.replace(/^[\s　]+|[\s　]+$/g, "").length) {
-      setTimeout(function () {
-        $showMsg.classList.add('active');
-      }, 10);
-      setTimeout(function () {
-        $showMsg.classList.remove('active');
-      }, 4000);
-    }
-  } // フッター要素を最下部に固定
-
-
-  if (window.innerHeight > $ftr.offsetTop + $ftr.offsetHeight) {
-    $ftr.classList.add("active");
-  } else {
-    $ftr.classList.remove("active");
-  }
-});
+__webpack_require__(/*! ./common-js/HandleBoard */ "./resources/js/common-js/HandleBoard.js");
 
 /***/ }),
 
@@ -65874,6 +65826,85 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/common-js/FlashMsg.js":
+/*!********************************************!*\
+  !*** ./resources/js/common-js/FlashMsg.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.addEventListener("DOMContentLoaded", function () {
+  // フラッシュメッセージの要素
+  var $showMsg = document.querySelector(".js-show-msg") || null; // フラッシュメッセージの動き
+
+  if ($showMsg !== null) {
+    if ($showMsg.textContent.replace(/^[\s　]+|[\s　]+$/g, "").length) {
+      setTimeout(function () {
+        $showMsg.classList.add('active');
+      }, 10);
+      setTimeout(function () {
+        $showMsg.classList.remove('active');
+      }, 4000);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/common-js/HandleBoard.js":
+/*!***********************************************!*\
+  !*** ./resources/js/common-js/HandleBoard.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.addEventListener("DOMContentLoaded", function () {
+  // ボード一覧のボード操作用の要素
+  var clickShow = document.querySelectorAll('.js-click-toggle-display') || null,
+      targetShow = document.querySelectorAll('.js-target-display') || null; // ボード一覧のボード操作ボタンをイベント
+
+  if (clickShow !== null && targetShow !== null) {
+    document.addEventListener('click', function (e) {
+      targetShow.forEach(function (el) {
+        el.classList.remove('show');
+      });
+
+      if (!e.target.closest('.js-click-toggle-display')) {} else {
+        e.target.nextElementSibling.classList.add('show');
+      }
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/common-js/SpMenu.js":
+/*!******************************************!*\
+  !*** ./resources/js/common-js/SpMenu.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.addEventListener("DOMContentLoaded", function () {
+  // ハンバーガーメニューの要素
+  var $headerToggle = document.querySelector('.js-header-toggle') || null,
+      $headerBar = document.querySelectorAll('.js-header-bar') || null,
+      $headerTarget = document.querySelector('.js-header-target') || null; // ハンバーガーメニュー
+
+  if ($headerToggle !== null && $headerBar !== null && $headerTarget !== null) {
+    $headerToggle.addEventListener('click', function () {
+      // ハンバーガーを変形させる
+      $headerBar.forEach(function ($bar) {
+        $bar.classList.toggle('active');
+      }); // メニューを表示・非表示する
+
+      $headerTarget.classList.toggle('active');
+    });
+  }
+});
 
 /***/ }),
 
@@ -66397,10 +66428,10 @@ var ListApp = /*#__PURE__*/function (_Component) {
       var _this5 = this;
 
       if (confirm('本当に削除しますか')) {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]('/api/clusters', {
-          id: id,
-          user_id: this.state.u_id
-        }).then(function () {
+        var formData = new FormData();
+        formData.set('_method', 'DELETE');
+        formData.set('id', id);
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/clusters', formData).then(function () {
           // コンポーネントから削除
           var data = lodash__WEBPACK_IMPORTED_MODULE_3___default.a.reject(_this5.state.clusters, {
             'id': id
@@ -66471,10 +66502,10 @@ var ListApp = /*#__PURE__*/function (_Component) {
       var _this8 = this;
 
       if (confirm('本当に削除しますか')) {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]('/api/todos', {
-          id: id,
-          user_id: this.state.u_id
-        }).then(function () {
+        var formData = new FormData();
+        formData.set('_method', 'DELETE');
+        formData.set('id', id);
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/todos', formData).then(function () {
           var data = lodash__WEBPACK_IMPORTED_MODULE_3___default.a.reject(_this8.state.todos, {
             'id': id
           });
@@ -67303,8 +67334,8 @@ var Task = /*#__PURE__*/function (_React$Component) {
             value: this.state.speMinute,
             onChange: this.handleChangeSpeMinute
           }))), timer, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            onClick: this.handleUpTime,
-            className: "p-todoList__submit u-bgColor--accent c-component__item"
+            className: "p-todoList__submit u-bgColor--accent c-component__item",
+            onClick: this.handleUpTime
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fas fa-arrow-circle-up"
           }), "\xA0\u4E88\u60F3\u30FB\u4F5C\u696D\u6642\u9593\u4FDD\u5B58"), timeMsg)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -67574,8 +67605,8 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
           bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "p-todoList__bottom"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            onClick: this.addList,
-            className: "p-todoList__btn c-component__item u-margin-right--xl u-padding--s-m u-bgColor--primary"
+            className: "p-todoList__btn c-component__item u-margin-right--xl u-padding--s-m u-bgColor--primary",
+            onClick: this.addList
           }, "\u30EA\u30B9\u30C8\u3092\u8FFD\u52A0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             onClick: this.handleNew,
             className: "far fa-times-circle p-todoList__icon"
@@ -67588,8 +67619,8 @@ var TaskList = /*#__PURE__*/function (_React$Component) {
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "p-todoList__name "
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-            onClick: this.handleEdit,
-            className: "p-todoList__text"
+            className: "p-todoList__text",
+            onClick: this.handleEdit
           }, this.state.text)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['ExpTime'], "\uFF1A", expTimeTotal, "\u6642\u9593", expMinuteTotal, "\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['SpeTime'], "\uFF1A", speTimeTotal, "\u6642\u9593", speMinuteTotal, "\u5206"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.word['TimeLug'], "\uFF1A", timeLug, "\u6642\u9593", minuteLug, "\u5206"));
           bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, newTask, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "u-flex"
