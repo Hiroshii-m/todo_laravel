@@ -2,7 +2,7 @@
 
 @section('head_info')
     {{-- TDK (title,description,keywords) --}}
-    <title>TOP - {{ config('app.name', 'TODO-PRO') }}</title>
+    <title>TOPページ - {{ config('app.name', 'TODO-PRO') }}</title>
     <meta name="description" content="TODO-PROは、あなたの見積り力を育てます。">
     <meta name="keywords" content="TODO-PRO,見積もる,タスク">
 @endsection
