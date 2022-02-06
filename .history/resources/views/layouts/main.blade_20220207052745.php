@@ -44,7 +44,7 @@
                                 @guest
                                     <a href="{{ url('/') }}" class="p-mainHeader__text">{{ __('Home') }}</a>
                                 @else
-                                    <a href="{{ route('boards') }}" class="p-mainHeader__text">{{ __('Home') }}</a>
+                                    <a href="{{ url('boards') }}" class="p-mainHeader__text">{{ __('Home') }}</a>
                                 @endguest
                             </li>
                             @guest
