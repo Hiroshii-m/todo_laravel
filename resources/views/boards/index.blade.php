@@ -21,7 +21,7 @@
                             <form action="{{ route('boards.delete', $board->id) }}" method="POST" class="p-boardList__opItem">
                                 @method('DELETE')
                                 @csrf
-                                <button class="u-block u-padding--m-l" onclick='return confirm("削除しますか？");'>
+                                <button class="p-boardList__delItem u-block u-padding--m-l" onclick='return confirm("削除しますか？");'>
                                     <i class="fas fa-trash-alt u-margin--0-m"></i>{{ __('Delete') }}
                                 </button>
                             </form>

@@ -1,11 +1,7 @@
 @charset "UTF-8";
-
 /*! destyle.css v2.0.2 | MIT License | https://github.com/nicolas-cusan/destyle.css */
-
 /* Reset box-model and set borders */
-
 /* ============================================ */
-
 *,
 ::before,
 ::after {
@@ -15,15 +11,12 @@
 }
 
 /* Document */
-
 /* ============================================ */
-
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  * 3. Remove gray overlay on links for iOS.
  */
-
 html {
   line-height: 1.15;
   /* 1 */
@@ -34,13 +27,10 @@ html {
 }
 
 /* Sections */
-
 /* ============================================ */
-
 /**
  * Remove the margin in all browsers.
  */
-
 body {
   margin: 0;
 }
@@ -48,15 +38,12 @@ body {
 /**
  * Render the `main` element consistently in IE.
  */
-
 main {
   display: block;
 }
 
 /* Vertical rhythm */
-
 /* ============================================ */
-
 p,
 table,
 blockquote,
@@ -70,9 +57,7 @@ dl {
 }
 
 /* Headings */
-
 /* ============================================ */
-
 h1,
 h2,
 h3,
@@ -86,9 +71,7 @@ h6 {
 }
 
 /* Lists (enumeration) */
-
 /* ============================================ */
-
 ul,
 ol {
   margin: 0;
@@ -97,9 +80,7 @@ ol {
 }
 
 /* Lists (definition) */
-
 /* ============================================ */
-
 dt {
   font-weight: bold;
 }
@@ -109,14 +90,11 @@ dd {
 }
 
 /* Grouping content */
-
 /* ============================================ */
-
 /**
  * 1. Add the correct box sizing in Firefox.
  * 2. Show the overflow in Edge and IE.
  */
-
 hr {
   box-sizing: content-box;
   /* 1 */
@@ -134,7 +112,6 @@ hr {
  * 1. Correct the inheritance and scaling of font size in all browsers.
  * 2. Correct the odd `em` font sizing in all browsers.
  */
-
 pre {
   font-family: monospace, monospace;
   /* 1 */
@@ -147,13 +124,10 @@ address {
 }
 
 /* Text-level semantics */
-
 /* ============================================ */
-
 /**
  * Remove the gray background on active links in IE 10.
  */
-
 a {
   background-color: transparent;
   text-decoration: none;
@@ -164,19 +138,16 @@ a {
  * 1. Remove the bottom border in Chrome 57-
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
-
 abbr[title] {
   text-decoration: underline;
   /* 2 */
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
   /* 2 */
 }
 
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
-
 b,
 strong {
   font-weight: bolder;
@@ -186,7 +157,6 @@ strong {
  * 1. Correct the inheritance and scaling of font size in all browsers.
  * 2. Correct the odd `em` font sizing in all browsers.
  */
-
 code,
 kbd,
 samp {
@@ -199,7 +169,6 @@ samp {
 /**
  * Add the correct font size in all browsers.
  */
-
 small {
   font-size: 80%;
 }
@@ -208,7 +177,6 @@ small {
  * Prevent `sub` and `sup` elements from affecting the line height in
  * all browsers.
  */
-
 sub,
 sup {
   font-size: 75%;
@@ -226,13 +194,10 @@ sup {
 }
 
 /* Embedded content */
-
 /* ============================================ */
-
 /**
  * Prevent vertical alignment issues.
  */
-
 img,
 embed,
 object,
@@ -241,21 +206,17 @@ iframe {
 }
 
 /* Forms */
-
 /* ============================================ */
-
 /**
  * Reset form fields to make them styleable
  */
-
 button,
 input,
 optgroup,
 select,
 textarea {
   -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   vertical-align: middle;
   color: inherit;
   font: inherit;
@@ -270,24 +231,20 @@ textarea {
 /**
  * Reset radio and checkbox appearance to preserve their look in iOS.
  */
-
 [type=checkbox] {
   -webkit-appearance: checkbox;
-  -moz-appearance: checkbox;
-       appearance: checkbox;
+  appearance: checkbox;
 }
 
 [type=radio] {
   -webkit-appearance: radio;
-  -moz-appearance: radio;
-       appearance: radio;
+  appearance: radio;
 }
 
 /**
  * Show the overflow in IE.
  * 1. Show the overflow in Edge.
  */
-
 button,
 input {
   /* 1 */
@@ -298,7 +255,6 @@ input {
  * Remove the inheritance of text transform in Edge, Firefox, and IE.
  * 1. Remove the inheritance of text transform in Firefox.
  */
-
 button,
 select {
   /* 1 */
@@ -308,15 +264,13 @@ select {
 /**
  * Correct the inability to style clickable types in iOS and Safari.
  */
-
 button,
 [type=button],
 [type=reset],
 [type=submit] {
   cursor: pointer;
   -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
+  appearance: none;
 }
 
 button[disabled],
@@ -329,7 +283,6 @@ button[disabled],
 /**
  * Remove the inner border and padding in Firefox.
  */
-
 button::-moz-focus-inner,
 [type=button]::-moz-focus-inner,
 [type=reset]::-moz-focus-inner,
@@ -341,7 +294,6 @@ button::-moz-focus-inner,
 /**
  * Restore the focus styles unset by the previous rule.
  */
-
 button:-moz-focusring,
 [type=button]:-moz-focusring,
 [type=reset]:-moz-focusring,
@@ -352,7 +304,6 @@ button:-moz-focusring,
 /**
  * Remove arrow in IE10 & IE11
  */
-
 select::-ms-expand {
   display: none;
 }
@@ -360,7 +311,6 @@ select::-ms-expand {
 /**
  * Remove padding
  */
-
 option {
   padding: 0;
 }
@@ -368,7 +318,6 @@ option {
 /**
  * Reset to invisible
  */
-
 fieldset {
   margin: 0;
   padding: 0;
@@ -381,7 +330,6 @@ fieldset {
  * 3. Remove the padding so developers are not caught out when they zero out
  *    `fieldset` elements in all browsers.
  */
-
 legend {
   color: inherit;
   /* 2 */
@@ -398,7 +346,6 @@ legend {
 /**
  * Add the correct vertical alignment in Chrome, Firefox, and Opera.
  */
-
 progress {
   vertical-align: baseline;
 }
@@ -406,7 +353,6 @@ progress {
 /**
  * Remove the default vertical scrollbar in IE 10+.
  */
-
 textarea {
   overflow: auto;
 }
@@ -414,7 +360,6 @@ textarea {
 /**
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
-
 [type=number]::-webkit-inner-spin-button,
 [type=number]::-webkit-outer-spin-button {
   height: auto;
@@ -423,7 +368,6 @@ textarea {
 /**
  * 1. Correct the outline style in Safari.
  */
-
 [type=search] {
   outline-offset: -2px;
   /* 1 */
@@ -432,7 +376,6 @@ textarea {
 /**
  * Remove the inner padding in Chrome and Safari on macOS.
  */
-
 [type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
@@ -441,7 +384,6 @@ textarea {
  * 1. Correct the inability to style clickable types in iOS and Safari.
  * 2. Change font properties to `inherit` in Safari.
  */
-
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   /* 1 */
@@ -452,19 +394,15 @@ textarea {
 /**
  * Clickable labels
  */
-
 label[for] {
   cursor: pointer;
 }
 
 /* Interactive */
-
 /* ============================================ */
-
 /*
  * Add the correct display in Edge, IE 10+, and Firefox.
  */
-
 details {
   display: block;
 }
@@ -472,7 +410,6 @@ details {
 /*
  * Add the correct display in all browsers.
  */
-
 summary {
   display: list-item;
 }
@@ -480,15 +417,12 @@ summary {
 /*
  * Remove outline for editable content.
  */
-
 [contenteditable] {
   outline: none;
 }
 
 /* Table */
-
 /* ============================================ */
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -510,13 +444,10 @@ th {
 }
 
 /* Misc */
-
 /* ============================================ */
-
 /**
  * Add the correct display in IE 10+.
  */
-
 template {
   display: none;
 }
@@ -524,13 +455,11 @@ template {
 /**
  * Add the correct display in IE 10.
  */
-
 [hidden] {
   display: none;
 }
 
-html,
-body {
+html, body {
   width: 100%;
   color: var(--font-color_default);
   line-height: 1.6;
@@ -538,8 +467,7 @@ body {
   letter-spacing: 0.1em;
 }
 
-p,
-a {
+p, a {
   -webkit-font-smoothing: antialiased;
 }
 
@@ -558,14 +486,6 @@ input {
 textarea {
   resize: vertical;
   height: 30px;
-}
-
-::-moz-placeholder {
-  color: #ccc;
-}
-
-:-ms-input-placeholder {
-  color: #ccc;
 }
 
 ::placeholder {
@@ -606,7 +526,7 @@ i {
   --space_xl: 20px;
   --space_xxl: 30px;
   --space_3l: 40px;
-  --font-family_default: "\30E1\30A4\30EA\30AA", sans-serif;
+  --font-family_default: "メイリオ", sans-serif;
 }
 
 #l-main {
@@ -614,13 +534,11 @@ i {
   position: relative;
   min-height: 520px;
 }
-
 @media screen and (max-width: 1200px) {
   #l-main {
     padding: 40px;
   }
 }
-
 @media screen and (max-width: 768px) {
   #l-main {
     padding: 50px 20px;
@@ -640,13 +558,11 @@ i {
   top: 20px;
   left: 20%;
 }
-
 @media screen and (max-width: 414px) {
   #l-modal {
     left: 10%;
   }
 }
-
 #l-modal.active {
   display: block;
 }
@@ -657,13 +573,11 @@ i {
   height: 35px;
   position: relative;
 }
-
 @media screen and (max-width: 768px) {
   .c-menuTrigger {
     display: block;
   }
 }
-
 .c-menuTrigger__bar {
   display: none;
   width: 100%;
@@ -672,85 +586,59 @@ i {
   background: #444;
   transition: all 0.4s;
 }
-
 @media screen and (max-width: 768px) {
   .c-menuTrigger__bar {
     display: block;
   }
 }
-
 .c-menuTrigger__bar.active {
   background: #fff;
   transition: all 0.4s;
 }
-
 .c-menuTrigger__bar:nth-of-type(1) {
   top: 0px;
 }
-
 .c-menuTrigger__bar:nth-of-type(1).active {
   top: 10px;
   transform: rotate(45deg);
 }
-
 .c-menuTrigger__bar:nth-of-type(2) {
   top: 10px;
 }
-
 .c-menuTrigger__bar:nth-of-type(2).active {
   display: none;
 }
-
 .c-menuTrigger__bar:nth-of-type(3) {
   top: 20px;
 }
-
 .c-menuTrigger__bar:nth-of-type(3).active {
   top: 10px;
   transform: rotate(-45deg);
 }
 
-.c-container,
-.p-boardList,
-.p-top {
+.c-container, .p-boardList, .p-top {
   max-width: 980px;
   margin: 0 auto;
 }
-
 @media screen and (max-width: 1000px) {
-  .c-container,
-  .p-boardList,
-  .p-top {
+  .c-container, .p-boardList, .p-top {
     max-width: 780px;
   }
 }
-
-.c-container__tit,
-.p-todoList__tit {
+.c-container__tit, .p-todoList__tit {
   font-size: 28px;
 }
-
 @media screen and (max-width: 1000px) {
-  .c-container__tit,
-  .p-todoList__tit {
+  .c-container__tit, .p-todoList__tit {
     font-size: 24px;
   }
 }
-
 @media screen and (max-width: 768px) {
-  .c-container__tit,
-  .p-todoList__tit {
+  .c-container__tit, .p-todoList__tit {
     font-size: 18px;
   }
 }
-
-.c-container__item,
-.p-todoList__tit,
-.p-todoList__item,
-.p-todoList__name,
-.p-todoList__todo,
-.p-todoList__edit,
-.p-todoList__remove {
+.c-container__item, .p-todoList__tit, .p-todoList__item, .p-todoList__name, .p-todoList__todo, .p-todoList__edit, .p-todoList__remove {
   border-radius: 5px;
   overflow: hidden;
 }
@@ -758,7 +646,6 @@ i {
 .c-form {
   max-width: 500px;
 }
-
 .c-form__submit {
   margin: var(--space_3l) 0;
   width: 100%;
@@ -767,37 +654,26 @@ i {
   border-radius: 50px;
   text-align: center;
 }
-
 .c-form__check {
   width: 20px;
 }
 
-.c-input,
-.p-boardModal__input {
+.c-input, .p-boardModal__input {
   border: 2px solid var(--font-color_default);
   border-radius: 5px;
   color: var(--font-color_secondary);
 }
-
-.c-input:focus,
-.p-boardModal__input:focus {
+.c-input:focus, .p-boardModal__input:focus {
   border: 2px solid var(--color_success);
 }
 
-.c-btn,
-.p-boardModal__submit,
-.p-boardHead__btn--pc,
-.p-boardHead__btn--sp {
+.c-btn, .p-boardModal__submit, .p-boardHead__btn--pc, .p-boardHead__btn--sp {
   padding: 0 15px;
   border-radius: 5px;
   cursor: pointer;
 }
-
 @media screen and (max-width: 768px) {
-  .c-btn,
-  .p-boardModal__submit,
-  .p-boardHead__btn--pc,
-  .p-boardHead__btn--sp {
+  .c-btn, .p-boardModal__submit, .p-boardHead__btn--pc, .p-boardHead__btn--sp {
     padding: 0 10px;
     font-size: 14px;
   }
@@ -807,13 +683,11 @@ i {
   display: flex;
   justify-content: center;
 }
-
 .c-page__item {
   display: block;
   text-align: center;
   cursor: pointer;
 }
-
 .c-page__item.disabled {
   display: none;
 }
@@ -828,7 +702,6 @@ i {
   top: -30px;
   transition: all 1s;
 }
-
 .c-flashMsg.active {
   top: 0;
   transition: all 0.8s;
@@ -839,7 +712,6 @@ i {
   justify-content: space-between;
   margin-top: 15px;
 }
-
 .c-timer__btn {
   color: #fff;
   width: 48%;
@@ -853,7 +725,6 @@ i {
 .p-mainHeader {
   height: 130px;
 }
-
 .p-mainHeader:before {
   position: absolute;
   content: "";
@@ -864,21 +735,18 @@ i {
   border-bottom: 280px solid transparent;
   border-left: 470px solid #00233D;
 }
-
 @media screen and (max-width: 1000px) {
   .p-mainHeader:before {
     height: 180px;
     border-bottom: 180px solid transparent;
   }
 }
-
 @media screen and (max-width: 768px) {
   .p-mainHeader:before {
     width: 300px;
     border-left: 300px solid #00233D;
   }
 }
-
 @media screen and (max-width: 414px) {
   .p-mainHeader:before {
     width: 210px;
@@ -887,7 +755,6 @@ i {
     border-bottom: 180px solid transparent;
   }
 }
-
 .p-mainHeader__inner {
   width: 90%;
   height: 100%;
@@ -896,42 +763,35 @@ i {
   justify-content: space-between;
   align-items: center;
 }
-
 .p-mainHeader__top {
   font-weight: bold;
   font-size: 28px;
   cursor: pointer;
   z-index: 1;
 }
-
 @media screen and (max-width: 768px) {
   .p-mainHeader__top {
     font-size: 18px;
   }
 }
-
 @media screen and (max-width: 414px) {
   .p-mainHeader__top {
     font-size: 14px;
   }
 }
-
 .p-mainHeader__nav {
   font-size: 18px;
   z-index: 2;
 }
-
 @media screen and (max-width: 1000px) {
   .p-mainHeader__nav {
     font-size: 14px;
   }
 }
-
 .p-mainHeader__list {
   display: flex;
   align-items: center;
 }
-
 @media screen and (max-width: 768px) {
   .p-mainHeader__list {
     position: absolute;
@@ -946,23 +806,19 @@ i {
     transition: all 0.4s;
     box-sizing: border-box;
   }
-
   .p-mainHeader__list.active {
     top: 0;
     transition: all 0.4s;
   }
 }
-
 .p-mainHeader__item {
   margin-right: 30px;
 }
-
 @media screen and (max-width: 1000px) {
   .p-mainHeader__item {
     margin-right: 20px;
   }
 }
-
 @media screen and (max-width: 768px) {
   .p-mainHeader__item {
     margin-right: 0;
@@ -974,7 +830,6 @@ i {
   display: flex;
   justify-content: space-between;
 }
-
 @media screen and (max-width: 1000px) {
   .p-top {
     display: grid;
@@ -982,25 +837,21 @@ i {
     margin: 100px auto 0 auto;
   }
 }
-
 .p-top__provider {
   width: 40%;
   text-align: center;
 }
-
 @media screen and (max-width: 1000px) {
   .p-top__provider {
     width: 100%;
     order: 2;
   }
 }
-
 .p-top__tit {
   font-size: 38px;
   font-weight: bolder;
   margin-top: 40px;
 }
-
 .p-top__btn {
   display: block;
   width: 200px;
@@ -1008,12 +859,10 @@ i {
   padding: 20px;
   border-radius: 50px;
 }
-
 .p-top__img {
   width: 50%;
   max-width: 500px;
 }
-
 @media screen and (max-width: 1000px) {
   .p-top__img {
     width: 100%;
@@ -1025,30 +874,25 @@ i {
 .p-boardHead {
   color: #00233D;
 }
-
 .p-boardHead__head {
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
 }
-
 .p-boardHead__btn--pc {
   color: #fff;
   background: #2024ad;
 }
-
 @media screen and (max-width: 414px) {
   .p-boardHead__btn--pc {
     display: none;
   }
 }
-
 .p-boardHead__btn--sp {
   color: #fff;
   background: #2024ad;
   display: none;
 }
-
 @media screen and (max-width: 414px) {
   .p-boardHead__btn--sp {
     display: block;
@@ -1059,7 +903,6 @@ i {
   position: relative;
   color: #00233D;
 }
-
 .p-boardList__item {
   display: flex;
   justify-content: space-between;
@@ -1068,53 +911,44 @@ i {
   border-left: 2px solid;
   border-right: 2px solid;
 }
-
 .p-boardList__item:last-child {
   border-bottom: 2px solid;
 }
-
 .p-boardList__name {
   width: 74%;
   max-width: 700px;
   display: inline-block;
 }
-
 @media screen and (max-width: 1200px) {
   .p-boardList__name {
     width: 55%;
     max-width: 300px;
   }
 }
-
 @media screen and (max-width: 768px) {
   .p-boardList__name {
     width: 80%;
   }
 }
-
 @media screen and (max-width: 414px) {
   .p-boardList__name {
     font-size: 14px;
   }
 }
-
 .p-boardList__date {
   font-size: 14px;
 }
-
 @media screen and (max-width: 768px) {
   .p-boardList__date {
     display: none;
   }
 }
-
 .p-boardList__icon {
   width: 20px;
   margin: 0 5px;
   cursor: pointer;
   text-align: center;
 }
-
 .p-boardList__opMenu {
   min-width: 230px;
   position: absolute;
@@ -1123,39 +957,36 @@ i {
   box-shadow: 0px 0px 6px 1px;
   z-index: 1;
 }
-
 .p-boardList__opItem {
   cursor: pointer;
 }
-
 .p-boardList__opItem:hover {
   background: #dadada;
+}
+.p-boardList__delItem {
+  width: 100%;
 }
 
 .p-todoList {
   font-size: 14px;
   color: #00233D;
 }
-
 .p-todoList__tit {
   max-width: 500px;
   margin: 0 40px 30px;
   cursor: pointer;
   font-size: 24px;
 }
-
 @media screen and (max-width: 768px) {
   .p-todoList__tit {
     margin: 0 10px 30px;
   }
 }
-
 .p-todoList__list {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
 }
-
 .p-todoList__item {
   background: #dadada;
   width: 300px;
@@ -1163,18 +994,15 @@ i {
   padding: 30px 15px;
   box-sizing: border-box;
 }
-
 @media screen and (max-width: 768px) {
   .p-todoList__item {
     width: 100%;
     margin: 5px 15px;
   }
 }
-
 .p-todoList__head {
   margin-bottom: 15px;
 }
-
 .p-todoList__name {
   display: flex;
   align-items: center;
@@ -1182,34 +1010,27 @@ i {
   cursor: pointer;
   box-sizing: border-box;
 }
-
 .p-todoList__input {
   height: 100%;
   padding: 5px 10px;
 }
-
 .p-todoList__input:focus {
   border: 2px solid #2024ad;
   padding: 3px 10px;
 }
-
-.p-todoList__time,
-.p-todoList__timeInput {
+.p-todoList__time, .p-todoList__timeInput {
   margin-left: -10px;
 }
-
 .p-todoList__timeInput {
   border: 2px solid #dadada;
   margin: 0 10px;
   padding: 0 10px;
 }
-
 .p-todoList__text {
   padding: 15px 10px;
   font-size: 16px;
   max-height: 60px;
 }
-
 .p-todoList__todo {
   display: flex;
   align-items: center;
@@ -1217,7 +1038,6 @@ i {
   background: #fff;
   padding: 0 15px;
 }
-
 .p-todoList__edit {
   display: flex;
   align-items: center;
@@ -1227,7 +1047,6 @@ i {
   padding: 0 0 0 15px;
   font-size: 18px;
 }
-
 .p-acd__check:checked + .p-todoList__acd {
   opacity: 1;
   height: 300px;
@@ -1235,46 +1054,38 @@ i {
   background: #fff;
   padding-bottom: 15px;
 }
-
 .p-todoList__acon {
   top: -43px;
   right: 2px;
 }
-
 .p-todoList__bottom {
   display: flex;
   align-items: center;
   margin-top: 10px;
 }
-
-.p-todoList__btn,
-.p-todoList__submit {
+.p-todoList__btn, .p-todoList__submit {
   height: 100%;
   padding: 5px 10px;
   color: #fff;
   cursor: pointer;
 }
-
 .p-todoList__icon {
   font-size: 24px;
   width: 28px;
   cursor: pointer;
 }
-
 .p-todoList__add {
   display: block;
   color: #444;
   cursor: pointer;
   margin: 10px 0;
 }
-
 .p-todoList__remove {
   color: #fff;
   font-size: 16px;
   margin: 0 0 0 auto;
   padding: 5px 10px;
 }
-
 .p-todoList__submit {
   display: block;
   width: 100%;
@@ -1288,22 +1099,18 @@ i {
   padding: 15px;
   box-sizing: border-box;
 }
-
 .p-mainFooter__menu {
   margin: 40px 0 15px 0;
   display: flex;
   flex-wrap: wrap;
 }
-
 .p-mainFooter__item {
   margin: 5px 10px;
 }
-
 .p-mainFooter__tit {
   text-align: right;
   margin: 0 10px;
 }
-
 @media screen and (max-width: 414px) {
   .p-mainFooter__tit {
     text-align: center;
@@ -1313,7 +1120,6 @@ i {
 .p-withdraw {
   max-width: 500px;
 }
-
 .p-withdraw__submit {
   margin: 40px 0;
   width: 100%;
@@ -1322,7 +1128,6 @@ i {
   border-radius: 50px;
   text-align: center;
 }
-
 .p-withdraw__check {
   width: 20px;
 }
@@ -1335,60 +1140,49 @@ i {
   font-size: 18px;
   border-radius: 5px;
 }
-
 @media screen and (max-width: 768px) {
   .p-boardModal {
     padding: 10px 20px;
   }
 }
-
 @media screen and (max-width: 414px) {
   .p-boardModal {
     width: 80%;
     font-size: 14px;
   }
 }
-
 .p-boardModal.show {
   display: block;
 }
-
 .p-boardModal__head {
   font-size: 28px;
   display: flex;
   justify-content: space-between;
 }
-
 @media screen and (max-width: 768px) {
   .p-boardModal__head {
     font-size: 18px;
   }
 }
-
 .p-boardModal__form {
   margin: 15px 0;
 }
-
 .p-boardModal__input {
   margin-bottom: 20px;
 }
-
 @media screen and (max-width: 768px) {
   .p-boardModal__input {
     margin-bottom: 5px;
   }
 }
-
 .p-boardModal__bottom {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
 .p-boardModal__submit {
   background: #2024ad;
 }
-
 @media screen and (max-width: 768px) {
   .p-boardModal__submit {
     width: 100%;
@@ -1400,13 +1194,11 @@ i {
 .p-boardPage {
   margin: 60px 0 30px 0;
 }
-
 .p-boardPage__item {
   width: 40px;
   height: 40px;
   line-height: 40px;
 }
-
 .p-boardPage__item.active {
   color: #fff;
   background: #00233D;
@@ -1418,15 +1210,12 @@ i {
   width: 100%;
   position: relative;
 }
-
 .p-acd__icon {
   position: absolute;
 }
-
 .p-acd__up {
   display: none;
 }
-
 .p-acd__check {
   position: absolute;
   z-index: 1;
@@ -1437,38 +1226,31 @@ i {
   opacity: 0;
   cursor: pointer;
 }
-
 .p-acd__check:checked ~ .c-acd__up {
   display: block;
 }
-
 .p-acd__check:checked ~ .c-acd__down {
   display: none;
 }
-
 .p-acd__content {
   height: 0;
   opacity: 0;
   visibility: hidden;
   transition: 0.4s;
 }
-
 .p-acd__item {
   display: flex;
   background: #fff;
   padding: 5px 15px;
   cursor: pointer;
 }
-
 .p-acd__item:hover {
   opacity: 0.5;
 }
-
 .p-acd__time {
   background: #fff;
   padding: 5px 15px;
 }
-
 .p-acd__text {
   margin: 0 10px;
 }
@@ -1476,15 +1258,12 @@ i {
 .u-color--accent {
   color: #00233D;
 }
-
 .u-color--error {
   color: #bb2f2f;
 }
-
 .u-color--success {
   color: #39D353;
 }
-
 .u-color--default {
   color: #fff;
 }
@@ -1492,19 +1271,15 @@ i {
 .u-bgColor--base {
   background: #C6C6C6;
 }
-
 .u-bgColor--accent {
   background: #00233D;
 }
-
 .u-bgColor--error {
   background: #bb2f2f;
 }
-
 .u-bgColor--success {
   background: #39D353;
 }
-
 .u-bgColor--primary {
   background: #2024ad;
 }
@@ -1512,35 +1287,27 @@ i {
 .u-margin-top--l {
   margin-top: 15px;
 }
-
 .u-margin-left--m {
   margin-left: 10px;
 }
-
 .u-margin-left--auto {
   margin-left: auto;
 }
-
 .u-margin-right--xl {
   margin-right: 20px;
 }
-
 .u-margin-bottom--m {
   margin-bottom: 10px;
 }
-
 .u-margin--0-m {
   margin: 0 10px;
 }
-
 .u-margin--0-auto {
   margin: 0 auto;
 }
-
 .u-margin--m-0 {
   margin: 10px 0;
 }
-
 .u-margin--xl-0 {
   margin: 20px 0;
 }
@@ -1548,15 +1315,12 @@ i {
 .u-padding--0-m {
   padding: 0 10px;
 }
-
 .u-padding--0-3l {
   padding: 0 40px;
 }
-
 .u-padding--s-m {
   padding: 5px 10px;
 }
-
 .u-padding--m-l {
   padding: 10px 15px;
 }
@@ -1572,7 +1336,6 @@ i {
 .u-flex {
   display: flex;
 }
-
 .u-flex-wrap--wrap {
   flex-wrap: wrap;
 }
@@ -1580,7 +1343,6 @@ i {
 .u-align-items--center {
   align-items: center;
 }
-
 .u-align-items--flex-start {
   align-items: flex-start;
 }
@@ -1588,11 +1350,9 @@ i {
 .u-justify-content--center {
   justify-content: center;
 }
-
 .u-justify-content--space-between {
   justify-content: space-between;
 }
-
 .u-justify-content--flex-end {
   justify-content: flex-end;
 }
@@ -1604,8 +1364,8 @@ i {
 .js-target-display {
   display: none;
 }
-
 .js-target-display.show {
   display: block;
 }
 
+/*# sourceMappingURL=style.css.map */
